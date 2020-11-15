@@ -40,7 +40,6 @@ Summary:
 * as an Adjacency Matrix;
 
 ![equation](http://www.sciweavers.org/tex2img.php?eq=A%20%5Cin%20R%5E%7Bnxn%7D%20%5C%2C%0AA_%7Bij%7D%20%3D%20%20%5Cbegin%7Bcases%7D1%20%26%20%28i%2C%20j%29%20%5Cin%20E%5C%5C0%20%26%20else%5Cend%7Bcases%7D%20%5C%2C%0AA%20%3D%20%20%5Cbegin%7Bpmatrix%7D0%20%26%201%20%26%201%20%5C%5C1%20%26%200%20%26%201%5C%5C%200%20%26%201%20%26%201%20%5Cend%7Bpmatrix%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
-
     * very simple to implement.
     * wastes lot of memory space. Such matrices are found to be very sparse. This representation requires space for n^2 elements for a graph with n vertices. If the graph has e number of edges then n^2 – e elements in the matrix will be 0.
     * presence of an edge between two vertices Vi and Vj can be checked in constant time. if(Aij == 1) then edge is present between vertices i and j, else edge is absent between vertices i and j
@@ -51,7 +50,6 @@ Summary:
 [[0 -> 1 -> 2]
 [1 -> 0 -> 2]
 [2 -> 1 -> 2]]
-
     * very memory efficient when the graph has a large number of vertices but very few edges.
     * For an undirected graph with n vertices and e edges, total number of nodes will be n + 2e. If e is large then due total overhead of maintaining pointers, adjacency list representation does not remain cost effective over adjacency matrix representation of a graph.
     * degree of a node in an undirected graph is given by the length of the corresponding linked list.
