@@ -29,7 +29,7 @@ Types of Graphs:
 * *Weighted* if there are weights assigned to either nodes or edges.
 * *Sparse* if the number of the edges is few compared to the number of nodes. 
 Summary:
-![Graph Types](/graph_types.png)
+![Graph Types](graph_types.png)
 
 
 ## Graph Convolutional Network (GCN)
