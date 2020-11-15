@@ -20,6 +20,17 @@ A graph ![equation](http://www.sciweavers.org/tex2img.php?eq=G%3D%28V%2C%20E%29&
 * A graph is *complete* if every nodes are connected in every possible way. For example, if a graph has n nodes, then it is complete if every nodes have n-1 neighbors.
 * A *path* from *i* to *j* is a sequence of edges that goes from *i* to *j*. This path has a length equal to the number of edges.
 * The *diameter* of a graph is the length of the LONGEST path among all the shortest path tha link any two nodes.
+* The shortest path between two nodes is called the *geodesic* path.
+* If all the nodes can be reached from each other by a given path, they form a *connected component*.
+Types of Graphs:
+* *Connected* if there is only ONE connected component in it.
+* *Directed* if edges are ordered pairs. In this case, the degree of a node is classified into "in-degree" and "out-degree" for incoming and outcoming edges respectively.
+* *Cyclic* if there are paths through relationships and nodes where you walk from and back to a particular node.
+* *Weighted* if there are weights assigned to either nodes or edges.
+* *Sparse* if the number of the edges is few compared to the number of nodes. 
+Summary:
+![Graph Types](/graph_types.png)
+
 
 ## Graph Convolutional Network (GCN)
 GCN的本质：一张graph network中feature和message的流动和传播。
