@@ -1,2 +1,4 @@
 # PhD-Notes
-Some study notes
+Some study notes on various areas.
+
+## [Graph and GCN](./GCN/README.md)
