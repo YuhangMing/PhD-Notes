@@ -34,11 +34,9 @@ Summary:
 ![Graph Types](graph_types.png)
 ## Store a Graph:
 * as an Edge List, which stores the edge via the pair of nodes;
-
 [(0,1), (0,2), (1,2), (2,0), (2,1)]
 
 * as an Adjacency Matrix;
-
 ![equation](http://www.sciweavers.org/tex2img.php?eq=A%20%5Cin%20R%5E%7Bnxn%7D%20%5C%2C%0AA_%7Bij%7D%20%3D%20%20%5Cbegin%7Bcases%7D1%20%26%20%28i%2C%20j%29%20%5Cin%20E%5C%5C0%20%26%20else%5Cend%7Bcases%7D%20%5C%2C%0AA%20%3D%20%20%5Cbegin%7Bpmatrix%7D0%20%26%201%20%26%201%20%5C%5C1%20%26%200%20%26%201%5C%5C%200%20%26%201%20%26%201%20%5Cend%7Bpmatrix%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
     * very simple to implement.
     * wastes lot of memory space. Such matrices are found to be very sparse. This representation requires space for n^2 elements for a graph with n vertices. If the graph has e number of edges then n^2 – e elements in the matrix will be 0.
@@ -46,7 +44,6 @@ Summary:
     * degree of a vertex can easily be calculated by counting all non-zero entries in the corresponding row of the adjacency matrix.
 
 * as an Adjacency List;
-
 [[0 -> 1 -> 2]
 [1 -> 0 -> 2]
 [2 -> 1 -> 2]]
