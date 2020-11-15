@@ -22,15 +22,36 @@ A graph ![equation](http://www.sciweavers.org/tex2img.php?eq=G%3D%28V%2C%20E%29&
 * The *diameter* of a graph is the length of the LONGEST path among all the shortest path tha link any two nodes.
 * The shortest path between two nodes is called the *geodesic* path.
 * If all the nodes can be reached from each other by a given path, they form a *connected component*.
+
 Types of Graphs:
 * *Connected* if there is only ONE connected component in it.
 * *Directed* if edges are ordered pairs. In this case, the degree of a node is classified into "in-degree" and "out-degree" for incoming and outcoming edges respectively.
 * *Cyclic* if there are paths through relationships and nodes where you walk from and back to a particular node.
 * *Weighted* if there are weights assigned to either nodes or edges.
 * *Sparse* if the number of the edges is few compared to the number of nodes. 
+
 Summary:
 ![Graph Types](graph_types.png)
+## Store a Graph:
+* as an Edge List, which stores the edge via the pair of nodes;
+[(0,1), (0,2), (1,2), (2,0), (2,1)]
+* as an Adjacency Matrix;
+![equation](http://www.sciweavers.org/tex2img.php?eq=A%20%5Cin%20R%5E%7Bnxn%7D%20%5C%2C%0AA_%7Bij%7D%20%3D%20%20%5Cbegin%7Bcases%7D1%20%26%20%28i%2C%20j%29%20%5Cin%20E%5C%5C0%20%26%20else%5Cend%7Bcases%7D%20%5C%2C%0AA%20%3D%20%20%5Cbegin%7Bpmatrix%7D0%20%26%201%20%26%201%20%5C%5C1%20%26%200%20%26%201%5C%5C%200%20%26%201%20%26%201%20%5Cend%7Bpmatrix%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+    * very simple to implement.
+    * wastes lot of memory space. Such matrices are found to be very sparse. This representation requires space for n^2 elements for a graph with n vertices. If the graph has e number of edges then n^2 – e elements in the matrix will be 0.
+    * presence of an edge between two vertices Vi and Vj can be checked in constant time. if(Aij == 1) then edge is present between vertices i and j, else edge is absent between vertices i and j
+    * degree of a vertex can easily be calculated by counting all non-zero entries in the corresponding row of the adjacency matrix.
+* as an Adjacency List;
+[[0 -> 1 -> 2]
+[1 -> 0 -> 2]
+[2 -> 1 -> 2]]
+    * very memory efficient when the graph has a large number of vertices but very few edges.
+    * For an undirected graph with n vertices and e edges, total number of nodes will be n + 2e. If e is large then due total overhead of maintaining pointers, adjacency list representation does not remain cost effective over adjacency matrix representation of a graph.
+    * degree of a node in an undirected graph is given by the length of the corresponding linked list.
+    * finding indegree of a directed graph represented using adjacency list will require O (e) comparisons. Lists pointed by all vertices must be examined to find the indegree of a node in a directed graph.
+    * checking the existence of an edge between two vertices i and j is also time consuming. Linked list of vertex i must be searched for the vertex j.
 
+Depending on the usage and available memory, the best representation varies. The graph is usually stored as .txt file.
 
 ## Graph Convolutional Network (GCN)
 GCN的本质：一张graph network中feature和message的流动和传播。
