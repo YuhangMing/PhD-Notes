@@ -1,3 +1,6 @@
+1. [Graph](# Graph)
+1. [Graph Neural/Convolutional Network](# Graph Neural Network (GNN))
+
 # Graph
 Graph can be used to represent:
 * social network
@@ -89,22 +92,22 @@ In this process, the nodes are divided into a set of graphs/clusters according t
 * ...
 
 ## Graph Learning
-* Link Prediction
+* Link Prediction:
 Given a graph ![equation](http://www.sciweavers.org/tex2img.php?eq=G%3D%28V%2C%20E%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]), the goal is to predict NEW EDGES. (Future relationship or Missing edges).
-* Node Labeling
+* Node Labeling:
 Given a grpah where some nodes are not labeled, the goal is to predict their labels. Semi-supervised Label Propagation.
 ![Label Propagation](label_propagation.png)
 
 ## Reference
 Graph Learning by maelfabien [Intro](https://maelfabien.github.io/machinelearning/graph_1/) [Analysis](https://maelfabien.github.io/machinelearning/graph_2/) [Algorithm](https://maelfabien.github.io/machinelearning/graph_3/) [Learning](https://maelfabien.github.io/machinelearning/graph_4/)
 
-## Graph Neural Network (GNN)
+# Graph Neural Network (GNN)
 GCN的本质：一张graph network中feature和message的流动和传播。
 
-### What Can Neural Networks Reason About (ICLR2020)
+## What Can Neural Networks Reason About (ICLR2020)
 在 Bellman-Ford 算法求解任意两点间最短路径的问题上，虽然可以证明 MLP 可以表示任何 GNN 可以表示的函数，但 GNN 的泛化能力更强，而后者决定了 GNN 的效果更好，或者说，GNN 学到了如何去推理。究其原因，GNN 可以通过学习一个很简单的步骤，即该算法中的松弛过程，来很好地模拟 Bellman-Ford 算法，而与此相对应地，MLP 却必须去模拟整个 for 循环才可以模拟 Bellman-Ford 算法。
 
-### DropEdge: Towards Deep Graph Convolutional Networks on Node Classification (ICLR2020)
+## DropEdge: Towards Deep Graph Convolutional Networks on Node Classification (ICLR2020)
 GCNs 在图的很多任务上取得了 SOTA 的表现，如节点分类，社交推荐，关联预测等，而 over-fitting 和 over-smoothing 是两个阻碍 GCNs 在节点分类等任务上进一步发展的问题。
 
 over-fitting 来源于使用一个具有过多参数的模型去拟合一个受限的训练集数据分布，其削弱了模型的泛化能力，而 over-smoothing 则是另一个极端，它指的是因为图卷积操作将一个节点和它邻居的特征向量混合起来，从而在有限步之后所有节点的表示都会收敛到一个相同的值的现象，这同时也会导致梯度消失，直接使得我们无法构建比较深的 GCNs，实际上经典的 GCNs 是比较浅的。受启发于深层的CNNs在图像分类任务上的良好表现，我们也希望探索在节点分类任务上如何可以建构出深层的 GCNs。通过探索这两个阻碍 GCNs 变深的因素---over-fitting 与 over-smoothing，本文提出了 DropEdge，可以同时缓解如上的两个问题，一方面，它可以看做是一种无偏的数据增强方式，通过随机地将原图变形，可以增加输入数据的多样性，从而可以缓解 over-fitting 的现象；另一方面，它可以减少信息在节点间传递，使得节点之间的连接更加稀疏，从而可以一定程度上避免 over-smoothing。
