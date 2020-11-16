@@ -1,5 +1,5 @@
-1. [Graph](# Graph)
-1. [Graph Neural/Convolutional Network](# Graph Neural Network (GNN))
+1. [Graph](#Graph)
+1. [Graph Neural/Convolutional Network](#Graph Neural Network (GNN))
 
 # Graph
 Graph can be used to represent:
