@@ -102,8 +102,23 @@ Given a grpah where some nodes are not labeled, the goal is to predict their lab
 Graph Learning by maelfabien [Intro](https://maelfabien.github.io/machinelearning/graph_1/) [Analysis](https://maelfabien.github.io/machinelearning/graph_2/) [Algorithm](https://maelfabien.github.io/machinelearning/graph_3/) [Learning](https://maelfabien.github.io/machinelearning/graph_4/)
 
 # GNN
-Graph Neural Network, GNN or GCN.
-其本质是一张graph network中feature和message的流动和传播。
+Graph Neural Network (GNN), a.k.a. GCN, performs convolution on a graph. Jus like CNN, it aims to extract th most important nodes and edges that can help classify nodes within the graph.
+其本质是分析一张graph network中feature和message的流动和传播。
+
+Convolution operation on a graph:
+Then just like CNN, a simple structure example is like:
+1. Normalizing the graph structurel
+1. Graph convolution layer
+1. Leaky ReLU an dropout layers
+1. Second graph convolution layer
+1. Softmax layer
+
+Example of Applications:
+1. Generating Predictions in Physical Systems: Modelling the real-world entities and predict the interactions and future behaviors;
+1. _Image Classification_: especially in Zero-Shot Learning when the model needs to recognize and label an image belonging to an unknown class, by inferring which known labels it may be similar to;
+1. Community Prediction usin Semi-Supervised Learning;
+1. Molecular Structure Analysis
+1. Operations Research and Combinarorial Optimization;
 
 ## What Can Neural Networks Reason About (ICLR2020)
 在 Bellman-Ford 算法求解任意两点间最短路径的问题上，虽然可以证明 MLP 可以表示任何 GNN 可以表示的函数，但 GNN 的泛化能力更强，而后者决定了 GNN 的效果更好，或者说，GNN 学到了如何去推理。究其原因，GNN 可以通过学习一个很简单的步骤，即该算法中的松弛过程，来很好地模拟 Bellman-Ford 算法，而与此相对应地，MLP 却必须去模拟整个 for 循环才可以模拟 Bellman-Ford 算法。
