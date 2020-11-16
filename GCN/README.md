@@ -53,5 +53,58 @@ Summary:
     * Find all edges from a node i: O(degree(i)).
 Depending on the usage and available memory, the best representation varies. The graph is usually stored as .txt file.
 
-## Graph Convolutional Network (GCN)
+## Graph Analysis
+We analyze a graph at different scales:
+* global properties of the network
+* communities and clusters
+* individual nodes
+
+By exploring the main descriptive measures:
+* the degree distribution
+* the clustering coefficient
+* the small world phenomena
+* the centrality of a node
+* the diameter of the graph
+
+## Graph Algorithms
+1. Graph Search and Path Finding Algorithm
+* Search algorithms
+    Breadth-First search (BFS) vs. Depth-First search (DFS).
+    ![Graph Search](graph_search.png)
+* Path finding algorithms
+    * Shortest path: computes the shortest weighted path (if the graph is weighted) between a pair of nodes;
+    * Single-source shortest path: computes the shortest path from a given node to all other nodes in the graph;
+    * All pairs shortest path: computes the shortest path between all pair of nodes;
+    * Minimum weight spanning tree: it is a subgraph of the graph (a tree) with a minimum sum of edges weights; A spanning forest is a union of the spanning trees for each connected component of the graph.
+2. Community Detection (CLUSTERING)
+In this process, the nodes are divided into a set of graphs/clusters according to some certain criterions. Example of usage: Identify social communities, customers behaviors, or web pages topics. A *community* is a set of nodes densely connected internally and/or sparsely connected externally.
+* Louvain Modularity (no theoretical guarantee but works well in practice):
+* Hierarchical Clustering: build a dendrogram either Bottom-up or Top-down using metrics such as Maximum linkage, Minimum linkage, Average linkage, Centroid linkage.
+![Hierarchcal Clustering](dendrogram.png)
+* Clustering Coefficient: measures how well two nodes tend to cluster together.
+3. Centrality Algorithms
+* Page Rank Algorithm: Estimates the importance of a current node from its linked neighbors by either iteratively distributing one node's rank over its neighbors or by randomly traversing the graph and counting the frequency of hitting each node during these walks.
+* Degree Centrality: Measures the number of incoming and outgoing relationships from a node. It is used to identify the most influential persons on a social network.
+* Eigenvector Centrality: represents the number of walks of infinite length ending at node i. This gives more importance to node with well-connected neighbors.
+* ...
+
+## Graph Learning
+* Link Prediction
+Given a graph ![equation](http://www.sciweavers.org/tex2img.php?eq=G%3D%28V%2C%20E%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]), the goal is to predict NEW EDGES. (Future relationship or Missing edges).
+* Node Labeling
+Given a grpah where some nodes are not labeled, the goal is to predict their labels. Semi-supervised Label Propagation.
+![Label Propagation](label_propagation.png)
+
+## Reference
+Graph Learning by maelfabien [Intro](https://maelfabien.github.io/machinelearning/graph_1/) [Analysis](https://maelfabien.github.io/machinelearning/graph_2/) [Algorithm](https://maelfabien.github.io/machinelearning/graph_3/) [Learning](https://maelfabien.github.io/machinelearning/graph_4/)
+
+## Graph Neural Network (GNN)
 GCN的本质：一张graph network中feature和message的流动和传播。
+
+### What Can Neural Networks Reason About (ICLR2020)
+在 Bellman-Ford 算法求解任意两点间最短路径的问题上，虽然可以证明 MLP 可以表示任何 GNN 可以表示的函数，但 GNN 的泛化能力更强，而后者决定了 GNN 的效果更好，或者说，GNN 学到了如何去推理。究其原因，GNN 可以通过学习一个很简单的步骤，即该算法中的松弛过程，来很好地模拟 Bellman-Ford 算法，而与此相对应地，MLP 却必须去模拟整个 for 循环才可以模拟 Bellman-Ford 算法。
+
+### DropEdge: Towards Deep Graph Convolutional Networks on Node Classification (ICLR2020)
+GCNs 在图的很多任务上取得了 SOTA 的表现，如节点分类，社交推荐，关联预测等，而 over-fitting 和 over-smoothing 是两个阻碍 GCNs 在节点分类等任务上进一步发展的问题。
+
+over-fitting 来源于使用一个具有过多参数的模型去拟合一个受限的训练集数据分布，其削弱了模型的泛化能力，而 over-smoothing 则是另一个极端，它指的是因为图卷积操作将一个节点和它邻居的特征向量混合起来，从而在有限步之后所有节点的表示都会收敛到一个相同的值的现象，这同时也会导致梯度消失，直接使得我们无法构建比较深的 GCNs，实际上经典的 GCNs 是比较浅的。受启发于深层的CNNs在图像分类任务上的良好表现，我们也希望探索在节点分类任务上如何可以建构出深层的 GCNs。通过探索这两个阻碍 GCNs 变深的因素---over-fitting 与 over-smoothing，本文提出了 DropEdge，可以同时缓解如上的两个问题，一方面，它可以看做是一种无偏的数据增强方式，通过随机地将原图变形，可以增加输入数据的多样性，从而可以缓解 over-fitting 的现象；另一方面，它可以减少信息在节点间传递，使得节点之间的连接更加稀疏，从而可以一定程度上避免 over-smoothing。
