@@ -1,5 +1,5 @@
 1. [Graph](#Graph)
-1. [Graph Neural/Convolutional Network](#Graph Neural Network (GNN))
+1. [Graph Neural/Convolutional Network](#GNN)
 
 # Graph
 Graph can be used to represent:
@@ -40,7 +40,7 @@ Summary:
 [(0,1), (0,2), (1,2), (2,0), (2,1)]
 
 * as an Adjacency Matrix;
-![equation](http://www.sciweavers.org/tex2img.php?eq=A%20%5Cin%20R%5E%7Bnxn%7D%20%5C%2C%0AA_%7Bij%7D%20%3D%20%20%5Cbegin%7Bcases%7D1%20%26%20%28i%2C%20j%29%20%5Cin%20E%5C%5C0%20%26%20else%5Cend%7Bcases%7D%20%5C%2C%0AA%20%3D%20%20%5Cbegin%7Bpmatrix%7D0%20%26%201%20%26%201%20%5C%5C1%20%26%200%20%26%201%5C%5C%200%20%26%201%20%26%201%20%5Cend%7Bpmatrix%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
+![equation](http://www.sciweavers.org/tex2img.php?eq=%20%5Cbegin%7Bbmatrix%7D0%20%26%201%20%26%201%20%5C%5C%201%20%26%200%20%26%201%20%5C%5C%201%20%26%201%20%26%200%20%5Cend%7Bbmatrix%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img])
     * very simple to implement;
     * Space: O(nxn); it wastes lot of memory space. Such matrices are found to be very sparse. For a graph with n vertices and e edges, nxn–e elements in the matrix will be 0.
     * Check if there is an edge between nodes i and j: O(1);
@@ -101,8 +101,9 @@ Given a grpah where some nodes are not labeled, the goal is to predict their lab
 ## Reference
 Graph Learning by maelfabien [Intro](https://maelfabien.github.io/machinelearning/graph_1/) [Analysis](https://maelfabien.github.io/machinelearning/graph_2/) [Algorithm](https://maelfabien.github.io/machinelearning/graph_3/) [Learning](https://maelfabien.github.io/machinelearning/graph_4/)
 
-# Graph Neural Network (GNN)
-GCN的本质：一张graph network中feature和message的流动和传播。
+# GNN
+Graph Neural Network, GNN or GCN.
+其本质是一张graph network中feature和message的流动和传播。
 
 ## What Can Neural Networks Reason About (ICLR2020)
 在 Bellman-Ford 算法求解任意两点间最短路径的问题上，虽然可以证明 MLP 可以表示任何 GNN 可以表示的函数，但 GNN 的泛化能力更强，而后者决定了 GNN 的效果更好，或者说，GNN 学到了如何去推理。究其原因，GNN 可以通过学习一个很简单的步骤，即该算法中的松弛过程，来很好地模拟 Bellman-Ford 算法，而与此相对应地，MLP 却必须去模拟整个 for 循环才可以模拟 Bellman-Ford 算法。
