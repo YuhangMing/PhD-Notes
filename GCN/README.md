@@ -1,6 +1,13 @@
 1. [Graph](#Graph)
 1. [Graph Neural/Convolutional Network](#GNN)
 
+Essential Notes:
+* Graph matching is useful and efficient in finding correspondences;
+* GNN is very useful in Zero-Shot Learning when the model needs to recognize and label an image belonging to an unknown class, by inferring which known labels it may be similar to. 
+
+Follow-up:
+[ ] Consider use GNN in detecting new objects in the scene???
+
 # Graph
 Graph can be used to represent:
 * social network
@@ -91,6 +98,18 @@ In this process, the nodes are divided into a set of graphs/clusters according t
 * Eigenvector Centrality: represents the number of walks of infinite length ending at node i. This gives more importance to node with well-connected neighbors.
 * ...
 
+## Graph Matching
+Finds the similarity between two graphs.
+
+Application examples: 
+[Correspondences finding using pair-wise constraints](https://www.cs.cmu.edu/~efros/courses/LBMV07/Papers/leordeanu-iccv-05.pdf)
+
+This work takes advantage of the spectral properties of the weighted adjacency matrix M of a graph with nodes for the potential assignments a = (i, i') and weights on edges for the agreements between pairs of potential assignments.
+
+Starting by first finding the level of association of each assignment with the main cluster, by inspecting the eigenvector of M corresponding to its largest eigenvalue (principal eigenvector). 
+
+Then we keep rejecting the assignments of low association, until the constraints on the correspondence mapping are met.
+
 ## Graph Learning
 * Link Prediction:
 Given a graph ![equation](http://www.sciweavers.org/tex2img.php?eq=G%3D%28V%2C%20E%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0[/img]), the goal is to predict NEW EDGES. (Future relationship or Missing edges).
@@ -104,8 +123,10 @@ Graph Learning by maelfabien [Intro](https://maelfabien.github.io/machinelearnin
 # GNN
 Graph Neural Network (GNN), a.k.a. GCN, performs convolution on a graph. Jus like CNN, it aims to extract th most important nodes and edges that can help classify nodes within the graph.
 其本质是分析一张graph network中feature和message的流动和传播。
+[Intro to GNN](https://arxiv.org/pdf/2007.02133.pdf)
 
 Convolution operation on a graph:
+![Graph Convolution](graph_convolution.png)
 Then just like CNN, a simple structure example is like:
 1. Normalizing the graph structurel
 1. Graph convolution layer
