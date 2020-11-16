@@ -1,5 +1,5 @@
 # PhD-Notes
-Some study notes on various areas.
+Some study notes on various areas (after the object based relocalisation project).
 
 ## SLAM Related
 
