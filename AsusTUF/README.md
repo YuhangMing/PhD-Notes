@@ -2,7 +2,6 @@
 2021 Asus TUF Gaming A15
 CPU: AMD Ryzen7 5800H
 GPU: GeForce RTX 3070 Laptop
-Display: 240Hz with 100% sRGB
 Memory: 16GB
 
 # NVIDIA
