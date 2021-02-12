@@ -8,13 +8,16 @@ Memory: 16GB
 driver, cudatoolkit, cudnn.
 
 * Driver
-  Graphical install, successfully installed NVIDIA Driver.
-  But in reboot, error reported: usci_acpi USBC000:00 PPM init failed (-110)
-  Some explanation: 
-    UCSI = "USB Type-C Connector System Software Interface"
-    PPM = "Platform Policy Manager. Hardware/firmware that manages all the USB Type-C connectors on the platform."
-  Conflicts between NVIDIA 460.39 driver and Looks like USB-C port???
-  Tried method:
-    Update Ubuntu kernel to 5.10.0 -> same issue
-    Update Ubuntu kernel to 5.11.0 -> cannot boot
-    Use a lower version driver -> nvidia-smi Could not find devices, nvcc -V has output.
+  Three different ways to install the NVIDIA-driver in ubuntu, refer to [Install NVIDIA drive on Ubuntu 20.04](https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux)
+  *GUI or Command-line intallation is preferred.*
+
+  To solve the compatibility problem between AMD Ryzen7 5xxx series CPU and RTX 3xxx series GPU, use the [procedure](https://forums.developer.nvidia.com/t/ubuntu-mate-20-04-with-rtx-3070-on-ryzen-5900-black-screen-after-boot/167681/30).
+
+* Cuda Toolkit
+  Note that Cuda toolkit need to be compatible with TensorFlow. Check the [table](https://www.tensorflow.org/install/source#gpu)
+
+  Since the NVIDIA driver is already installed, recommend to install Cuda Toolkit using runfile, and make sure to un-select install driver during the installation.
+
+* cudnn
+  Install the correct version of cudnn. 
+
