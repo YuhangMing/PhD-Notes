@@ -75,7 +75,12 @@ Memory: 16GB
       or
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
 
+# Anaconda
+  Install Anaconda, follow the official instruction [here](https://docs.anaconda.com/anaconda/install/linux/)
 
+# OpenCV
+  [OpenCV](https://opencv.org/releases/)
+  [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases) 
 
   
   
