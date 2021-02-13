@@ -133,6 +133,13 @@ Memory: 16GB
     
   Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
   
+  4. CAIRO Error: 
+  
+    /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_end'
+    /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_begin'
+    /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_font_options_get_variations'
+
+  
   x. python error: no module named 'cv2'
   
     pip install opencv-python
