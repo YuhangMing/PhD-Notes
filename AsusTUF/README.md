@@ -82,6 +82,21 @@ Memory: 16GB
   [OpenCV](https://opencv.org/releases/)
   [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases) 
 
+  	cmake -D CMAKE_BUILD_TYPE=RELEASE \
+		      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.12/modules \
+      	  -D WITH_LIBV4L=ON \
+		      -D WITH_CUDA=ON \
+		      -D ENABLE_FAST_MATH=ON \
+		      -D CUDA_FAST_MATH=ON \
+		      -D WITH_CUBLAS=ON \
+		      -D WITH_NVCUVID=ON \
+		      -D CUDA_GENERATION=Auto \
+		      -D WITH_TBB=ON \
+		      -D WITH_OPENMP=ON \
+		      -D WITH_OPENGL=ON \
+		      -D ENABLE_CXX11=ON \
+		      -D OPENCV_ENABLE_NONFREE=ON \
+          -D ENABLE_PRECOMPILED_HEADERS=OFF ..
   
   
 
