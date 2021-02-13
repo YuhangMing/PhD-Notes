@@ -90,7 +90,7 @@ Memory: 16GB
 
   Install OpenCV
   
-  	cmake -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.12/modules -D WITH_LIBV4L=ON -D WITH_CUDA=ON -D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=ON -D WITH_CUBLAS=ON -D WITH_NVCUVID=ON -D CUDA_GENERATION=Auto -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_OPENGL=ON -D ENABLE_CXX11=ON -D OPENCV_ENABLE_NONFREE=ON -D ENABLE_PRECOMPILED_HEADERS=OFF ..
+  	cmake -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.13/modules -D WITH_CUDA=ON -D CUDA_ARCH_BIN=8.0  -D WITH_CUDNN=OFF -D OPENCV_ENABLE_NONFREE=ON -DBUILD_JAVA=OFF -DBUILD_opencv_java_bindings_generator=OFF -D BUILD_PYTHON=OFF -D BUILD_opencv_python_bindings_generator=OFF -D WITH_QT=ON -D WITH_LIBV4L=ON -D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=ON -D WITH_CUBLAS=ON -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_OPENGL=ON -D ENABLE_CXX11=ON ..
     
   Problems Encountered:
   
@@ -104,9 +104,18 @@ Memory: 16GB
   
   CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
   
+  Sol: 
+  
+  i) update CUDA from 11.0 to 11.1.1
+  
+  ii) set -D CUDA_ARCH_BIN=8.0 when building opencv
+  
   3. python error: no module named 'cv2'
   
     pip install opencv-python
   
+# NOCS Network
+  Paper by Wang et al. in CVPR 2019, [GitHub](https://github.com/hughw19/NOCS_CVPR2019).
   
-
+  Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
+ 
