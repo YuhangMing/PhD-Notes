@@ -110,7 +110,28 @@ Memory: 16GB
   
   ii) set -D CUDA_ARCH_BIN=8.0 when building opencv
   
-  3. python error: no module named 'cv2'
+  3. LIBTIFF Error:
+  
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBAStrip@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadDirectory@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteEncodedStrip@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFIsTiled@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteScanline@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFGetField@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFScanlineSize@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteDirectory@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedTile@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBATile@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClose@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClientOpen@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFRGBAImageOK@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFOpen@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedStrip@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetField@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
+    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
+  
+  x. python error: no module named 'cv2'
   
     pip install opencv-python
   
