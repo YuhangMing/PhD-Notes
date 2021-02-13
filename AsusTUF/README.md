@@ -102,7 +102,7 @@ Memory: 16GB
     
   2. nvcc fatal: Unsupported gpu architecture 'compute_86'
   
-  Sol: change to the newest version (3.4.13).
+  CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
   
   3. python error: no module named 'cv2'
   
