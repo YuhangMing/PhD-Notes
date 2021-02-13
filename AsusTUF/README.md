@@ -99,8 +99,12 @@ Memory: 16GB
     sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
     sudo apt update
     sudo apt install libjasper-dev
+    
+  2. nvcc fatal: Unsupported gpu architecture 'compute_86'
   
-  2. python error: no module named 'cv2'
+  Sol: change to the newest version (3.4.13).
+  
+  3. python error: no module named 'cv2'
   
     pip install opencv-python
   
