@@ -130,6 +130,8 @@ Memory: 16GB
     /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetField@LIBTIFF_4.0'
     /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
     /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
+    
+  Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
   
   x. python error: no module named 'cv2'
   
