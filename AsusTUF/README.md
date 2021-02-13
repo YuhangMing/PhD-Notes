@@ -81,8 +81,28 @@ Memory: 16GB
 # OpenCV
   [OpenCV](https://opencv.org/releases/)
   [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases) 
+  
+  Prerequisite
 
+    [compiler] sudo apt-get install build-essential
+    [required] sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+    [optional] sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+  Install OpenCV
+  
   	cmake -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.12/modules -D WITH_LIBV4L=ON -D WITH_CUDA=ON -D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=ON -D WITH_CUBLAS=ON -D WITH_NVCUVID=ON -D CUDA_GENERATION=Auto -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_OPENGL=ON -D ENABLE_CXX11=ON -D OPENCV_ENABLE_NONFREE=ON -D ENABLE_PRECOMPILED_HEADERS=OFF ..
+    
+  Problems Encountered:
+  
+  1. E: Unable to locate package libjasper-dev
+  
+    sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+    sudo apt update
+    sudo apt install libjasper-dev
+  
+  2. python error: no module named 'cv2'
+  
+    pip install opencv-python
   
   
 
