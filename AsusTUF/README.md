@@ -1,7 +1,10 @@
 # System Info
-2021 Asus TUF Gaming A15
+2021 Asus TUF Gaming A15, Windows 10 and Ubuntu 20.04.2 dual systems
+
 CPU: AMD Ryzen7 5800H
+
 GPU: GeForce RTX 3070 Laptop
+
 Memory: 16GB
 
 # NVIDIA
@@ -60,27 +63,16 @@ Memory: 16GB
 
       Navigate to your <cudnnpath> directory containing the cuDNN Debian file.
       Install the runtime library, for example:
-
         sudo dpkg -i libcudnn8_x.x.x-1+cudax.x_amd64.deb
-
       or
-
         sudo dpkg -i libcudnn8_x.x.x-1+cudax.x_arm64.deb
-
       Install the developer library, for example:
-
         sudo dpkg -i libcudnn8-dev_8.x.x.x-1+cudax.x_amd64.deb
-
       or
-
         sudo dpkg -i libcudnn8-dev_8.x.x.x-1+cudax.x_arm64.deb
-
       Install the code samples and the cuDNN library documentation, for example:
-
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_amd64.deb
-
       or
-
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
 
 
