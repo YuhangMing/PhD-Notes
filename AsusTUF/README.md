@@ -319,63 +319,71 @@ Memory: 16GB
     -- Generating done
     -- Build files have been written to: /home/yohann/SLAMs/depend/opencv-3.4.13/build
 
-## Problems Encountered CV
+### Problems Encountered CV
   > E: Unable to locate package libjasper-dev
+  ```
+  sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
+  sudo apt update
+  sudo apt install libjasper-dev
+  ```
   
-    sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
-    sudo apt update
-    sudo apt install libjasper-dev
-    
   > nvcc fatal: Unsupported gpu architecture 'compute_86'
   
-   Why:
+  Why:
    
-   CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
+  CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
   
-   Sol: 
+  Sol: 
   
-   i) update CUDA from 11.0 to 11.1.1;
+  i) update CUDA from 11.0 to 11.1.1;
   
-   ii) set -D CUDA_ARCH_BIN=8.0 when building opencv. (This solution is chosen here)
-    
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBAStrip@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadDirectory@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteEncodedStrip@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFIsTiled@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteScanline@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFGetField@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFScanlineSize@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteDirectory@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedTile@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBATile@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClose@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClientOpen@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFRGBAImageOK@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFOpen@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedStrip@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetField@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
-  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
-    
-   Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
+  ii) set -D CUDA_ARCH_BIN=8.0 when building opencv. (This solution is chosen here)
+   
+  > undefined reference to TIFF
+  ```
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBAStrip@LIBTIFF_4.0'\s\s
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadDirectory@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteEncodedStrip@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFIsTiled@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteScanline@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFGetField@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFScanlineSize@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteDirectory@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedTile@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBATile@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClose@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClientOpen@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFRGBAImageOK@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFOpen@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedStrip@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetField@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
+  /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
+  ```
+   
+  Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
   
-  > /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_end'
-  > /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_begin'
-  > /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_font_options_get_variations'
+  > undifined reference to cairo
+  ```
+  /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_end'
+  /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_begin'
+  /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_font_options_get_variations'
+  ```
 
-   Why:
-   
-   Anaconda environments caused the mismatch between librsvg and libcairo.
-   
-   Sol: 
-   
-   i) set LD_PRELOAD to the path of match librsvg and libcairo;
-   
-   ii) remove Anaconda and reinstall after opencv is compiled. (This solution is chosen here)
+  Why:
+  
+  Anaconda environments caused the mismatch between librsvg and libcairo.
+  
+  Sol: 
+  
+  i) set LD_PRELOAD to the path of match librsvg and libcairo;
+  
+  ii) remove Anaconda and reinstall after opencv is compiled. (This solution is chosen here)
   
   > python error: no module named 'cv2'
-  
-    pip install opencv-python
+  ```
+  pip install opencv-python
+  ```
 
 [Back to Top](#table-of-content)
 
@@ -394,35 +402,40 @@ Memory: 16GB
   Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
   
   1. Create anaconda environment and enter virtual environment
-    
-    conda create -n NOCS2 python=3.8
-    conda activate NOCS2
-    
-  2. Install tensorflow (2.4.0 chosen here)
-    
-    pip install --upgrade pip
-    pip install --upgrade tensorflow-gpu==2.4
-    
-  3. Install keras (2.4.3 chosen here)
+  ```  
+  conda create -n NOCS2 python=3.8
+  conda activate NOCS2
+  ```
   
-    pip install keras
-    
+  2. Install tensorflow (2.4.0 chosen here)
+  ```  
+  pip install --upgrade pip
+  pip install --upgrade tensorflow-gpu==2.4
+  ```
+  
+  3. Install keras (2.4.3 chosen here)
+  ```
+  pip install keras
+  ```
+   
   Note: There is not any keras-gpu package; Keras is a wrapper around some backends, including Tensorflow, and these backends may come in different versions, such as tensorflow and tensorflow-gpu. But this does not hold for Keras itself
   
   UPDATE: there is now a keras-gpu package on Anaconda Cloud.
-
-    conda install -c anaconda keras-gpu
-
-   This will install Keras along with both tensorflow and tensorflow-gpu libraries as the backend. (There is also no need to install separately the CUDA runtime and cudnn libraries as they are also included in the package - tested on Windows 10 and working).
+  ```
+  conda install -c anaconda keras-gpu
+  ```
    
-   4. Some additional packages (scikit-image, open3d, pycocotools):
+  This will install Keras along with both tensorflow and tensorflow-gpu libraries as the backend. (There is also no need to install separately the CUDA runtime and cudnn libraries as they are also included in the package - tested on Windows 10 and working).
    
-     pip install opencv-python
-     pip install scikit-image
-     pip install --user --pre https://storage.googleapis.com/open3d-releases-master/python-wheels/open3d-0.12.0+a7cfdb2-cp38-cp38-linux_x86_64.whl
-     conda install -c conda-forge pycocotools
-    
-## Problems Encountered NOCS
+  4. Some additional packages (scikit-image, open3d, pycocotools):
+  ```
+  pip install opencv-python
+  pip install scikit-image
+  pip install --user --pre https://storage.googleapis.com/open3d-releases-master/python-wheels/open3d-0.12.0+a7cfdb2-cp38-cp38-linux_x86_64.whl
+  conda install -c conda-forge pycocotools
+  ```
+     
+### Problems Encountered NOCS
 
   > CondaHTTPError: HTTP 000 CONNECTION FAILED for url <https://repo.anaconda.com/pkgs/main/linux-64/current_repodata.json>
   
@@ -432,53 +445,55 @@ Memory: 16GB
   
     conda config --remove-key channels
 
-  > raise ReadTimeoutError(self._pool, None, "Read timed out.")
-  > pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out.
+  > ReadTimeoutError: pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out.
 
   Sol: Change to Tsinghua Mirror temporarily (in single installation).
-  
-    pip install -i mirror-link package-name
+  ```
+  pip install -i mirror-link package-name
+  ```
   
   where mirror-link is:
+  ```
+  清华源：https://pypi.tuna.tsinghua.edu.cn/simple
+  豆瓣源：http://pypi.douban.com/simple/
+  阿里源：https://mirrors.aliyun.com/pypi/simple/
+  腾讯源：http://mirrors.cloud.tencent.com/pypi/simple
+  ```
   
-    清华源：https://pypi.tuna.tsinghua.edu.cn/simple
-    豆瓣源：http://pypi.douban.com/simple/
-    阿里源：https://mirrors.aliyun.com/pypi/simple/
-    腾讯源：http://mirrors.cloud.tencent.com/pypi/simple
-    
   Eg.
+  ```
+  pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
+  ```
   
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
-    
-  > (0) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
-  
-  >         [[{{node conv1/Conv2D}}]]
-  
-  > (1) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
-  
-  >         [[{{node conv1/Conv2D}}]]
-  
-  >         [[mrcnn_bbox/Reshape/_2851]]
+  > Failed to get convolution algorithm.  
+  ```
+  (0) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
+           [[{{node conv1/Conv2D}}]]
+  (1) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
+           [[{{node conv1/Conv2D}}]]
+           [[mrcnn_bbox/Reshape/_2851]]
+  ```
   
   Why:
   
   Possilbly because GPU runs out of memery.
   
   Sol:
-  
-    gpus = tf.config.list_physical_devices('GPU')
-    if gpus:
-      try:
-      # Currently, memory growth needs to be the same across GPUs
-      for gpu in gpus:
-        tf.config.experimental.set_memory_growth(gpu, True)
-        logical_gpus = tf.config.experimental.list_logical_devices('GPU')
-        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
-      except RuntimeError as e:
-        # Memory growth must be set before GPUs have been initialized
-        print(e)
-  
-   > W tensorflow/stream_executor/gpu/asm_compiler.cc:235] Your CUDA software stack is old. We fallback to the NVIDIA driver for some compilation. Update your CUDA version to get the best performance. The ptxas error was: ptxas fatal   : Value 'sm_86' is not defined for option 'gpu-name'
+  ```py
+  gpus = tf.config.list_physical_devices('GPU')
+  if gpus:
+    try:
+    # Currently, memory growth needs to be the same across GPUs
+    for gpu in gpus:
+      tf.config.experimental.set_memory_growth(gpu, True)
+      logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+      print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+    except RuntimeError as e:
+      # Memory growth must be set before GPUs have been initialized
+      print(e)
+  ```
+   
+  > W tensorflow/stream_executor/gpu/asm_compiler.cc:235] Your CUDA software stack is old. We fallback to the NVIDIA driver for some compilation. Update your CUDA version to get the best performance. The ptxas error was: ptxas fatal   : Value 'sm_86' is not defined for option 'gpu-name'
    
    Why:
    
