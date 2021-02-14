@@ -434,7 +434,11 @@ Memory: 16GB
 
   Sol: Change to Tsinghua Mirror temporarily (in single installation).
   
-    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package-name
+    pip install -i mirror-link package-name
+  
+  where mirror-link is:
+  
+    https://pypi.tuna.tsinghua.edu.cn/simple
     
   Eg.
   
