@@ -97,8 +97,9 @@ Memory: 16GB
 
 
 # OpenCV
-  [OpenCV](https://opencv.org/releases/)
-  [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases) 
+  Links to download OpenCV source codes:
+  [OpenCV](https://opencv.org/releases/),
+  [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases).
   
   Prerequisite
 
@@ -384,6 +385,10 @@ Memory: 16GB
   Paper by Wang et al. in CVPR 2019, [GitHub](https://github.com/hughw19/NOCS_CVPR2019).
   
   Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
+  
+  1. Create anaconda environment
+    
+    conda create -n NOCS2 python=3.8
 
 [Back to Top](#table-of-content)
 
