@@ -5,6 +5,7 @@
   * [Problems](#problems-encountered)
 - [Anaconda](#anaconda)
 - [NOCS](#nocs-network)
+  * [Problems](#problems-encountered)
 - [Libfusion](#libfusion)
 
 
@@ -389,6 +390,18 @@ Memory: 16GB
   1. Create anaconda environment
     
     conda create -n NOCS2 python=3.8
+    
+## Problems Encountered
+
+  1. CondaHTTPError: 
+  
+  > HTTP 000 CONNECTION FAILED for url <https://repo.anaconda.com/pkgs/main/linux-64/current_repodata.json>
+  
+  Sol: Change to Tsinghua Mirror using the instruction [here](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/).
+  
+  *To change back to original conda source, use*
+  
+    conda config --remove-key channels
 
 [Back to Top](#table-of-content)
 
