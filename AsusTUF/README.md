@@ -1,3 +1,4 @@
+# Table of Content
 - [System Info](#system-info)
 - [NVIDIA](#nvidia)
 - [OpenCV](#opencv)
@@ -16,8 +17,10 @@ GPU: GeForce RTX 3070 Laptop
 
 Memory: 16GB
 
-# NVIDIA
+[Back to Top](#table-of-content)
 
+
+# NVIDIA
 * Driver (460.39): 
   Three different ways to install the NVIDIA-driver in ubuntu, refer to [Install NVIDIA drive on Ubuntu 20.04](https://linuxconfig.org/how-to-install-the-nvidia-drivers-on-ubuntu-20-04-focal-fossa-linux).
   *GUI or Command-line intallation is preferred.*
@@ -89,6 +92,9 @@ Memory: 16GB
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_amd64.deb
       or
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
+
+[Back to Top](#table-of-content)
+
 
 # OpenCV
   [OpenCV](https://opencv.org/releases/)
@@ -363,15 +369,26 @@ Memory: 16GB
   
     pip install opencv-python
 
+[Back to Top](#table-of-content)
+
+
 # Anaconda
   Install Anaconda, follow the official instruction [here](https://docs.anaconda.com/anaconda/install/linux/)
   
   *recommend to install OpenCV before Anaconda.*
 
+[Back to Top](#table-of-content)
+
+
 # NOCS Network
   Paper by Wang et al. in CVPR 2019, [GitHub](https://github.com/hughw19/NOCS_CVPR2019).
   
   Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
- 
+
+[Back to Top](#table-of-content)
+
+
 # Libfusion
   Implementation of our SLAM system.
+
+[Back to Top](#table-of-content)
