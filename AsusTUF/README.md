@@ -2,10 +2,10 @@
 - [System Info](#system-info)
 - [NVIDIA](#nvidia)
 - [OpenCV](#opencv)
-  * [Problems](#problems-encountered)
+  * [Problems](#problems-encountered-cv)
 - [Anaconda](#anaconda)
 - [NOCS](#nocs-network)
-  * [Problems](#problems-encountered)
+  * [Problems](#problems-encountered-nocs)
 - [Libfusion](#libfusion)
 
 
@@ -313,7 +313,7 @@ Memory: 16GB
     -- Generating done
     -- Build files have been written to: /home/yohann/SLAMs/depend/opencv-3.4.13/build
 
-## Problems Encountered
+## Problems Encountered CV
   1. E: Unable to locate package libjasper-dev
   
     sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
@@ -416,7 +416,7 @@ Memory: 16GB
      pip install --user --pre https://storage.googleapis.com/open3d-releases-master/python-wheels/open3d-0.12.0+a7cfdb2-cp38-cp38-linux_x86_64.whl
      conda install -c conda-forge pycocotools
     
-## Problems Encountered
+## Problems Encountered NOCS
 
   1. Conda HTTPError: 
   
