@@ -320,52 +320,52 @@ Memory: 16GB
     -- Build files have been written to: /home/yohann/SLAMs/depend/opencv-3.4.13/build
 
 ## Problems Encountered CV
-  1. E: Unable to locate package libjasper-dev
+  > E: Unable to locate package libjasper-dev
   
     sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
     sudo apt update
     sudo apt install libjasper-dev
     
-  2. nvcc fatal: Unsupported gpu architecture 'compute_86'
+  > nvcc fatal: Unsupported gpu architecture 'compute_86'
   
-   > CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
+   Why:
+   
+   CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
   
    Sol: 
   
    i) update CUDA from 11.0 to 11.1.1;
   
    ii) set -D CUDA_ARCH_BIN=8.0 when building opencv. (This solution is chosen here)
-  
-  3. LIBTIFF Error:
-  
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBAStrip@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadDirectory@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteEncodedStrip@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFIsTiled@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteScanline@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFGetField@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFScanlineSize@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteDirectory@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedTile@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBATile@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClose@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClientOpen@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFRGBAImageOK@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFOpen@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedStrip@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetField@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
-    /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
+    
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBAStrip@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadDirectory@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteEncodedStrip@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFIsTiled@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteScanline@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFGetField@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFScanlineSize@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteDirectory@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedTile@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBATile@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClose@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFClientOpen@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFRGBAImageOK@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFOpen@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadEncodedStrip@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetField@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
+  > /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
     
    Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
   
-  4. CAIRO Error: 
-  
-    /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_end'
-    /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_begin'
-    /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_font_options_get_variations'
+  > /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_end'
+  > /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_begin'
+  > /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_font_options_get_variations'
 
-   > Anaconda environments caused the mismatch between librsvg and libcairo.
+   Why:
+   
+   Anaconda environments caused the mismatch between librsvg and libcairo.
    
    Sol: 
    
@@ -373,7 +373,7 @@ Memory: 16GB
    
    ii) remove Anaconda and reinstall after opencv is compiled. (This solution is chosen here)
   
-  5. python error: no module named 'cv2'
+  > python error: no module named 'cv2'
   
     pip install opencv-python
 
@@ -424,8 +424,6 @@ Memory: 16GB
     
 ## Problems Encountered NOCS
 
-  1. Conda HTTPError: 
-  
   > CondaHTTPError: HTTP 000 CONNECTION FAILED for url <https://repo.anaconda.com/pkgs/main/linux-64/current_repodata.json>
   
   Sol: Change to Tsinghua Mirror using the instruction [here](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/).
@@ -433,9 +431,8 @@ Memory: 16GB
   *To change back to original conda source, use*
   
     conda config --remove-key channels
-   
-  2. Pip ReadTimeoutError:
-  
+
+  > raise ReadTimeoutError(self._pool, None, "Read timed out.")
   > pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out.
 
   Sol: Change to Tsinghua Mirror temporarily (in single installation).
