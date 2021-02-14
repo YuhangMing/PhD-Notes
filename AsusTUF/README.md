@@ -449,6 +449,15 @@ Memory: 16GB
   Eg.
   
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
+    
+  > (0) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
+	 >         [[{{node conv1/Conv2D}}]]
+  > (1) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
+	 >         [[{{node conv1/Conv2D}}]]
+	 >         [[mrcnn_bbox/Reshape/_2851]]
+  
+  
+
 
 [Back to Top](#table-of-content)
 
