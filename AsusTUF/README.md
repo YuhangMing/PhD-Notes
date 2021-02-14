@@ -1,3 +1,13 @@
+Table of Content
+- [System Info](#system-info)
+- [NVIDIA](#nvidia)
+- [Anaconda](#anaconda)
+- [OpenCV](#opencv)
+  * [Problems](#problems-encountered)
+- [NOCS](#nocs-network)
+- [Libfusion](#libfusion)
+
+
 # System Info
 2021 Asus TUF Gaming A15, Windows 10 and Ubuntu 20.04.2 dual systems
 
@@ -295,8 +305,7 @@ Memory: 16GB
     -- Build files have been written to: /home/yohann/SLAMs/depend/opencv-3.4.13/build
   
     
-  Problems Encountered:
-  
+## Problems Encountered
   1. E: Unable to locate package libjasper-dev
   
     sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
@@ -352,3 +361,5 @@ Memory: 16GB
   
   Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
  
+# Libfusion
+  Implementation of our SLAM system.
