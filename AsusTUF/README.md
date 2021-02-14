@@ -1,5 +1,6 @@
 # Table of Content
 - [System Info](#system-info)
+- [Ubuntu](#ubuntu-20.04.2)
 - [NVIDIA](#nvidia)
 - [OpenCV](#opencv)
   * [Problems](#problems-encountered-cv)
@@ -19,6 +20,11 @@ GPU: GeForce RTX 3070 Laptop
 Memory: 16GB
 
 [Back to Top](#table-of-content)
+
+
+# Ubuntu 20.04.2
+* 双系统安装时怎么分配空间
+* 修改阿里源
 
 
 # NVIDIA
@@ -438,7 +444,10 @@ Memory: 16GB
   
   where mirror-link is:
   
-    https://pypi.tuna.tsinghua.edu.cn/simple
+    清华源：https://pypi.tuna.tsinghua.edu.cn/simple
+    豆瓣源：http://pypi.douban.com/simple/
+    阿里源：https://mirrors.aliyun.com/pypi/simple/
+    腾讯源：http://mirrors.cloud.tencent.com/pypi/simple
     
   Eg.
   
