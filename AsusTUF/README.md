@@ -387,9 +387,38 @@ Memory: 16GB
   
   Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
   
-  1. Create anaconda environment
+  1. Create anaconda environment and enter virtual environment
     
     conda create -n NOCS2 python=3.8
+    conda activate NOCS2
+    
+  2. Install tensorflow (2.4.0 chosen here)
+    
+    pip install --upgrade pip
+    pip install --upgrade tensorflow-gpu==2.4
+    
+  3. Install keras (2.4.3 chosen here)
+  
+    pip install keras
+    
+  Note: There is not any keras-gpu package; Keras is a wrapper around some backends, including Tensorflow, and these backends may come in different versions, such as tensorflow and tensorflow-gpu. But this does not hold for Keras itself
+  
+  UPDATE: there is now a keras-gpu package on Anaconda Cloud.
+
+    conda install -c anaconda keras-gpu
+
+   This will install Keras along with both tensorflow and tensorflow-gpu libraries as the backend. (There is also no need to install separately the CUDA runtime and cudnn libraries as they are also included in the package - tested on Windows 10 and working).
+   
+   4. Some additional packages (scikit-image, open3d, pycocotools):
+   
+     pip install opencv-python
+     pip install scikit-image
+     pip install --user --pre https://storage.googleapis.com/open3d-releases-master/python-wheels/open3d-0.12.0+a7cfdb2-cp38-cp38-linux_x86_64.whl
+     conda install -c conda-forge pycocotools
+     
+   Change pip to Tsinghua mirror in one installation in case of the super slow installation:
+     
+     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
     
 ## Problems Encountered
 
