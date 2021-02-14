@@ -23,7 +23,7 @@ Memory: 16GB
   *GUI or Command-line intallation is preferred.*
 
   To solve the compatibility problem between AMD Ryzen7 5xxx series CPU and RTX 3xxx series GPU, use the [procedure](https://forums.developer.nvidia.com/t/ubuntu-mate-20-04-with-rtx-3070-on-ryzen-5900-black-screen-after-boot/167681/30).
-
+0
 * [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) (11.0): 
   Note that Cuda toolkit need to be compatible with TensorFlow. Check the [table](https://www.tensorflow.org/install/source#gpu)
 
@@ -63,7 +63,13 @@ Memory: 16GB
   
       export PATH=/usr/local/cuda-11.0/bin:$PATH
       export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
-   
+      
+  To delete current CUDA:
+      
+      cd /usr/local/cuda-11.0/bin
+      chmod +x cuda-uninstaller
+      sudo ./cuda-uninstaller
+
 * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive) (8.0.5): 
   Based on system and cuda version, choose cuDNN v8.0.5 for CUDA 11.0 through Debian Installation.
 
