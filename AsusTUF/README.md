@@ -415,22 +415,30 @@ Memory: 16GB
      pip install scikit-image
      pip install --user --pre https://storage.googleapis.com/open3d-releases-master/python-wheels/open3d-0.12.0+a7cfdb2-cp38-cp38-linux_x86_64.whl
      conda install -c conda-forge pycocotools
-     
-   Change pip to Tsinghua mirror in one installation in case of the super slow installation:
-     
-     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
     
 ## Problems Encountered
 
-  1. CondaHTTPError: 
+  1. Conda HTTPError: 
   
-  > HTTP 000 CONNECTION FAILED for url <https://repo.anaconda.com/pkgs/main/linux-64/current_repodata.json>
+  > CondaHTTPError: HTTP 000 CONNECTION FAILED for url <https://repo.anaconda.com/pkgs/main/linux-64/current_repodata.json>
   
   Sol: Change to Tsinghua Mirror using the instruction [here](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/).
   
   *To change back to original conda source, use*
   
     conda config --remove-key channels
+   
+  2. Pip ReadTimeoutError:
+  
+  > pip._vendor.urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='files.pythonhosted.org', port=443): Read timed out.
+
+  Sol: Change to Tsinghua Mirror temporarily (in single installation).
+  
+    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package-name
+    
+  Eg.
+  
+    pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
 
 [Back to Top](#table-of-content)
 
