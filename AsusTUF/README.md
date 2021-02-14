@@ -1,8 +1,8 @@
 - [System Info](#system-info)
 - [NVIDIA](#nvidia)
-- [Anaconda](#anaconda)
 - [OpenCV](#opencv)
   * [Problems](#problems-encountered)
+- [Anaconda](#anaconda)
 - [NOCS](#nocs-network)
 - [Libfusion](#libfusion)
 
@@ -90,9 +90,6 @@ Memory: 16GB
       or
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
 
-# Anaconda
-  Install Anaconda, follow the official instruction [here](https://docs.anaconda.com/anaconda/install/linux/)
-
 # OpenCV
   [OpenCV](https://opencv.org/releases/)
   [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases) 
@@ -106,7 +103,6 @@ Memory: 16GB
   Install OpenCV
   
   	cmake -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.13/modules -D WITH_CUDA=ON -D CUDA_ARCH_BIN=8.0 -D WITH_CUDNN=OFF -D BUILD_opencv_cudacodec=OFF -D OPENCV_ENABLE_NONFREE=ON -DBUILD_JAVA=OFF -DBUILD_opencv_java_bindings_generator=OFF -D BUILD_PYTHON=OFF -D BUILD_opencv_python_bindings_generator=OFF -D WITH_QT=ON -D ENABLE_CXX11=ON -D BUILD_TIFF=ON ..
-    -D WITH_LIBV4L=ON -D ENABLE_FAST_MATH=ON -D CUDA_FAST_MATH=ON -D WITH_CUBLAS=ON -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_OPENGL=ON 
     
   CMake Output:
   
@@ -308,8 +304,7 @@ Memory: 16GB
     -- Configuring done
     -- Generating done
     -- Build files have been written to: /home/yohann/SLAMs/depend/opencv-3.4.13/build
-  
-    
+
 ## Problems Encountered
   1. E: Unable to locate package libjasper-dev
   
@@ -319,13 +314,13 @@ Memory: 16GB
     
   2. nvcc fatal: Unsupported gpu architecture 'compute_86'
   
-  CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
+   > CUDA outdated, 'compute_86' is supported from CUDA 11.1.1
   
-  Sol: 
+   Sol: 
   
-  i) update CUDA from 11.0 to 11.1.1
+   i) update CUDA from 11.0 to 11.1.1;
   
-  ii) set -D CUDA_ARCH_BIN=8.0 when building opencv
+   ii) set -D CUDA_ARCH_BIN=8.0 when building opencv. (This solution is chosen here)
   
   3. LIBTIFF Error:
   
@@ -348,7 +343,7 @@ Memory: 16GB
     /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetWarningHandler@LIBTIFF_4.0'
     /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFSetErrorHandler@LIBTIFF_4.0'
     
-  Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
+   Sol: 在cmake 编译OpenCV时： cmake -D BUILD_TIFF=ON
   
   4. CAIRO Error: 
   
@@ -356,11 +351,23 @@ Memory: 16GB
     /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_tag_begin'
     /usr/bin/ld: /lib/x86_64-linux-gnu/librsvg-2.so.2: undefined reference to `cairo_font_options_get_variations'
 
+   > Anaconda environments caused the mismatch between librsvg and libcairo.
+   
+   Sol: 
+   
+   i) set LD_PRELOAD to the path of match librsvg and libcairo;
+   
+   ii) remove Anaconda and reinstall after opencv is compiled. (This solution is chosen here)
   
-  x. python error: no module named 'cv2'
+  5. python error: no module named 'cv2'
   
     pip install opencv-python
+
+# Anaconda
+  Install Anaconda, follow the official instruction [here](https://docs.anaconda.com/anaconda/install/linux/)
   
+  *recommend to install OpenCV before Anaconda.*
+
 # NOCS Network
   Paper by Wang et al. in CVPR 2019, [GitHub](https://github.com/hughw19/NOCS_CVPR2019).
   
