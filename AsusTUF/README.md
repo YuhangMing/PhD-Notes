@@ -451,12 +451,42 @@ Memory: 16GB
     pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
     
   > (0) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
-	 >         [[{{node conv1/Conv2D}}]]
+  
+  >         [[{{node conv1/Conv2D}}]]
+  
   > (1) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
-	 >         [[{{node conv1/Conv2D}}]]
-	 >         [[mrcnn_bbox/Reshape/_2851]]
   
+  >         [[{{node conv1/Conv2D}}]]
   
+  >         [[mrcnn_bbox/Reshape/_2851]]
+  
+  Why:
+  
+  Possilbly because GPU runs out of memery.
+  
+  Sol:
+  
+    gpus = tf.config.list_physical_devices('GPU')
+    if gpus:
+      try:
+      # Currently, memory growth needs to be the same across GPUs
+      for gpu in gpus:
+        tf.config.experimental.set_memory_growth(gpu, True)
+        logical_gpus = tf.config.experimental.list_logical_devices('GPU')
+        print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
+      except RuntimeError as e:
+        # Memory growth must be set before GPUs have been initialized
+        print(e)
+  
+   > W tensorflow/stream_executor/gpu/asm_compiler.cc:235] Your CUDA software stack is old. We fallback to the NVIDIA driver for some compilation. Update your CUDA version to get the best performance. The ptxas error was: ptxas fatal   : Value 'sm_86' is not defined for option 'gpu-name'
+   
+   Why:
+   
+   Same as OpenCV, 'sm_86' is supported after Cuda 11.1.1
+   
+   Sol:
+   
+   TO BE ADDED.
 
 
 [Back to Top](#table-of-content)
