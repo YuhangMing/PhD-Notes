@@ -1,4 +1,3 @@
-Table of Content
 - [System Info](#system-info)
 - [NVIDIA](#nvidia)
 - [Anaconda](#anaconda)
