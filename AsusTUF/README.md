@@ -88,7 +88,7 @@ Memory: 16GB
   
   Because the latest tensorflow 2.4.0 supports CUDA 11.0, cudnn 8.0, and python 3.6-3.8, CUDA 11.0 is installed using runfile. 
   
-  UPDATE, because the only Cuda 11.1 and later versions support cc-8.6, changed to CUDA 11.1.1 here.
+  UPDATE, because the only Cuda 11.1 and later versions support compute capability 8.6, changed to CUDA 11.1.1 here.
   
   Installation Instructions:
   ```
