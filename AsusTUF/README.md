@@ -537,7 +537,8 @@ Memory: 16GB
    
    Sol:
    
-   TO BE ADDED.
+   返工！！！
+   Update Cuda to 11.1.1 or later. Re-do all the OpenCV and Anaconda setup.
 
 
 [Back to Top](#table-of-content)
