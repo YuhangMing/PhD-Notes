@@ -91,9 +91,10 @@ Memory: 16GB
   UPDATE, because the only Cuda 11.1 and later versions support cc-8.6, changed to CUDA 11.1.1 here.
   
   Installation Instructions:
-
-      wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.1.1_455.32.00_linux.run
-      sudo sh cuda_11.1.1_455.32.00_linux.run
+  ```
+  wget http://developer.download.nvidia.com/compute/cuda/11.1.1/local_installers/cuda_11.1.1_455.32.00_linux.run
+  sudo sh cuda_11.1.1_455.32.00_linux.run
+  ```
   
   The output is:
   ```
@@ -136,23 +137,13 @@ Memory: 16GB
 
 * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive) (8.0.5): 
 
-  Instruction: 
-  Before issuing the following commands, you'll need to replace x.x and 8.x.x.x with your specific CUDAand cuDNN versions and package date.
-
-      Navigate to your <cudnnpath> directory containing the cuDNN Debian file.
-      Install the runtime library, for example:
-        sudo dpkg -i libcudnn8_x.x.x-1+cudax.x_amd64.deb
-      or
-        sudo dpkg -i libcudnn8_x.x.x-1+cudax.x_arm64.deb
-      Install the developer library, for example:
-        sudo dpkg -i libcudnn8-dev_8.x.x.x-1+cudax.x_amd64.deb
-      or
-        sudo dpkg -i libcudnn8-dev_8.x.x.x-1+cudax.x_arm64.deb
-      Install the code samples and the cuDNN library documentation, for example:
-        sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_amd64.deb
-      or
-        sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
-        
+  Installed using debian: 
+  ```
+  sudo dpkg -i libcudnn8_8.0.5.39-1+cuda11.1_amd64.deb
+  sudo dpkg -i libcudnn8-dev_8.0.5.39-1+cuda11.1_amd64.deb
+  sudo dpkg -i libcudnn8-samples_8.0.5.39-1+cuda11.1_amd64.deb
+  ```
+  
   To check if the installation succeeded, run:
   ```
   cat /usr/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
