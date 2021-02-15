@@ -259,10 +259,10 @@ Memory: 16GB
 # NOCS Network
   Updated code can be found [here](https://github.com/YuhangMing/NOCS_CVPR2019).  
   
-  1. Create anaconda environment and enter virtual environment
+  1. Create anaconda environment and enter virtual environment (open3d in pip supports upto python 3.7)
   ```  
-  conda create -n NOCS2 python=3.8
-  conda activate NOCS2
+  conda create -n NOCS python=3.7
+  conda activate NOCS
   ```
   
   2. Install tensorflow (2.4.0 chosen here)
@@ -289,7 +289,7 @@ Memory: 16GB
   ```
   pip install opencv-python
   pip install scikit-image
-  pip install --user --pre https://storage.googleapis.com/open3d-releases-master/python-wheels/open3d-0.12.0+a7cfdb2-cp38-cp38-linux_x86_64.whl
+  pip install open3d-python
   conda install -c conda-forge pycocotools
   ```
      
