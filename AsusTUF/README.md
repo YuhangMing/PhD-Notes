@@ -82,42 +82,45 @@ Memory: 16GB
   
   Because the latest tensorflow 2.4.0 supports CUDA 11.0, cudnn 8.0, and python 3.6-3.8, CUDA 11.0 is installed using runfile. 
   
+  UPDATE, because the only Cuda 11.1 and later versions support cc-8.6, changed to CUDA 11.1.1 here.
+  
   Installation Instructions:
 
-      wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.0.2_450.51.05_linux.run
-      sudo sh cuda_11.0.2_450.51.05_linux.run
+      wget http://developer.download.nvidia.com/compute/cuda/11.0.2/local_installers/cuda_11.1.1_455.32.00_linux.run
+      sudo sh cuda_11.1.1_455.32.00_linux.run
   
   The output is:
+  ```
+  ===========
+  = Summary =
+  ===========
+
+  Driver:   Not Selected
+  Toolkit:  Installed in /usr/local/cuda-11.1/
+  Samples:  Installed in /home/yohann/, but missing recommended libraries
+
+  Please make sure that
+   -   PATH includes /usr/local/cuda-11.1/bin
+   -   LD_LIBRARY_PATH includes /usr/local/cuda-11.1/lib64, or, add /usr/local/cuda-11.1/lib64 to /etc/ld.so.conf and run ldconfig as root
+
+  To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.1/bin
+  ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least 455.00 is required for CUDA 11.1 functionality to work.
+  To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
+      sudo <CudaInstaller>.run --silent --driver
+
+  Logfile is /var/log/cuda-installer.log
+  ```
   
-      ===========
-      = Summary =
-      ===========
-
-      Driver:   Not Selected
-      Toolkit:  Installed in /usr/local/cuda-11.0/
-      Samples:  Installed in /home/yohann/, but missing recommended libraries
-
-      Please make sure that
-      -   PATH includes /usr/local/cuda-11.0/bin
-      -   LD_LIBRARY_PATH includes /usr/local/cuda-11.0/lib64, or, add /usr/local/cuda-11.0/lib64 to /etc/ld.so.conf and run ldconfig as root
-
-      To uninstall the CUDA Toolkit, run cuda-uninstaller in /usr/local/cuda-11.0/bin
-
-      Please see CUDA_Installation_Guide_Linux.pdf in /usr/local/cuda-11.0/doc/pdf for detailed information on setting up CUDA.
-      ***WARNING: Incomplete installation! This installation did not install the CUDA Driver. A driver of version at least .00 is required for CUDA 11.0 functionality to work.
-      To install the driver using this installer, run the following command, replacing <CudaInstaller> with the name of this run file:
-          sudo <CudaInstaller>.run --silent --driver
-
-      Logfile is /var/log/cuda-installer.log
-   
   Update PATH and LD_LIBRARY_PATH:
+  ```
+  export PATH=/usr/local/cuda-11.1/bin:$PATH
+  export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
+  ```    
   
-      export PATH=/usr/local/cuda-11.0/bin:$PATH
-      export LD_LIBRARY_PATH=/usr/local/cuda-11.0/lib64:$LD_LIBRARY_PATH
-      
   To delete current CUDA:
-      
-      sudo /usr/local/cuda-11.0/bin/cuda-unintstaller
+  ```    
+  sudo /usr/local/cuda-11.1/bin/cuda-unintstaller
+  ```
 
 * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive) (8.0.5): 
   Based on system and cuda version, choose cuDNN v8.0.5 for CUDA 11.0 through Debian Installation.
