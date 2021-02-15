@@ -257,7 +257,7 @@ Memory: 16GB
 
 
 # NOCS Network
-  Updated code can be found [here](https://github.com/hughw19/NOCS_CVPR2019).  
+  Updated code can be found [here](https://github.com/YuhangMing/NOCS_CVPR2019).  
   
   1. Create anaconda environment and enter virtual environment
   ```  
