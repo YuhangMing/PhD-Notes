@@ -117,9 +117,7 @@ Memory: 16GB
       
   To delete current CUDA:
       
-      cd /usr/local/cuda-11.0/bin
-      chmod +x cuda-uninstaller
-      sudo ./cuda-uninstaller
+      sudo /usr/local/cuda-11.0/bin/cuda-unintstaller
 
 * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive) (8.0.5): 
   Based on system and cuda version, choose cuDNN v8.0.5 for CUDA 11.0 through Debian Installation.
