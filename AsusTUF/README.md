@@ -433,6 +433,12 @@ Memory: 16GB
   Install Anaconda, follow the official instruction [here](https://docs.anaconda.com/anaconda/install/linux/)
   
   *recommend to install OpenCV before Anaconda.*
+  
+  To uninstall:
+  ```
+  rm -rf ~/anaconda3
+  ```
+  and make sure to delete the conda-related lines in ~/.bashrc file.
 
 [Back to Top](#table-of-content)
 
