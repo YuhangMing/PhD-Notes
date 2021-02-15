@@ -433,9 +433,7 @@ Memory: 16GB
 
 
 # NOCS Network
-  Paper by Wang et al. in CVPR 2019, [GitHub](https://github.com/hughw19/NOCS_CVPR2019).
-  
-  Instruction on upgrading code from tf-1 to tf-2 is [here](https://www.tensorflow.org/guide/upgrade).
+  Updated code can be found [here](https://github.com/hughw19/NOCS_CVPR2019).  
   
   1. Create anaconda environment and enter virtual environment
   ```  
