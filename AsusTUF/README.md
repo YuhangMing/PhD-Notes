@@ -24,7 +24,43 @@ Memory: 16GB
 
 # Ubuntu 20.04.2
 * 双系统安装时怎么分配空间
+  1. 下载ubuntu 20.04.2镜像 [here](https://ubuntu.com/download/desktop);
+  2. 在Windows下使用[rufus](https://rufus.ie/)制作ubuntu安装盘;
+  3. 在"磁盘管理"中空出相应磁盘空间c
+  4. 重启，按F2进入BIOS，选择Boot from USB;
+  5. 按提示菜单安装Ubuntu（国内建议选择Minimal Installation并起【不要】选择Download updates during Installation）;
+  6. 在选择安装方式时选择"Something Else";
+  7. 分8GB给“swap”，剩下的所有空间都分给“/”即可
 * 修改阿里源
+  Detailed Instructions can be found [here](https://blog.csdn.net/wangyijieonline/article/details/105360138). In short:
+  1. 备份原来的源
+  ```
+  sudo cp /etc/apt/sources.list /etc/apt/sources_init.list
+  ```
+  2. 修改源with following text
+  ```
+  deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+  deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+
+  deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+  deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+
+  deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+  deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+
+  deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+  deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+
+  deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+  deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+  ```
+  3. 更新
+  ```
+  sudo apt-get update
+  sudo apt-get upgrade
+  ```
+
+[Back to Top](#table-of-content)
 
 
 # NVIDIA
