@@ -1,6 +1,6 @@
 # Table of Content
 - [System Info](#system-info)
-- [Ubuntu](#ubuntu-20.04.2)
+- [Ubuntu](#ubuntu)
 - [NVIDIA](#nvidia)
 - [OpenCV](#opencv)
   * [Problems](#problems-encountered-cv)
@@ -22,9 +22,9 @@ Memory: 16GB
 [Back to Top](#table-of-content)
 
 
-# Ubuntu 20.04.2
+# Ubuntu
 * 双系统安装时怎么分配空间
-  1. 下载ubuntu 20.04.2镜像 [here](https://ubuntu.com/download/desktop);
+  1. 下载Ubuntu 20.04.2镜像 [here](https://ubuntu.com/download/desktop);
   2. 在Windows下使用[rufus](https://rufus.ie/)制作ubuntu安装盘;
   3. 在"磁盘管理"中空出相应磁盘空间c
   4. 重启，按F2进入BIOS，选择Boot from USB;
