@@ -70,7 +70,12 @@ Memory: 16GB
 
   To solve the compatibility problem between AMD Ryzen7 5xxx series CPU and RTX 3xxx series GPU, use the [procedure](https://forums.developer.nvidia.com/t/ubuntu-mate-20-04-with-rtx-3070-on-ryzen-5900-black-screen-after-boot/167681/30).
 
-  To uninstall NVIDIA Driver (BE CAUTION), run
+  To check if the installation succeeded, run:
+  ```
+  nvidia-smi
+  ```
+
+  To uninstall NVIDIA Driver (BE CAUTION), run:
   ```
   sudo /usr/bin/nvidia-uninstall
   ```
@@ -115,7 +120,13 @@ Memory: 16GB
   ```
   export PATH=/usr/local/cuda-11.1/bin:$PATH
   export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH
-  ```    
+  ```
+  
+  To check if the installation succeeded, run:
+  ```
+  nvcc -V
+  nvcc --version
+  ```
   
   To delete current CUDA:
   ```    
@@ -140,6 +151,11 @@ Memory: 16GB
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_amd64.deb
       or
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
+        
+  To check if the installation succeeded, run:
+  ```
+  cat /usr/include/cudnn_version.h | grep CUDNN_MAJOR -A 2
+  ```
     
   No need to uninstall, will be automatically written over (see the output below).
   ```
