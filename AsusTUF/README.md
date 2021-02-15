@@ -75,7 +75,7 @@ Memory: 16GB
   sudo /usr/bin/nvidia-uninstall
   ```
   
-* [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) (11.0): 
+* [CUDA Toolkit](https://developer.nvidia.com/cuda-toolkit-archive) (11.1.1): 
   Note that Cuda toolkit need to be compatible with TensorFlow. Check the [table](https://www.tensorflow.org/install/source#gpu)
 
   Since the NVIDIA driver is already installed, recommend to install Cuda Toolkit using runfile, and make sure to un-select install driver during the installation.
@@ -123,7 +123,6 @@ Memory: 16GB
   ```
 
 * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive) (8.0.5): 
-  Based on system and cuda version, choose cuDNN v8.0.5 for CUDA 11.0 through Debian Installation.
 
   Instruction: 
   Before issuing the following commands, you'll need to replace x.x and 8.x.x.x with your specific CUDAand cuDNN versions and package date.
@@ -141,6 +140,14 @@ Memory: 16GB
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_amd64.deb
       or
         sudo dpkg -i libcudnn8-samples_8.x.x.x-1+cudax.x_arm64.deb
+    
+  No need to uninstall, will be automatically written over (see the output below).
+  ```
+  Preparing to unpack libcudnn8_8.0.5.39-1+cuda11.1_amd64.deb ...
+  Unpacking libcudnn8 (8.0.5.39-1+cuda11.1) over (8.0.5.39-1+cuda11.0) ...
+  Setting up libcudnn8 (8.0.5.39-1+cuda11.1) ...
+  Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
+  ```
 
 [Back to Top](#table-of-content)
 
