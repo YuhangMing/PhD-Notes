@@ -172,9 +172,12 @@ Memory: 16GB
     [optional] sudo apt-get install libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
 
   Install OpenCV
+  ```
+  cmake -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.13/modules -D WITH_CUDA=ON -D WITH_CUDNN=OFF -D BUILD_opencv_cudacodec=OFF -D OPENCV_ENABLE_NONFREE=ON -DBUILD_JAVA=OFF -DBUILD_opencv_java_bindings_generator=OFF -D BUILD_PYTHON=OFF -D BUILD_opencv_python_bindings_generator=OFF -D WITH_QT=ON -D ENABLE_CXX11=ON -D BUILD_TIFF=ON ..
+  make -j12
+  sudo make install
+  ```
   
-  	cmake -D CMAKE_BUILD_TYPE=RELEASE -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.13/modules -D WITH_CUDA=ON -D WITH_CUDNN=OFF -D BUILD_opencv_cudacodec=OFF -D OPENCV_ENABLE_NONFREE=ON -DBUILD_JAVA=OFF -DBUILD_opencv_java_bindings_generator=OFF -D BUILD_PYTHON=OFF -D BUILD_opencv_python_bindings_generator=OFF -D WITH_QT=ON -D ENABLE_CXX11=ON -D BUILD_TIFF=ON ..
-    
   [CMake Output](#opencv-cmake-output)
 
 ### Problems Encountered CV
