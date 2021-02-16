@@ -161,7 +161,7 @@ Memory: 16GB
 
 
 # OpenCV
-  Links to download OpenCV source codes:
+  Links to download OpenCV source codes (3.4.13 chosen here):
   [OpenCV](https://opencv.org/releases/),
   [OpenCV-contrib](https://github.com/opencv/opencv_contrib/releases).
   
@@ -403,9 +403,17 @@ Memory: 16GB
 
 
 # Libfusion
-  Implementation of our SLAM system.
-
+  1. Install the dependencies:
+  - [CUDA](https://developer.nvidia.com/cuda-zone)
+  - [OpenCV 3.4.*](https://opencv.org/)
+  - [Eigen](http://eigen.tuxfamily.org/)
+  - [Pangolin](https://github.com/stevenlovegrove/Pangolin)
+  - [Sophus](https://github.com/strasdat/Sophus)
+  - [g2o](https://github.com/RainerKuemmerle/g2o)
+  - (Optional) [OpenNI2](https://structure.io/openni)
+    
 [Back to Top](#table-of-content)
+
 
 # Log
 ### OpenCV CMake Output
