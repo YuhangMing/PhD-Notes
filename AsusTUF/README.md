@@ -284,21 +284,20 @@ Memory: 16GB
   git clone https://github.com/tensorflow/tensorflow.git
   cd tensorflow
   ```
-  - Set compile configurations
+  - Set compile configurations ([configuration example](#tensorflow-configuration-example));
   ```
   ./configure
   ```
-  [configuration example](#tensorflow-configuration-example)
-  - Build the pip package
+  - Build the pip package ([bazel build output](#tensorflow-bazel-build-output));
+  *Took about 10-20 mins to download necessary packages and 1 hour to build*.
   ```
   bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
   ```
-  [bazel build output](#tensorflow-bazel-build-output)
   - Build the package
   ```
   ./bazel-bin/tensorflow/tools/pip_package/build_pip_package --nightly_flag /tmp/tensorflow_pkg
   ```
-  Note *--nightly_flag* here is optional.
+  Note "*--nightly_flag*" here is optional.
   - Install the pip package
   ```
   pip install /tmp/tensorflow_pkg/tf_nightly-2.5.0-cp37-cp37m-linux_x86_64.whl
@@ -359,7 +358,7 @@ Memory: 16GB
   
   Why: Running out of memory in bazel build.
   
-  Sol: Add *-j x* flag where x is 4/8/16
+  Sol: Add "*-j x*" flag where x is 4/8/16
   ```
   bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
   ```
