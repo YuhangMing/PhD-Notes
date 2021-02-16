@@ -265,17 +265,49 @@ Memory: 16GB
   conda activate NOCS
   ```
   
-  2. Install tensorflow (2.4.0 chosen here)
+  2. Install tensorflow (option 2 chosen here)
+  option(1) Installed through pip for released versions
   ```  
   pip install --upgrade pip
   pip install --upgrade tensorflow-gpu==2.4
+  ```
+  option(2) Build from source to support CUDA 11.1 (Given released versions don't support CUDA 11.1 currently) [link](https://www.tensorflow.org/install/source)
+  - Install dependencies;
+  ```
+  pip install -U --user pip numpy wheel
+  pip install -U --user keras_preprocessing --no-deps
+  ```
+  - Install bazel follow [here](https://docs.bazel.build/versions/master/install-ubuntu.html);
+    *Make sure to install a supported Bazel version: any version between _TF_MIN_BAZEL_VERSION and _TF_MAX_BAZEL_VERSION as specified in tensorflow/configure.py.*
+  - Clone tensorflow source code, using master branch here;
+  ```
+  git clone https://github.com/tensorflow/tensorflow.git
+  cd tensorflow
+  ```
+  - Set compile configurations
+  ```
+  ./configure
+  ```
+  [configuration example](#tensorflow-configuration-example)
+  - Build the pip package
+  ```
+  bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
+  ```
+  [bazel build output](#tensorflow-bazel-build-output)
+  - Build the package
+  ```
+  ./bazel-bin/tensorflow/tools/pip_package/build_pip_package --nightly_flag /tmp/tensorflow_pkg
+  ```
+  Note *--nightly_flag* here is optional.
+  - Install the pip package
+  ```
+  pip install /tmp/tensorflow_pkg/tf_nightly-2.5.0-cp37-cp37m-linux_x86_64.whl
   ```
   
   3. Install keras (2.4.3 chosen here)
   ```
   pip install keras
   ```
-   
   Note: There is not any keras-gpu package; Keras is a wrapper around some backends, including Tensorflow, and these backends may come in different versions, such as tensorflow and tensorflow-gpu. But this does not hold for Keras itself
   
   UPDATE: there is now a keras-gpu package on Anaconda Cloud.
@@ -321,6 +353,15 @@ Memory: 16GB
   Eg.
   ```
   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
+  ```
+  
+  > Server terminated abruptly (error code: 14, error message: 'Socket closed', log file: '/home/yohann/.cache/bazel/_bazel_yohann/65412b27117725ef7ef78067e0377b6c/server/jvm.out')
+  
+  Why: Running out of memory in bazel build.
+  
+  Sol: Add *-j x* flag where x is 4/8/16
+  ```
+  bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
   ```
   
   > Failed to get convolution algorithm.  
@@ -997,6 +1038,96 @@ ModuleNotFoundError: No module named 'numpy'
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/yohann/SLAMs/depend/opencv-3.4.13/build
+```
+
+### Tensorflow Configuration Example
+```
+You have bazel 3.7.2 installed.
+Please specify the location of python. [Default is /home/yohann/anaconda3/envs/NOCS/bin/python3]: 
+
+
+Found possible Python library paths:
+  /home/yohann/anaconda3/envs/NOCS/lib/python3.7/site-packages
+Please input the desired Python library path to use.  Default is [/home/yohann/anaconda3/envs/NOCS/lib/python3.7/site-packages]
+
+Do you wish to build TensorFlow with ROCm support? [y/N]: 
+No ROCm support will be enabled for TensorFlow.
+
+Do you wish to build TensorFlow with CUDA support? [y/N]: y
+CUDA support will be enabled for TensorFlow.
+
+Do you wish to build TensorFlow with TensorRT support? [y/N]: 
+No TensorRT support will be enabled for TensorFlow.
+
+Found CUDA 11.1 in:
+    /usr/local/cuda-11.1/targets/x86_64-linux/lib
+    /usr/local/cuda-11.1/targets/x86_64-linux/include
+Found cuDNN 8 in:
+    /usr/lib/x86_64-linux-gnu
+    /usr/include
+
+
+Please specify a list of comma-separated CUDA compute capabilities you want to build with.
+You can find the compute capability of your device at: https://developer.nvidia.com/cuda-gpus. Each capability can be specified as "x.y" or "compute_xy" to include both virtual and binary GPU code, or as "sm_xy" to only include the binary code.
+Please note that each additional compute capability significantly increases your build time and binary size, and that TensorFlow only supports compute capabilities >= 3.5 [Default is: 8.6]: 
+
+
+Do you want to use clang as CUDA compiler? [y/N]: 
+nvcc will be used as CUDA compiler.
+
+Please specify which gcc should be used by nvcc as the host compiler. [Default is /usr/bin/gcc]: 
+
+
+Please specify optimization flags to use during compilation when bazel option "--config=opt" is specified [Default is -Wno-sign-compare]: 
+
+
+Would you like to interactively configure ./WORKSPACE for Android builds? [y/N]: 
+Not configuring the WORKSPACE for Android builds.
+
+Preconfigured Bazel build configs. You can use any of the below by adding "--config=<>" to your build command. See .bazelrc for more details.
+	--config=mkl         	# Build with MKL support.
+	--config=mkl_aarch64 	# Build with oneDNN support for Aarch64.
+	--config=monolithic  	# Config for mostly static monolithic build.
+	--config=numa        	# Build with NUMA support.
+	--config=dynamic_kernels	# (Experimental) Build kernels into separate shared objects.
+	--config=v2          	# Build TensorFlow 2.x instead of 1.x.
+Preconfigured Bazel build configs to DISABLE default on features:
+	--config=noaws       	# Disable AWS S3 filesystem support.
+	--config=nogcp       	# Disable GCP support.
+	--config=nohdfs      	# Disable HDFS support.
+	--config=nonccl      	# Disable NVIDIA NCCL support.
+Configuration finished
+```
+
+### Tensorflow Bazel Build Output
+```
+bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
+WARNING: The following configs were expanded more than once: [cuda, using_cuda]. For repeatable flags, repeats are counted twice and may lead to unexpected behavior.
+INFO: Options provided by the client:
+  Inherited 'common' options: --isatty=1 --terminal_columns=120
+INFO: Reading rc options for 'build' from /home/yohann/NNs/tensorflow/.bazelrc:
+  Inherited 'common' options: --experimental_repo_remote_exec
+INFO: Reading rc options for 'build' from /home/yohann/NNs/tensorflow/.bazelrc:
+  'build' options: --apple_platform_type=macos --define framework_shared_object=true --java_toolchain=@org_tensorflow//third_party/toolchains/java:tf_java_toolchain --host_java_toolchain=@org_tensorflow//third_party/toolchains/java:tf_java_toolchain --define=tensorflow_enable_mlir_generated_gpu_kernels=0 --define=use_fast_cpp_protos=true --define=allow_oversize_protos=true --spawn_strategy=standalone -c opt --announce_rc --define=grpc_no_ares=true --noincompatible_remove_legacy_whole_archive --noincompatible_prohibit_aapt1 --enable_platform_specific_config --config=short_logs --config=v2
+INFO: Reading rc options for 'build' from /home/yohann/NNs/tensorflow/.tf_configure.bazelrc:
+  'build' options: --action_env PYTHON_BIN_PATH=/home/yohann/anaconda3/envs/NOCS/bin/python3 --action_env PYTHON_LIB_PATH=/home/yohann/anaconda3/envs/NOCS/lib/python3.7/site-packages --python_path=/home/yohann/anaconda3/envs/NOCS/bin/python3 --config=xla --action_env CUDA_TOOLKIT_PATH=/usr/local/cuda-11.1 --action_env TF_CUDA_COMPUTE_CAPABILITIES=8.6 --action_env LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64: --action_env GCC_HOST_COMPILER_PATH=/usr/bin/x86_64-linux-gnu-gcc-9 --config=cuda --action_env TF_CONFIGURE_IOS=0
+INFO: Found applicable config definition build:short_logs in file /home/yohann/NNs/tensorflow/.bazelrc: --output_filter=DONT_MATCH_ANYTHING
+INFO: Found applicable config definition build:v2 in file /home/yohann/NNs/tensorflow/.bazelrc: --define=tf_api_version=2 --action_env=TF2_BEHAVIOR=1
+INFO: Found applicable config definition build:xla in file /home/yohann/NNs/tensorflow/.bazelrc: --define=with_xla_support=true
+INFO: Found applicable config definition build:cuda in file /home/yohann/NNs/tensorflow/.bazelrc: --config=using_cuda --define=using_cuda_nvcc=true
+INFO: Found applicable config definition build:using_cuda in file /home/yohann/NNs/tensorflow/.bazelrc: --define=using_cuda=true --action_env TF_NEED_CUDA=1 --crosstool_top=@local_config_cuda//crosstool:toolchain --define=tensorflow_enable_mlir_generated_gpu_kernels=1
+INFO: Found applicable config definition build:cuda in file /home/yohann/NNs/tensorflow/.bazelrc: --config=using_cuda --define=using_cuda_nvcc=true
+INFO: Found applicable config definition build:using_cuda in file /home/yohann/NNs/tensorflow/.bazelrc: --define=using_cuda=true --action_env TF_NEED_CUDA=1 --crosstool_top=@local_config_cuda//crosstool:toolchain --define=tensorflow_enable_mlir_generated_gpu_kernels=1
+INFO: Found applicable config definition build:linux in file /home/yohann/NNs/tensorflow/.bazelrc: --copt=-w --host_copt=-w --define=PREFIX=/usr --define=LIBDIR=$(PREFIX)/lib --define=INCLUDEDIR=$(PREFIX)/include --define=PROTOBUF_INCLUDE_PATH=$(PREFIX)/include --cxxopt=-std=c++14 --host_cxxopt=-std=c++14 --config=dynamic_kernels
+INFO: Found applicable config definition build:dynamic_kernels in file /home/yohann/NNs/tensorflow/.bazelrc: --define=dynamic_loaded_kernels=true --copt=-DAUTOLOAD_DYNAMIC_KERNELS
+INFO: Analyzed target //tensorflow/tools/pip_package:build_pip_package (423 packages loaded, 35903 targets configured).
+INFO: Found 1 target...
+INFO: Deleting stale sandbox base /home/yohann/.cache/bazel/_bazel_yohann/65412b27117725ef7ef78067e0377b6c/sandbox
+Target //tensorflow/tools/pip_package:build_pip_package up-to-date:
+  bazel-bin/tensorflow/tools/pip_package/build_pip_package
+INFO: Elapsed time: 9425.628s, Critical Path: 204.99s
+INFO: 13511 processes: 198 internal, 13313 local.
+INFO: Build completed successfully, 13511 total actions
 ```
 
 [Back to Top](#table-of-content)
