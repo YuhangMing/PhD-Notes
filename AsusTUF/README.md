@@ -281,7 +281,7 @@ Memory: 16GB
   pip install -U --user keras_preprocessing --no-deps
   ```
   - Install bazel follow [here](https://docs.bazel.build/versions/master/install-ubuntu.html);
-    *Make sure to install a supported Bazel version: any version between _TF_MIN_BAZEL_VERSION and _TF_MAX_BAZEL_VERSION as specified in tensorflow/configure.py.*
+    Make sure to install a supported Bazel version: any version between `_TF_MIN_BAZEL_VERSION` and `_TF_MAX_BAZEL_VERSION` as specified in *tensorflow/configure.py*.
   - Clone tensorflow source code, using master branch here;
   ```
   git clone https://github.com/tensorflow/tensorflow.git
@@ -406,6 +406,7 @@ Memory: 16GB
 
 
 # Libfusion
+  **Object Guided Relocalisation**
   1. Install the dependencies:
   - [CUDA](https://developer.nvidia.com/cuda-zone)
   - [OpenCV 3.4.*](https://opencv.org/)
@@ -413,7 +414,41 @@ Memory: 16GB
   - [Pangolin](https://github.com/stevenlovegrove/Pangolin)
   - [Sophus](https://github.com/strasdat/Sophus)
   - [g2o](https://github.com/RainerKuemmerle/g2o)
-  - (Optional) [OpenNI2](https://structure.io/openni)
+  - (Optional) 
+  2. OpenNI2 currently removed, both [OpenNI2](https://structure.io/openni) and [Azure](https://docs.microsoft.com/en-us/azure/Kinect-dk/sensor-sdk-download) dependency to be added later.
+  3. Build the executables and run as:
+  ```
+  cmake -DCMAKE_BUILD_TYPE=Debug ..
+  make -j12
+  ./bin/vil_reconst BOR 0 true
+  ```
+### Problems Encountered libfusion
+
+  > TF crashes on startup
+  ```
+  GPU_TEST = re.search(r"(test_gpu|test_xla_gpu)$", sys.argv[0])
+  IndexError: list index out of range
+  ```
+  
+  Why: which is caused by calling from C++, but reason unknown.
+  
+  Sol:
+  Workaround mention [here](https://github.com/tensorflow/tensorflow/issues/45994) is adopted.
+  ```python
+  import sys
+  if not sys.argv:
+    sys.argv.append("(C++)")
+
+  import tensorflow as tf
+  ```
+  
+  > SegFault in Release Mode, but no bug in Debug Mod
+  
+  Why: Still investigating...
+  
+  > Taking way too long in object pose estimation
+  
+  Why: Possibily because the memory release part of the detector; Still investigatin...
     
 [Back to Top](#table-of-content)
 
