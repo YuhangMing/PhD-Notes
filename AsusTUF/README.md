@@ -422,18 +422,18 @@ Memory: 16GB
   make -j12
   ./bin/vil_reconst BOR 0 true
   ```
-### Problems Encountered libfusion
 
+### Problems Encountered libfusion
   > TF crashes on startup
   ```
   GPU_TEST = re.search(r"(test_gpu|test_xla_gpu)$", sys.argv[0])
   IndexError: list index out of range
   ```
-  
+
   Why: which is caused by calling from C++, but reason unknown.
   
   Sol:
-  Workaround mention [here](https://github.com/tensorflow/tensorflow/issues/45994) is adopted.
+  Use the workaround mention [here](https://github.com/tensorflow/tensorflow/issues/45994).
   ```python
   import sys
   if not sys.argv:
