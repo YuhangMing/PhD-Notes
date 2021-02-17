@@ -8,6 +8,7 @@
 - [NOCS](#nocs-network)
   * [Problems](#problems-encountered-nocs)
 - [Libfusion](#libfusion)
+  * [Problems](#problems-encountered-libfusion)
 - [Log](#log)
 
 
@@ -414,7 +415,6 @@ Memory: 16GB
   - [Pangolin](https://github.com/stevenlovegrove/Pangolin)
   - [Sophus](https://github.com/strasdat/Sophus)
   - [g2o](https://github.com/RainerKuemmerle/g2o)
-  - (Optional) 
   2. OpenNI2 currently removed, both [OpenNI2](https://structure.io/openni) and [Azure](https://docs.microsoft.com/en-us/azure/Kinect-dk/sensor-sdk-download) dependency to be added later.
   3. Build the executables and run as:
   ```
