@@ -444,7 +444,7 @@ Memory: 16GB
   
   > SegFault in Release Mode, but no bug in Debug Mod
   
-  Why: Still investigating...
+  Why: 一般这种问题是因为（1）某个函数没有返回值；（2）某个变量没有初始化。
   
   > Taking way too long in object pose estimation
   
