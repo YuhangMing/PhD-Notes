@@ -418,7 +418,7 @@ Memory: 16GB
   2. OpenNI2 currently removed, both [OpenNI2](https://structure.io/openni) and [Azure](https://docs.microsoft.com/en-us/azure/Kinect-dk/sensor-sdk-download) dependency to be added later.
   3. Build the executables and run as:
   ```
-  cmake -DCMAKE_BUILD_TYPE=Debug ..
+  cmake ..
   make -j12
   ./bin/vil_reconst BOR 0 true
   ```
@@ -448,7 +448,7 @@ Memory: 16GB
   
   > Taking way too long in object pose estimation
   
-  Why: Possibily because the memory release part of the detector; Still investigatin...
+  Why: Because the Debug mode, the timing is normal in Release mode.
     
 [Back to Top](#table-of-content)
 
