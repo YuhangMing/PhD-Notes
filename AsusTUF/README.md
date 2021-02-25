@@ -7,7 +7,7 @@
 - [Anaconda](#anaconda)
 - [NOCS](#nocs-network)
   * [Problems](#problems-encountered-nocs)
-  [TensorFlow](#tensorflow)
+- [TensorFlow](#tensorflow)
 - [Libfusion](#libfusion)
   * [Problems](#problems-encountered-libfusion)
 - [Azure Kinect](#azure-kinect-depth-camera)
@@ -474,7 +474,7 @@ option(2) Build from source to support CUDA 11.1 (Given released versions don't 
 
   OpenGL, use `glxinfo | grep "OpenGL version"` to check if it's already installed
 
-  [Depth Engine](https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/libk/)
+  [Depth Engine](./libs)
   ```
   sudo dpkg -i libk4a1.4_1.4.1_amd64.deb
   sudo dpkg -i libk4a1.4-dev_1.4.1_amd64.deb
@@ -498,7 +498,7 @@ option(2) Build from source to support CUDA 11.1 (Given released versions don't 
   sudo cp scripts/99-k4a.rules /etc/udev/rules.d/
   ```
   
-  * add missing *depthengine* dll (can be found [here](./libs/libdepthengine.so.2.0)
+  * add missing *depthengine* dll (can be found [here](./libs/libdepthengine.so.2.0))
   ```
   sudo cp libdepthengine.so.2.0 /usr/lib/x86_64-linux-gpu/
   ```
