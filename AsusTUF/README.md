@@ -7,8 +7,10 @@
 - [Anaconda](#anaconda)
 - [NOCS](#nocs-network)
   * [Problems](#problems-encountered-nocs)
+  [TensorFlow](#tensorflow)
 - [Libfusion](#libfusion)
   * [Problems](#problems-encountered-libfusion)
+- [Azure Kinect](#azure-kinect-depth-camera)
 - [Log](#log)
 
 
@@ -25,7 +27,7 @@ Memory: 16GB
 
 
 # Ubuntu
-* 双系统安装时怎么分配空间
+* Ubuntu+Windows双系统安装时怎么分配空间
   1. 下载Ubuntu 20.04.2镜像 [here](https://ubuntu.com/download/desktop);
   2. 在Windows下使用[rufus](https://rufus.ie/)制作ubuntu安装盘;
   3. 在"磁盘管理"中空出相应磁盘空间c
@@ -98,7 +100,7 @@ Memory: 16GB
   ```
   
   The output is:
-  ```
+  ```console
   ===========
   = Summary =
   ===========
@@ -132,7 +134,7 @@ Memory: 16GB
   ```
   
   To delete current CUDA:
-  ```    
+  ```
   sudo /usr/local/cuda-11.1/bin/cuda-unintstaller
   ```
 
@@ -197,10 +199,10 @@ Memory: 16GB
   
   i) update CUDA from 11.0 to 11.1.1;
   
-  ii) set -D CUDA_ARCH_BIN=8.0 when building opencv. (This solution is chosen here)
+  ii) set -D CUDA_ARCH_BIN=8.0 when building opencv.
    
   > undefined reference to TIFF
-  ```
+  ```console
   /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadRGBAStrip@LIBTIFF_4.0'\s\s
   /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFReadDirectory@LIBTIFF_4.0'
   /usr/bin/ld: ../../lib/libopencv_imgcodecs.so.3.4.13: undefined reference to `TIFFWriteEncodedStrip@LIBTIFF_4.0'
@@ -261,51 +263,17 @@ Memory: 16GB
 
 
 # NOCS Network
-  Updated code can be found [here](https://github.com/YuhangMing/NOCS_CVPR2019).  
+  Updated code can be found [here](https://github.com/YuhangMing/NOCS_CVPR2019).
   
   1. Create anaconda environment and enter virtual environment (open3d in pip supports upto python 3.7)
-  ```  
+  ```
   conda create -n NOCS python=3.7
   conda activate NOCS
   ```
   
-  2. Install tensorflow (option 2 chosen here)
-  option(1) Installed through pip for released versions
-  ```  
-  pip install --upgrade pip
-  pip install --upgrade tensorflow-gpu==2.4
-  ```
-  option(2) Build from source to support CUDA 11.1 (Given released versions don't support CUDA 11.1 currently) [link](https://www.tensorflow.org/install/source)
-  - Install dependencies;
-  ```
-  pip install -U --user pip numpy wheel
-  pip install -U --user keras_preprocessing --no-deps
-  ```
-  - Install bazel follow [here](https://docs.bazel.build/versions/master/install-ubuntu.html);
-    Make sure to install a supported Bazel version: any version between `_TF_MIN_BAZEL_VERSION` and `_TF_MAX_BAZEL_VERSION` as specified in *tensorflow/configure.py*.
-  - Clone tensorflow source code, using master branch here;
-  ```
-  git clone https://github.com/tensorflow/tensorflow.git
-  cd tensorflow
-  ```
-  - Set compile configurations ([configuration example](#tensorflow-configuration-example));
-  ```
-  ./configure
-  ```
-  - Build the pip package ([bazel build output](#tensorflow-bazel-build-output));
-  *Took about 10-20 mins to download necessary packages and 1 hour to build*.
-  ```
-  bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
-  ```
-  - Build the package
-  ```
-  ./bazel-bin/tensorflow/tools/pip_package/build_pip_package --nightly_flag /tmp/tensorflow_pkg
-  ```
-  Note "*--nightly_flag*" here is optional.
-  - Install the pip package
-  ```
-  pip install /tmp/tensorflow_pkg/tf_nightly-2.5.0-cp37-cp37m-linux_x86_64.whl
-  ```
+  2. Install tensorflow
+  Detailed instructions see [here](#tensorflow)
+  
   
   3. Install keras (2.4.3 chosen here)
   ```
@@ -367,7 +335,7 @@ Memory: 16GB
   bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
   ```
   
-  > Failed to get convolution algorithm.  
+  > Failed to get convolution algorithm.
   ```
   (0) Unknown: Failed to get convolution algorithm. This is probably because cuDNN failed to initialize, so try looking to see if a warning log message was printed above.
            [[{{node conv1/Conv2D}}]]
@@ -402,7 +370,50 @@ Memory: 16GB
    返工！！！
    Update Cuda to 11.1.1 or later. Re-do all the OpenCV and Anaconda setup.
 
+[Back to Top](#table-of-content)
 
+
+# Tensorflow
+Two options here to install tensorflow:
+
+option(1) Installed through pip for released versions. Note, up to today, 2.4.0 is the latest version available in pip.
+  ```
+  pip install --upgrade pip
+  pip install --upgrade tensorflow-gpu==2.4
+  ```
+option(2) Build from source to support CUDA 11.1 (Given released versions don't support CUDA 11.1 currently) [link](https://www.tensorflow.org/install/source)
+  - Install dependencies;
+  ```
+  pip install -U --user pip numpy wheel
+  pip install -U --user keras_preprocessing --no-deps
+  ```
+  - Install bazel follow [here](https://docs.bazel.build/versions/master/install-ubuntu.html);
+    Make sure to install a supported Bazel version: any version between `_TF_MIN_BAZEL_VERSION` and `_TF_MAX_BAZEL_VERSION` as specified in *tensorflow/configure.py*.
+  - Clone tensorflow source code, using master branch here;
+  ```
+  git clone https://github.com/tensorflow/tensorflow.git
+  cd tensorflow
+  ```
+  - Set compile configurations ([configuration example](#tensorflow-configuration-example));
+  ```
+  ./configure
+  ```
+  - Build the pip package ([bazel build output](#tensorflow-bazel-build-output));
+  *Took about 10-20 mins to download necessary packages and 1 hour to build*.
+  ```
+  bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
+  ```
+  - Build the package
+  ```
+  ./bazel-bin/tensorflow/tools/pip_package/build_pip_package --nightly_flag /tmp/tensorflow_pkg
+  ```
+  Note "*--nightly_flag*" here is optional.
+  - Install the pip package
+  ```
+  pip install /tmp/tensorflow_pkg/tf_nightly-2.5.0-cp37-cp37m-linux_x86_64.whl
+
+  ```
+  
 [Back to Top](#table-of-content)
 
 
@@ -415,7 +426,9 @@ Memory: 16GB
   - [Pangolin](https://github.com/stevenlovegrove/Pangolin)
   - [Sophus](https://github.com/strasdat/Sophus)
   - [g2o](https://github.com/RainerKuemmerle/g2o)
-  2. OpenNI2 currently removed, both [OpenNI2](https://structure.io/openni) and [Azure](https://docs.microsoft.com/en-us/azure/Kinect-dk/sensor-sdk-download) dependency to be added later.
+  2. Cameras
+  - OpenNI2 currently removed, add [OpenNI2](https://structure.io/openni) dependency back later.
+  - Setup Azure camera follow instructions [here](#azuer_kinect_depth_camera) 
   3. Build the executables and run as:
   ```
   cmake ..
@@ -452,21 +465,93 @@ Memory: 16GB
     
 [Back to Top](#table-of-content)
 
+
 # Azure Kinect Depth Camera
 
 1. Prerequisite:
-   OpenSSL
-   OpenGL
-   Depth Engine
+
+  OpenSSL, use `openssl version` to check if it's already installed
+
+  OpenGL, use `glxinfo | grep "OpenGL version"` to check if it's already installed
+
+  [Depth Engine](https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/libk/)
+  ```
+  sudo dpkg -i libk4a1.4_1.4.1_amd64.deb
+  sudo dpkg -i libk4a1.4-dev_1.4.1_amd64.deb
+  ```
+
+  In my installation, the following package is also missing.
+  ```
+  sudo apt install libudev-dev
+  ```
+
+2. Install using CMake
+  ```
+  cmake ..
+  make -j12
+  sudo make install
+  ```
    
- 2. Install using OpenCV
-   cmake ..
-   make -j12
+3. Finishing steps
+  * make the camera accessable even not in *root*
+  ```
+  sudo cp scripts/99-k4a.rules /etc/udev/rules.d/
+  ```
+  
+  * add missing *depthengine* dll (can be found [here](./libs/libdepthengine.so.2.0)
+  ```
+  sudo cp libdepthengine.so.2.0 /usr/lib/x86_64-linux-gpu/
+  ```
+
+4. Check Installation
+  Run `./viewer_opengl`.
+
+5. Camera Info
+```
+== Azure Kinect DK Firmware Tool == 
+Device Serial Number: 000057201312
+Current Firmware Versions:
+  RGB camera firmware:      1.6.102
+  Depth camera firmware:    1.6.75
+  Depth config file:        6109.7
+  Audio firmware:           1.6.14
+  Build Config:             Production
+  Certificate Type:         Microsoft
+```
+```
+===== Device 0: 000057201312 =====
+resolution width: 640
+resolution height: 576
+principal point x: 328.002930
+principal point y: 333.227478
+focal length x: 504.286377
+focal length y: 504.373688
+radial distortion coefficients:
+k1: 6.564074
+k2: 4.790055
+k3: 0.263871
+k4: 6.888676
+k5: 6.996602
+k6: 1.347770
+center of distortion in Z=1 plane, x: 0.000000
+center of distortion in Z=1 plane, y: 0.000000
+tangential distortion coefficient x: -0.000009
+tangential distortion coefficient y: 0.000084
+metric radius: 0.000000
+
+```
+
+6. Unknown Problems:
+  * The original visualisation tool `k4aviewer` failed to work with error message: 
+  > incompatible audio device
+  * The laptop has some wierd noise (coil wine?) when the camera is working.
+
+[Back to Top](#table-of-content)
 
 
 # Log
 ### OpenCV CMake Output
-```
+```console
 -- The CXX compiler identification is GNU 9.3.0
 -- The C compiler identification is GNU 9.3.0
 -- Check for working CXX compiler: /usr/bin/c++
@@ -1097,7 +1182,7 @@ ModuleNotFoundError: No module named 'numpy'
 ```
 
 ### Tensorflow Configuration Example
-```
+```console
 You have bazel 3.7.2 installed.
 Please specify the location of python. [Default is /home/yohann/anaconda3/envs/NOCS/bin/python3]: 
 
@@ -1156,7 +1241,7 @@ Configuration finished
 ```
 
 ### Tensorflow Bazel Build Output
-```
+```console
 bazel build --config=cuda //tensorflow/tools/pip_package:build_pip_package -j 8
 WARNING: The following configs were expanded more than once: [cuda, using_cuda]. For repeatable flags, repeats are counted twice and may lead to unexpected behavior.
 INFO: Options provided by the client:
