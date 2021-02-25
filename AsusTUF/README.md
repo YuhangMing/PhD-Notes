@@ -452,6 +452,17 @@ Memory: 16GB
     
 [Back to Top](#table-of-content)
 
+# Azure Kinect Depth Camera
+
+1. Prerequisite:
+   OpenSSL
+   OpenGL
+   Depth Engine
+   
+ 2. Install using OpenCV
+   cmake ..
+   make -j12
+
 
 # Log
 ### OpenCV CMake Output
