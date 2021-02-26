@@ -486,6 +486,7 @@ option(2) Build from source to support CUDA 11.1 (Given released versions don't 
   ```
 
 2. Install using CMake
+  Download the source code [here](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/tree/61951daac782234f4f28322c0904ba1c4702d0ba)
   ```
   cmake ..
   make -j12
