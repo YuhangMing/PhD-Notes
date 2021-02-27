@@ -12,3 +12,8 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## Other Learning Related
 * [Graph and GCN](./GCN/README.md)
+
+## Datasets
+* [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
+* [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
+* [More](http://www.michaelfirman.co.uk/RGBDdatasets/)
