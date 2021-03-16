@@ -15,11 +15,12 @@ Some study notes on various areas (after the object based relocalisation project
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
 
 ## Datasets
+* [ScanNet](http://www.scan-net.org/)
+* [3DMatch](https://3dmatch.cs.princeton.edu/)
+* [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html)
 * [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
-* [ScanNet](http://www.scan-net.org/)
-* [3DMatch](https://3dmatch.cs.princeton.edu/)
 * [More](http://www.michaelfirman.co.uk/RGBDdatasets/)
 
 ## Programming
