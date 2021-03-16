@@ -19,6 +19,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
 * [ScanNet](http://www.scan-net.org/)
+* [3DMatch](https://3dmatch.cs.princeton.edu/)
 * [More](http://www.michaelfirman.co.uk/RGBDdatasets/)
 
 ## Programming
