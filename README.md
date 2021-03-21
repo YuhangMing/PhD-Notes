@@ -21,6 +21,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
+* [Scan2CAD](https://github.com/skanti/Scan2CAD)
 * [More](http://www.michaelfirman.co.uk/RGBDdatasets/)
 
 ## Programming
