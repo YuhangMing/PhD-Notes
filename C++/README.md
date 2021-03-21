@@ -3,7 +3,10 @@
 ### std::set<> vs. std::vector<>
 * std::set<>: elements are ordered, and unique, fast in insertion & deleting in the middle of the container;
 * std::vector<>: elementes are unordered, and can contain duplicates, fast in inserion & deleting at the end of the container.
-* [ref1-GeekforGeek](https://www.geeksforgeeks.org/difference-between-stdset-vs-stdvector-in-c-stl/), [ref2-StackOverflow](https://stackoverflow.com/questions/8686725/what-is-the-difference-between-stdset-and-stdvector).
+* [ref1-GeeksforGeeks](https://www.geeksforgeeks.org/difference-between-stdset-vs-stdvector-in-c-stl/), [ref2-StackOverflow](https://stackoverflow.com/questions/8686725/what-is-the-difference-between-stdset-and-stdvector).
+
+### Smart Pointer (C++11)
+Automatically delete the allocated memory. No longer need to delete the pointer manually. [ref-GeeksforGeeks](https://www.geeksforgeeks.org/smart-pointers-cpp/]
 
 ### Static keyword
 
