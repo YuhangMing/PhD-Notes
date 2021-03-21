@@ -1,5 +1,10 @@
 # Random notes in C++
 
+### std::set<> vs. std::vector<>
+* std::set<>: elements are ordered, and unique, fast in insertion & deleting in the middle of the container;
+* std::vector<>: elementes are unordered, and can contain duplicates, fast in inserion & deleting at the end of the container.
+* [ref1-GeekforGeek](https://www.geeksforgeeks.org/difference-between-stdset-vs-stdvector-in-c-stl/), [ref2-StackOverflow](https://stackoverflow.com/questions/8686725/what-is-the-difference-between-stdset-and-stdvector).
+
 ### Static keyword
 
 详细解释见[link](https://zhuanlan.zhihu.com/p/37439983)
