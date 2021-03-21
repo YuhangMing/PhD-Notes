@@ -6,7 +6,7 @@
 * [ref1-GeeksforGeeks](https://www.geeksforgeeks.org/difference-between-stdset-vs-stdvector-in-c-stl/), [ref2-StackOverflow](https://stackoverflow.com/questions/8686725/what-is-the-difference-between-stdset-and-stdvector).
 
 ### Smart Pointer (C++11)
-Automatically delete the allocated memory. No longer need to delete the pointer manually. [ref-GeeksforGeeks](https://www.geeksforgeeks.org/smart-pointers-cpp/]
+Automatically delete the allocated memory. No longer need to delete the pointer manually. [ref-GeeksforGeeks](https://www.geeksforgeeks.org/smart-pointers-cpp/)
 
 ### Static keyword
 
