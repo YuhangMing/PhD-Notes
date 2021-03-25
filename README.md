@@ -26,3 +26,4 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## Programming
 * [C++](./C++/README.md)
+* OpenGL: [CN](https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/), [EN](http://www.songho.ca/opengl/index.html).
