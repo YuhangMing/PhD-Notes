@@ -3,6 +3,9 @@ It is an implicit surface representation. Originally used in SLAM by Newcombe *e
 * Pros: Detailed, dense reconstructon of the environment;
 * Cons: Not Scalable due to the pre-allocated grids (memory footprint grows cubically).
 
+# Experiments on voxel size and impact of the parameters
+[pdf](TruncatedSignedDistanceFunction.pdf)
+
 # Improved SDF
 More efficient data structures have been proposed.
 * moving volumes: [Kintinuous](https://github.com/mp3guy/Kintinuous);
