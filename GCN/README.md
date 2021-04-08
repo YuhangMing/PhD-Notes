@@ -123,7 +123,10 @@ Graph Learning by maelfabien [Intro](https://maelfabien.github.io/machinelearnin
 # GNN
 Graph Neural Network (GNN), a.k.a. GCN, performs convolution on a graph. Jus like CNN, it aims to extract th most important nodes and edges that can help classify nodes within the graph.
 其本质是分析一张graph network中feature和message的流动和传播。
+
 [Intro to GNN](https://arxiv.org/pdf/2007.02133.pdf)
+
+[GCN](https://tkipf.github.io/graph-convolutional-networks/)
 
 Convolution operation on a graph:
 ![Graph Convolution](graph_convolution.png)
