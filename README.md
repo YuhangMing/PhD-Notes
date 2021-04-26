@@ -19,6 +19,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [S3DIS](https://docs.google.com/forms/d/e/1FAIpQLScDimvNMCGhy_rmBA2gHfDu3naktRm6A8BPwAWWDv-Uhm6Shw/viewform?c=0&w=1)
 * [Semantic3D](http://www.semantic3d.net/)
 * [Paris-Lille-3D](https://npm3d.fr/paris-lille-3d)
+* [SceneNN](http://103.24.77.34/scenenn/home/)
 * [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset) (virtual)
 * [Scan2CAD](https://github.com/skanti/Scan2CAD)
 ### RGB-D SLAM
@@ -29,7 +30,6 @@ Some study notes on various areas (after the object based relocalisation project
 ### Both
 * [ScanNet](http://www.scan-net.org/)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
-* [SceneNN](http://103.24.77.34/scenenn/home/)
 * [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
 ### Point Clouds
 * [3DMatch](https://3dmatch.cs.princeton.edu/)
