@@ -15,16 +15,26 @@ Some study notes on various areas (after the object based relocalisation project
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
 
 ## Datasets
-* [ScanNet](http://www.scan-net.org/)
-* [3DMatch](https://3dmatch.cs.princeton.edu/)
-* [SceneNN](http://103.24.77.34/scenenn/home/)
-* [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html)
-* [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
-* [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
-* [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
-* [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset)
+### 3D Segmentation
+* [S3DIS](https://docs.google.com/forms/d/e/1FAIpQLScDimvNMCGhy_rmBA2gHfDu3naktRm6A8BPwAWWDv-Uhm6Shw/viewform?c=0&w=1)
+* [Semantic3D](http://www.semantic3d.net/)
+* [Paris-Lille-3D](https://npm3d.fr/paris-lille-3d)
+* [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset) (virtual)
 * [Scan2CAD](https://github.com/skanti/Scan2CAD)
+### RGB-D SLAM
+* [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
+* [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html) (virtual)
+* [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
+### Both
+* [ScanNet](http://www.scan-net.org/)
+* [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
+* [SceneNN](http://103.24.77.34/scenenn/home/)
+* [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
+### Point Clouds
+* [3DMatch](https://3dmatch.cs.princeton.edu/)
+### More
 * [More](http://www.michaelfirman.co.uk/RGBDdatasets/)
+
 
 ## Programming
 * [C++](./C++/README.md)
