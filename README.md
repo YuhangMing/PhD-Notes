@@ -25,6 +25,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
 * [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html) (virtual)
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
+* [DIML/CVL RGBD Datasest](https://dimlrgbd.github.io/) (both indoors and outdoors)
 ### Both
 * [ScanNet](http://www.scan-net.org/)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
