@@ -3,9 +3,11 @@
 
 ## Observations
 ![legends](./imgs/scannet-legends.png)
-The test model is trained with only vertical rotation augmentation only.
+
+The test model is trained with only *vertical* rotation augmentation only.
 ![Original setup](./imgs/scannet-orig-setup.png)
 Results with unchanged input point cloud.
+
 ![90RotY setup](./imgs/scannet-90RotY.png)
 Results after rotating the input point cloud along y-axis for 90 degrees.
 
@@ -358,16 +360,139 @@ pool_p, pool_b = batch_grid_subsampling(stacked_points, stack_lengths, sampleDl=
 pool_i = batch_neighbors(pool_p, stacked_points, pool_b, stack_lengths, r)
 up_i = batch_neighbors(stacked_points, pool_p, stack_lengths, pool_b, 2 * r)
 ```
+##### Neighbor Size Limit:
+Select first N_i neighbors given limits for each layer i computed [here](#neighbor_limit-calibration)
+```python
+conv_i = self.big_neighborhood_filter(conv_i, len(input_points))
+pool_i = self.big_neighborhood_filter(pool_i, len(input_points))
+up_i = self.big_neighborhood_filter(up_i, len(input_points)+1)
+```
+
 #### Additional Input for Testing:
 [[scales](#data-augmentation), [rots](#data-augmentation), [cloud_inds](#get-center-point), [point_inds](#get-center-point), [input_inds](#neighbors-of-center-point)]
 
 
 
 ## Setup Batch Sampler
-1. Calibration
-    1-1. Neibhgor calibrations:
-    i. Compute higher bound of the neighbours number in the neighbourhood, the volume of the sphere is used here. Note the radius here is in the number of grid, hence the volume is the total number of grid in the neighborhood.
-    E.g. with defrom_radius=6.0, the upper bound of the neighour numbers is 1437.
-    ```python
-    hist_n = int(np.ceil(4 / 3 * np.pi * (self.dataset.config.deform_radius + 1) ** 3))
-    ```
+
+#### Calibration
+This calibration is only for training, with the purpose of limiting the number of the points per epoch to reach the desired batch number.
+
+##### Preparation:
+1. Compute higher bound of the neighbours number in the neighbourhood, the volume of the sphere is used here.
+Note the radius here is in the number of grid, hence this volume gives the maixmum number of grids/points in the neighborhood.
+E.g. with defrom_radius=6.0, the upper bound of the neighour numbers is 1437.
+```python
+hist_n = int(np.ceil(4 / 3 * np.pi * (self.dataset.config.deform_radius + 1) ** 3))
+```
+
+2. Initialise the neighborhood size for each layer. (num_layers, max_neighb).
+```python
+neighb_hists = np.zeros((self.dataset.config.num_layers, hist_n), dtype=np.int32)
+```
+<!-- ===========
+estim_batch = 0; target_batch = self.dataset.config.batch_num. 
+Goal is to get estim_batch as close as possible to target_batch
+
+```python
+# Estimated average batch size and target value
+estim_b = 0
+target_b = self.dataset.config.batch_num
+# Calibration parameters
+low_pass_T = 10
+Kp = 100.0
+finer = False
+# Convergence parameters
+smooth_errors = []
+converge_threshold = 0.1
+# Loop parameters
+last_display = time.time()
+i = 0
+breaking = False
+```
+========== -->
+##### Perform Calibration:
+###### Batch_Limit calibrations
+Run for a maximum of 10 epochs.
+1. Count the number valid neighbors for each point in each layer
+`batch.neighbors` stores the point indices to perform convolution with values of [0, number_of_points], while number_of_points is actually an invalid index.
+`axis=1` means sum over the row direction, resulting counts is a list of 1D array with shapes [(N_1, ), (N_2, ), (N_3, ), (N_4, ), (N_5, )]
+```python
+counts = [np.sum(neighb_mat.numpy() < neighb_mat.shape[0], axis=1) for neighb_mat in batch.neighbors]
+```
+
+2. Update the histogram
+Construct the histogram over the number of neighbors for each point, with x-axis be the number of neighbors and y-axis be the count. x-axis is set to a fixed-length of `hist_n`.
+And then sum over all batches and epoches.
+```python
+hists = [np.bincount(c, minlength=hist_n)[:hist_n] for c in counts]
+neighb_hists += np.vstack(hists)
+```
+
+3. Update batch value and heck convergence
+By increasing the maximum number can be included in a single batch, increase the batch length used in a forward pass.
+The (low pass filter) step can be consider as an "gradient descent" style increment, to calculate the increment in every step and use smaller step size as closing the desired value.
+```python
+# batch length  # initialised with 1
+b = len(batch.cloud_inds)
+# Update estim_b (low pass filter)
+estim_b += (b - estim_b) / low_pass_T
+# Estimate error (noisy)
+error = target_b - b
+# Save smooth errors for convergene check
+smooth_errors.append(target_b - estim_b)
+if len(smooth_errors) > 10:
+    smooth_errors = smooth_errors[1:]
+# Update batch limit with P controller (maximum number of points per batch)
+self.dataset.batch_limit += Kp * error
+# finer low pass filter when closing in
+if not finer and np.abs(estim_b - target_b) < 1:
+    low_pass_T = 100
+    finer = True
+# Convergence
+if finer and np.max(np.abs(smooth_errors)) < converge_threshold:
+    breaking = True
+    break
+```
+
+###### Neighbor_Limit Calibration
+**Still have some problem here**
+Following the `neighbor_hist` generated above
+1. Compute the cumulative sum
+Compute the cumulative sum (number of points) for number of neighbors from 0 - hist_n. Last row is the total number of input points.
+```python
+cumsum = np.cumsum(neighb_hists.T, axis=0)
+```
+
+2. Count the number of neighbors with the untouched ratio applied
+For given neighbor number N, and ratio r, count the number of points with neighbor number N' < r * N.
+e.g. [38, 37, 228, 173, 71], up to which row reaches the limit for each layer
+Meaning, up to X neighbors, 
+with `untouched_ratio=0.9`, `untouched_ratio * cumsum[hist_n - 1, :]` means 90% of the total points in this batch. Thus, `percentiles` means up to how many neighbors of each input point, the number of points reaches 90% of total number points.
+**Question**: The official documents said this limits the maximum number of neighbors allowed in convolution, so that 90% of the neighborhoods remain untouched. While in the code it seems like 90% of total points used in convolution? Also how does set ratio on the "number of points" affect the ratio of neighbors???
+```python
+percentiles = np.sum(cumsum < (untouched_ratio * cumsum[hist_n - 1, :]), axis=0)
+```
+
+##### Save the Calibrations:
+Store the computed `batch_limit` and `percentiles` above into files.
+```python
+key = '{:s}_{:.3f}_{:.3f}_{:d}'.format(sampler_method,
+                            self.dataset.config.in_radius,
+                            self.dataset.config.first_subsampling_dl,
+                            self.dataset.config.batch_num)
+batch_lim_dict[key] = float(self.dataset.batch_limit)
+with open(batch_lim_file, 'wb') as file:
+    pickle.dump(batch_lim_dict, file)
+self.dataset.neighborhood_limits = percentiles
+for layer_ind in range(self.dataset.config.num_layers):
+    dl = self.dataset.config.first_subsampling_dl * (2 ** layer_ind)
+    if self.dataset.config.deform_layers[layer_ind]:
+        r = dl * self.dataset.config.deform_radius
+    else:
+        r = dl * self.dataset.config.conv_radius
+    key = '{:.3f}_{:.3f}'.format(dl, r)
+    neighb_lim_dict[key] = self.dataset.neighborhood_limits[layer_ind]
+with open(neighb_lim_file, 'wb') as file:
+    pickle.dump(neighb_lim_dict, file)
+```
