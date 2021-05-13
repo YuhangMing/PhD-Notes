@@ -243,7 +243,14 @@ and the [input data containers](#containers-to-get-network-input).
 self.pot_trees += [search_tree]
 ```
 ##### Get Reprojection Indices (Test and Validalidation ONLY):
-Find the map from original point cloud to the subsampled point cloud
+Find the map from original point cloud to the subsampled point cloud.
+
+***USAGE***: 
+
+`test_proj`: In test or validation, the prediction is performed on the subsampled point cloud. Thus these reprojection indices are used to project predictions in the subsampled point cloud to the original point cloud.
+
+`validation_labels`: Ground truth labels for original point cloud, and then used to compute prediction accuracy later.
+
 1. Load the original point cloud
 ```python
 vertex_data, faces = read_ply(join(self.mesh_path, scene+'_mesh.ply'), triangular_mesh=True)
