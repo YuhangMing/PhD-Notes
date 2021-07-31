@@ -20,22 +20,25 @@ Some study notes on various areas (after the object based relocalisation project
 * [Oxford Robot Car](https://robotcar-dataset.robots.ox.ac.uk/)
 * [InHouse Dataset](https://drive.google.com/drive/folders/1Wn1Lvvk0oAkwOUwR0R6apbrekdXAUg7D)
 * [InLoc Dataset](http://www.ok.sc.e.titech.ac.jp/INLOC/)
+* [Stanford-2D-3D-S](http://buildingparser.stanford.edu/dataset.html)
 ### 3D Segmentation
-* [S3DIS](https://docs.google.com/forms/d/e/1FAIpQLScDimvNMCGhy_rmBA2gHfDu3naktRm6A8BPwAWWDv-Uhm6Shw/viewform?c=0&w=1)
+* [ScanNet](http://www.scan-net.org/)
+* [S3DIS](http://buildingparser.stanford.edu/dataset.html)
+* [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
+* [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
 * [Semantic3D](http://www.semantic3d.net/)
 * [Paris-Lille-3D](https://npm3d.fr/paris-lille-3d)
 * [SceneNN](http://103.24.77.34/scenenn/home/)
 * [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset) (virtual)
 * [Scan2CAD](https://github.com/skanti/Scan2CAD)
 ### RGB-D SLAM
+* [ScanNet](http://www.scan-net.org/)
+* [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
+* [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
 * [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
 * [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html) (virtual)
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [DIML/CVL RGBD Datasest](https://dimlrgbd.github.io/) (both indoors and outdoors)
-### Both Segmentation & SLAM
-* [ScanNet](http://www.scan-net.org/)
-* [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
-* [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
 ### Point Clouds
 * [3DMatch](https://3dmatch.cs.princeton.edu/)
 ### More
