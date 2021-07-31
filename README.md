@@ -7,6 +7,8 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## SLAM Related
 * [SDF](./SDF/README.md)
+* Kalman Filter & Extended Kalman Filter
+* Particle Filter
 
 ## Semantic for SLAM Related
 
@@ -14,6 +16,11 @@ Some study notes on various areas (after the object based relocalisation project
 * [KPConv](./KPConv/README.md)
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
+* Optimiser - Adam
+* Traditional ML Algorithms
+  * Random Forest
+  * AdaBoost
+  * ...
 
 ## Datasets
 ### Place Recognition
