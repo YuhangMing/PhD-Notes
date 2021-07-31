@@ -16,6 +16,10 @@ Some study notes on various areas (after the object based relocalisation project
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
 
 ## Datasets
+### Place Recognition
+* [Oxford Robot Car](https://robotcar-dataset.robots.ox.ac.uk/)
+* [InHouse Dataset](https://drive.google.com/drive/folders/1Wn1Lvvk0oAkwOUwR0R6apbrekdXAUg7D)
+* [InLoc Dataset](http://www.ok.sc.e.titech.ac.jp/INLOC/)
 ### 3D Segmentation
 * [S3DIS](https://docs.google.com/forms/d/e/1FAIpQLScDimvNMCGhy_rmBA2gHfDu3naktRm6A8BPwAWWDv-Uhm6Shw/viewform?c=0&w=1)
 * [Semantic3D](http://www.semantic3d.net/)
@@ -28,7 +32,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html) (virtual)
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [DIML/CVL RGBD Datasest](https://dimlrgbd.github.io/) (both indoors and outdoors)
-### Both
+### Both Segmentation & SLAM
 * [ScanNet](http://www.scan-net.org/)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
 * [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
