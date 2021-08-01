@@ -17,6 +17,11 @@ Some study notes on various areas (after the object based relocalisation project
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
 * Optimiser - Adam
+  Adam配置参数
+  * alpha:   也被称为学习速率或步长。权重比例被校正(例如001)。更大的值(例如0.3)在速率校正之前会加快初始学习速度。较小的值(例如1.0e-5)在培训期间降低学习速度
+  * beta1:   第一次估计的指数衰减率(如9)。
+  * beta2:   第二次估计的指数衰次减率(例如999)。在稀疏梯度问题(例如NLP和计算机视觉问题)上，这个值应该接近1.0。
+  * epsilon: 是一个非常小的数字，可以防止任何在实施中被0划分(例如，10e-8)。
 * Traditional ML Algorithms
   * Random Forest
   * AdaBoost
