@@ -97,7 +97,7 @@ Adaptive learning rate of each parameter components for gradient descent: smalle
 <u>Cons</u>: its accumulation of the squared gradients in the denominator keeps growing during training, causing the learning rate to shrink and eventually beconme infinitesimally small, at which point the algorithm is no longer able to acquire additional knowledge. 
 
 #### Adadelta
-It's an improved version of Adagrad, preventing the <u>aggressive, monotonically decreasing behaviour of the learning rate</u>. It is done by replacing the Diagonal matrix *G_t* with the decaying average over past gradients *E[g^2]_t*. Then to solve the <u>unit not matched</u> issue, the learning rate η is replaced with the RMS[Δθ]_(t−1).
+It's an improved version of Adagrad, preventing the <u>aggressive, monotonically decreasing behaviour of the learning rate</u>. It is done by replacing the Diagonal matrix *G_t* with the decaying average over past squared gradients *E[g^2]_t*. Then to solve the <u>unit not matched</u> issue, the learning rate η is replaced with the RMS[Δθ]_(t−1).
 
 ![formula](./adadelta.png)
 
