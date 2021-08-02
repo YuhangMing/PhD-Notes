@@ -16,6 +16,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [KPConv](./KPConv/README.md)
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
+* [L1Norm vs. L2Norm](./L1-L2/README.md)
 * [Optimiser in Deep Learning](./Optimiser/README.md)
 * Traditional ML Algorithms
   * Random Forest
