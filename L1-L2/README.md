@@ -2,8 +2,6 @@
 #### [towardsdatascience](https://towardsdatascience.com/visualizing-regularization-and-the-l1-and-l2-norms-d962aa769932)
 ![plot](./L1-L2.gif)
 
-[towardsdatascience](https://towardsdatascience.com/visualizing-regularization-and-the-l1-and-l2-norms-d962aa769932)
-
 On the left we have a plot of the L1 and L2 norm for a given weight w. On the right, we have the corresponding graph for the slope of the norms. As we can see, both L1 and L2 increase for increasing asbolute values of w. However, while the L1 norm increases at a constant rate, the L2 norm increases exponentially.
 
 This is important because, as we know, when doing gradiant descent we’ll update our weights based on the derivative of the loss function. So if we’ve included a norm in our loss function, the derivative of the norm will determine how the weights get updated.
@@ -12,7 +10,7 @@ We can see that with the L2 norm as w gets smaller so does the slope of the norm
 
 On the other hand, with the L1 norm the slope is constant. This means that as w gets smaller the updates don’t change, so we keep getting the same “reward” for making the weights smaller. Therefore, the L1 norm is much more likely to reduce some weights to 0.
 
-#### [Kaggle](https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms).
+#### [Kaggle](https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms)
 
 Robustness: L1 > L2
 
