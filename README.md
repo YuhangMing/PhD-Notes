@@ -16,7 +16,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [KPConv](./KPConv/README.md)
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
-* Optimiser - Adam
+* [Optimiser](./Optimiser/README.md)
   Adam配置参数
   * alpha:   也被称为学习速率或步长。权重比例被校正(例如001)。更大的值(例如0.3)在速率校正之前会加快初始学习速度。较小的值(例如1.0e-5)在培训期间降低学习速度
   * beta1:   第一次估计的指数衰减率(如9)。
