@@ -29,6 +29,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [InHouse Dataset](https://drive.google.com/drive/folders/1Wn1Lvvk0oAkwOUwR0R6apbrekdXAUg7D)
 * [InLoc Dataset](http://www.ok.sc.e.titech.ac.jp/INLOC/)
 * [Stanford-2D-3D-S](http://buildingparser.stanford.edu/dataset.html)
+* [Structure3D](https://structured3d-dataset.org/)
 ### 3D Segmentation
 * [ScanNet](http://www.scan-net.org/)
 * [S3DIS](http://buildingparser.stanford.edu/dataset.html)
@@ -36,6 +37,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
 * [Semantic3D](http://www.semantic3d.net/)
 * [Paris-Lille-3D](https://npm3d.fr/paris-lille-3d)
+* [Structure3D](https://structured3d-dataset.org/)
 * [SceneNN](http://103.24.77.34/scenenn/home/)
 * [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset) (virtual)
 * [Scan2CAD](https://github.com/skanti/Scan2CAD)
