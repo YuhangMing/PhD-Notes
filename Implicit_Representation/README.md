@@ -12,6 +12,9 @@ The signed distance at a location. [paper](https://graphics.stanford.edu/papers/
 
 
 # NeRF
+General Idea and how the scene is represented understood.
+STILL FUZZY ABOUT HOW THE MATH WORKS IN RENDERING THE SCENE USING NETWORK OUTPUTS (c, σ), as well as why the special design helps.
+LOOK INTO SEMINAL RAY TRACING WORKS.
 
 GOAL: new view sythesis.
 
@@ -38,7 +41,6 @@ FIRST, the MLP F_Θ processes the input 3D coordinate **x** with 8 FC layers (us
 THEN, this feature vector is concatenated with the camera ray’s viewing direction **d** and passed to one additional FC layer (using a ReLU activation and 128 channels) that output the view-dependent RGB color **c**.
 
 #### Rendering novel views from this representation
-STILL FUZZY ABOUT HOW THE MATH WORKS IN RENDERING THE SCENE USING NETWORK OUTPUTS (c, σ).
 Colour of the scene is rendered following [classical volume rendering](https://dl.acm.org/doi/10.1145/964965.808594)
 The volume density σ(**x**) can be interpreted as the differential probability of a ray terminating at an infinitesimal particle at location x.
 The function T(t) denotes the accumulated transmittance along the ray from tn to t, i.e., the probability that the ray travels from tn to t without hitting any other particle.
