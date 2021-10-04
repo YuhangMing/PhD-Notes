@@ -29,6 +29,7 @@ By applying gradient descent on minimising error between each observed image and
 
 ![Pipeline](./imgs/NeRF.png)
 
+#### Modeling the scene as a neural radiance field
 Network Input: 3D location **x** = (x, y, z) and 2D viewing direction (θ, φ) (expressed as 3D cartisan unit vector **d**);
 Network Output: Colour **c** = (r, g, b) and volume density σ.
 Then the scene is repreesented by the MLP as: F_Θ: (**x**, **d**) -> (**c**, σ) and optimise the weights Θ to map each input to its cooresponding output.
@@ -36,4 +37,15 @@ Then the scene is repreesented by the MLP as: F_Θ: (**x**, **d**) -> (**c**, σ
 FIRST, the MLP F_Θ processes the input 3D coordinate **x** with 8 FC layers (using ReLU activations and 256 channels per layer), and outputs σ and a 256-dimensional feature vector. 
 THEN, this feature vector is concatenated with the camera ray’s viewing direction **d** and passed to one additional FC layer (using a ReLU activation and 128 channels) that output the view-dependent RGB color **c**.
 
-KEEP READING FROM SECTION 4.
+#### Rendering novel views from this representation
+STILL FUZZY ABOUT HOW THE MATH WORKS IN RENDERING THE SCENE USING NETWORK OUTPUTS (c, σ).
+Colour of the scene is rendered following [classical volume rendering](https://dl.acm.org/doi/10.1145/964965.808594)
+The volume density σ(**x**) can be interpreted as the differential probability of a ray terminating at an infinitesimal particle at location x.
+The function T(t) denotes the accumulated transmittance along the ray from tn to t, i.e., the probability that the ray travels from tn to t without hitting any other particle.
+
+#### Optimisation
+###### Positional encoding
+Mapping the inputs to a higher dimensional space using high frequency functions to enable our MLP to more easily approximate a higher frequency function.
+A similar mapping is used in the popular [Transformer](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) architecture, where it is referred to as a positional encoding
+###### Hierarchical volume sampling
+Simultaneously optimize two networks: one “coarse” and one “fine.
