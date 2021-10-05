@@ -7,6 +7,7 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## SLAM Related
 * [SDF](./SDF/README.md)
+* [Implicit Representation](./Implicit_Representation/README.md)
 * Kalman Filter & Extended Kalman Filter
 * Particle Filter
 
