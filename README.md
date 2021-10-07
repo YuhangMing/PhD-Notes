@@ -57,6 +57,7 @@ Some study notes on various areas (after the object based relocalisation project
 ### More
 * [More](http://www.michaelfirman.co.uk/RGBDdatasets/)
 
+## [Tools](./Tools/README.md)
 
 ## Programming
 * [C++](./C++/README.md)
