@@ -1,6 +1,8 @@
 # Habitat-Sim
 3D simulator ([link](https://github.com/facebookresearch/habitat-sim)) to operate an agent in a 3D reconstruction.
 
+Activate ``habitat`` virtual environment.
+
 - ScanNet Dataset:
     First convert the reconstruction from ``.ply`` file to ``.glb`` file (glTF format) using:
     ``assimp export <PLY FILE> <GLB PATH>``
