@@ -7,6 +7,10 @@
 # Trending
 Encoding objects and scenes in the weights of an MLP that directly maps from a 3D spatial location to an implicit representation of the shape.
 
+Difference to the "Code" used in the CodeSLAM and its successors:
+1. CodeSLAM use the fixed-length, compact code between encoder and decoder to represent the input while Implicit Represent uses the weights in an MLP to represent the map.
+2. CodeSLAM only represent a single RGB or RGB-D frame while Implicit Representation represent the entire map.
+
 **What is an implicit representation**:
 In mathematics, an implicit surface is a surface in Euclidean space defined by an equation F(x, y, z) = 0. An implicit surface is the set of zeros of a function of three variables. And implicit means that the equation is not solved for x or y or z. [[Wiki](https://en.wikipedia.org/wiki/Implicit_surface)]
 
