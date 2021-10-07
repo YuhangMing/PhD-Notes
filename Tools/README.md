@@ -12,3 +12,5 @@ Activate ``habitat`` virtual environment.
 
 - Replica Dataset:
     Run as ``habitat-viewer /media/yuhang/Datasets/datasets/Replica/office_4/habitat/mesh_semantic.ply``
+
+Example on extracting RGB-D-Semantic images: [link](https://aihabitat.org/docs/habitat-sim/image-extractor.html#writing-custom-pose-extractors)
