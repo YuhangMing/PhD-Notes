@@ -42,8 +42,9 @@ Some study notes on various areas (after the object based relocalisation project
 * [Paris-Lille-3D](https://npm3d.fr/paris-lille-3d)
 * [Structure3D](https://structured3d-dataset.org/)
 * [SceneNN](http://103.24.77.34/scenenn/home/)
-* [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset) (virtual)
+* [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset)
 * [Scan2CAD](https://github.com/skanti/Scan2CAD)
+* [InteriorNet](https://interiornet.org/)
 ### RGB-D SLAM
 * [ScanNet](http://www.scan-net.org/)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
@@ -52,6 +53,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [Augmented ICL-NUIM Dataset](http://redwood-data.org/indoor/dataset.html) (virtual)
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [DIML/CVL RGBD Datasest](https://dimlrgbd.github.io/) (both indoors and outdoors)
+* [InteriorNet](https://interiornet.org/)
 ### Point Clouds
 * [3DMatch](https://3dmatch.cs.princeton.edu/)
 ### More
