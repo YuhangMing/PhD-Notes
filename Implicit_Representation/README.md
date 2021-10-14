@@ -1,11 +1,14 @@
 # Table of Content
 - [Trending](#trending)
-- [NeRF](#nerf)
-- [iMAP](#imap)
-- [UnsupervisedR&R](#unsupervisedrr)
+- [NeRF ECCV2020](#nerf)
+- [UnsupervisedR&R CVPR2021](#unsupervisedrr)
+- [NeruralRecon CVPR2021](#neuralrecon)
+- [iMAP ICCV2021](#imap)
+- [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
+- [Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
 
 # Trending
-Encoding objects and scenes in the weights of an MLP that directly maps from a 3D spatial location to an implicit representation of the shape.
+*Encoding objects/scenes in the weights of an MLP that directly maps from a 3D spatial location to objects/scenes properties. This MLP serves as an implicit representation of the object/scene.*
 
 Difference to the "Code" used in the CodeSLAM and its successors:
 1. CodeSLAM use the fixed-length, compact code between encoder and decoder to represent the input while Implicit Represent uses the weights in an MLP to represent the map.
@@ -69,7 +72,7 @@ Simultaneously optimize two networks: one “coarse” and one “fine.
 
 # iMAP
 
-With RGB-D input, iMAP uses a MLP to represent the 3D volumetric map and casts the SLAM as a Continual Learning problem. The catastrophic forgetting is alleviated with replaying. Keyframes are selected to store and compress past memories. 
+With RGB-D input, iMAP uses a MLP to represent the 3D volumetric map and casts the SLAM as a **Continual Learning** problem. The catastrophic forgetting is alleviated with replaying. Keyframes are selected to store and compress past memories. 
 
 ![Pipeline](./imgs/iMAP.png)
 
@@ -156,5 +159,42 @@ If the camera locations are estimated correctly, the point cloud renders will be
 
 ## Possible Improvement
 Work on large viewpoint changes
+
+[Back Top](#table-of-content)
+
+
+# Continual Neural Mapping
+
+GOAL: continual learn the implicit scene representation directly from sequential observations.
+Bridging the gap between batch-trained implicit neural representations and streaming data.
+
+Casted as **Continual Learning** problem, as [iMap](#imap).
+
+## Problem Statement
+**y** = f(**x**, θ^t), \all **x** \in W. The goal is to learn the mapping function f(-) parameterised by a neural network θ^t. W is the 3D environment, **x**^t \in Ω^t \subset W is the 3D coordinate at time t, and **y** is the scene property.
+
+**Knowledge Transfer**
+- Backward Transfer: [[Continual Learning for Robotics](https://arxiv.org/pdf/1907.00182.pdf)] [[Gradient Episodic Memory](https://arxiv.org/pdf/1706.08840.pdf)]
+For unvisited areas, the mapping function f(-) can be queried at any time to predict hte scene property **y** given the spatial cooridinate **x**.
+For previsouly visited area **x** \in Ω^{1:t}, the mapping funciton f(-) serves as a compact memory of past observations D^{1:t}.
+- Forward Transfer:
+May be facilitated that distills knowlege and skills for *future exploration*.
+
+**Learning Paradigms**
+Domain-incremental continual learning: data distribution shifts and the objective remains the same.
+![learning_paradigms](./imgs/learning_paradigms.png)
+- Multi-task learning: splits the training process into a set of dependent tasks and optimizes all tasks jointly. The network is fixed once the model is deployed.
+- Fine-tuning: maintains a single network consecutively, where network parameters of a new task are initialized with that of the last task. The performance of early tasks will degrade on current network parameters (*Catastrophic Forgetting*).
+- Batch-retraining: preserves all previously observed data to satisfy the iid-sampled assumption. It is computationally expensive as it learns a new model at each time from scratch without exploiting past experience.
+
+[Back Top](#table-of-content)
+
+
+# NeuralRecon
+
+[Back Top](#table-of-content)
+
+
+# Neural RGBD Surface Reconstruction
 
 [Back Top](#table-of-content)
