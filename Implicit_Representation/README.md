@@ -192,6 +192,20 @@ Domain-incremental continual learning: data distribution shifts and the objectiv
 
 # NeuralRecon
 
+GOAL: Directly reconstruct local surfaces represented as sparse TSDF volumes for each video fragment.
+**Gated Recurrent Units** are used here for the learning-based TSDF fusion module. 
+*This work fomulated the SLAM problem differently to [iMAP](#imap) or [Continual Neural Mapping](#continual-neural-mapping). Instead of using the Continual Learning Formulation with a single MLP, NerualRecon adops a CNN-RNN-MLP formulation.*
+
+Input: Monocular images with corresponding camera poses.
+Unprojects the image features to form a 3D feature volume and then uses sparse convolutions to process the feature volume to output a sparse TSDF volume.
+GRU makes ccurrent reconstruction conditioned on previous global volume.
+Speed: 33 keyframes per second on an NVIDIA RTX 2080Ti GPU.
+
+![neural_recon](./imgs/neuralrecon.png)
+- Keyframe images passed through iamge backbone to extract multi-level features;
+- Backproject the features and aggregated them into a 3D feature volume F_t^l;
+- 3D feature volume F_t^l is passed through the GRU and MLP modules to get the predicted Sparse TSDF (Final Output).
+
 [Back Top](#table-of-content)
 
 
