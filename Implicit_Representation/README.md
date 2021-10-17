@@ -1,11 +1,13 @@
 # Table of Content
 - [Trending](#trending)
+- [Scene Representation Networks NeurIPS2019](#scene-representation-networks)
 - [NeRF ECCV2020](#nerf)
-- [UnsupervisedR&R CVPR2021](#unsupervisedrr)
+- [* Semantic Implicit 3DV2020](#semantic-implicit)
+- [* UnsupervisedR&R CVPR2021](#unsupervisedrr)
 - [NeruralRecon CVPR2021](#neuralrecon)
 - [iMAP ICCV2021](#imap)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
-- [Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
+- [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
 
 # Trending
 *Encoding objects/scenes in the weights of an MLP that directly maps from a 3D spatial location to objects/scenes properties. This MLP serves as an implicit representation of the object/scene.*
@@ -135,6 +137,8 @@ General Approach:
 3. use a differentiable optimizer to align the top k correspondences and estimate the 6-DOF transformation between them.
 4. render the point cloud from the two estimated viewpoints to generate an RGB image for each view; and use photometric and geometric consistency losses between the RGB-D inputs and outputs and back-propagate through our entire pipeline.
 
+![pipeline](./imgs/unsupervisedrr.png)
+
 #### Point Cloud Generation
 I \in R^{4xHxW} -> P \in R^{(6+F)xN}.
 4 channels in the input image are R, G, B, D;
@@ -210,5 +214,77 @@ Speed: 33 keyframes per second on an NVIDIA RTX 2080Ti GPU.
 
 
 # Neural RGBD Surface Reconstruction
+
+**Reference to network structure here**
+
+TL;DR: Replacing the mapping module in BundleFusion with the network and optimisation proposed in this paper.
+
+Leverages the success of implicit novel view synthesis ([NeRF](#nerf)) for surface reconstruction.
+Incorporate **depth measurement** into the radiance field formulation to produce mroe detailed and complete reconstruction.
+
+Again, use a deep neural network to store the TSDF. And the beneficial is the same as previous ones, i.e. handling regions with missing depth measurements.
+
+<u> Good review on representing scenes in the weights of a MLP (compensation to the papers mentioned here). </u>
+
+General Steps:
+1. Initialisation: obtain camera pose using BundleFusion.
+1. Optimisation: optimise a continuous volulmetric representation of the scene that stores radiance and TSDF per point.
+1. Evaluation: use Marching Cubes to extract a triangle mesh.
+
+![pipeline](./imgs/neural-surface-recon.png)
+
+MLP-1:  
+Input:  encoding (represented by γ(-)) of a queried 3D point;
+Output: the truncated signed distance D_i to the nearest surface (TSDF value).
+MLP-2: 
+produce surface color valules for a given viewing direction d.
+Input: concatenation of 1) positional encoding of the viewing direction γ(d) (enables dealing with view-dependent effects like specular highlights); 2) a 2-D appearance latent code (learned for each frame following [NeRF in the Wild](https://nerf-w.github.io/) to correct for effects like auto-white balancing); 3) the output of MLP-1.
+Output: color value of the given pixel.
+
+[Back Top](#table-of-content)
+
+
+# Scene Representation Networks
+
+A less direct neural 3D representation: 1) outputs a feature vector and RGB color at each continueous 3D coordinates; 2) proposes a differentiable rendering function consisting of a recurrent neural network that marches along each ray and decide where the surface is located.
+
+![overview](./imgs/SRN.png)
+
+
+[Back Top](#table-of-content)
+
+
+# Semantic Implicit
+
+Build on Scene Representation Networks ([SRN](#scene-representation-networks)) and perform per-point semantic segmentation in addition to represent appearance and geometry.
+The model proposed in this paper is a **Semantically Aware Implicit Neural Scene Representation**.
+
+<u>Good review on representing scenes in the weights of a MLP (compensation to the papers mentioned here). </u>
+
+Small set of semantically labelled data is needed for training.
+
+## Methodology
+
+![architecture](./imgs/Semantic_SRN.png)
+
+#### SRN
+
+*SRN*: Encode a scene in the weights **w** \in R^l of a MLP. Map a 3D coordinate **x** to a scene property **v**.
+
+*RGB Renderer*: 1) use a differentiable ray marcher to find the intersections of camera rays withscene geometry; 2) query the SRN at the intersection points and map the feature vector **v** to an RGB color using another MLP.
+
+*Hypernetwork*: maps the embedding vector **z** \in R^k to the weight **w** \in R^j, enabling representing an object class using an embedding vector **z**.
+
+#### Semantic
+
+Minimum supervision wanted, authors concludes that the learned features **v** already contains the semantic info (see t-SNE plot).
+
+*Segmentation Render SEG*: Maps a feature vector **v** to a distribution over class labels **y**.
+SEG is added to the SRN in parrallel to the RGB Renderer.
+
+SEG is parameterised as a linear classifier with input being the feature vector **v** from SRN and output being class labels.
+
+
+
 
 [Back Top](#table-of-content)
