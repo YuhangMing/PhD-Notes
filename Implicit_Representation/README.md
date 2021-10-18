@@ -6,6 +6,7 @@
 - [* UnsupervisedR&R CVPR2021](#unsupervisedrr)
 - [NeruralRecon CVPR2021](#neuralrecon)
 - [iMAP ICCV2021](#imap)
+- [* Semantic NeRF ICCV2021](#semantic-nerf)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
 - [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
 
@@ -45,7 +46,7 @@ To render the *neural radince field* (NeRF) from a particular viewpoint:
 2) use those points and their corresponding 2D viewing directions as input to the MLP to produce set of colours and densities;
 3) use classical volume rendering techinques to accumulate those colours and densities into a 2D image.
 
-By applying gradient descent on minimising error between each observed image and the corresponding rendered view across multiple views, the network is encouraged to predict a coherent model of the scene by assigning high volume densities and accurate colors to the locations that actually contain the scene content.
+By applying gradient descent on minimising error between each observed image and the corresponding rendered view across multiple views, the network is encouraged to predict a coherent model of the scene by assigning high volume densities and accurate colours to the locations that actually contain the scene content.
 
 ![Pipeline](./imgs/NeRF.png)
 
@@ -55,7 +56,7 @@ Network Output: Colour **c** = (r, g, b) and volume density σ.
 Then the scene is repreesented by the MLP as: F_Θ: (**x**, **d**) -> (**c**, σ) and optimise the weights Θ to map each input to its cooresponding output.
 
 FIRST, the MLP F_Θ processes the input 3D coordinate **x** with 8 FC layers (using ReLU activations and 256 channels per layer), and outputs σ and a 256-dimensional feature vector. 
-THEN, this feature vector is concatenated with the camera ray’s viewing direction **d** and passed to one additional FC layer (using a ReLU activation and 128 channels) that output the view-dependent RGB color **c**.
+THEN, this feature vector is concatenated with the camera ray’s viewing direction **d** and passed to one additional FC layer (using a ReLU activation and 128 channels) that output the view-dependent RGB colour **c**.
 
 #### Rendering novel views from this representation
 Colour of the scene is rendered following [classical volume rendering](https://dl.acm.org/doi/10.1145/964965.808594)
@@ -237,16 +238,16 @@ MLP-1:
 Input:  encoding (represented by γ(-)) of a queried 3D point;
 Output: the truncated signed distance D_i to the nearest surface (TSDF value).
 MLP-2: 
-produce surface color valules for a given viewing direction d.
+produce surface colour valules for a given viewing direction d.
 Input: concatenation of 1) positional encoding of the viewing direction γ(d) (enables dealing with view-dependent effects like specular highlights); 2) a 2-D appearance latent code (learned for each frame following [NeRF in the Wild](https://nerf-w.github.io/) to correct for effects like auto-white balancing); 3) the output of MLP-1.
-Output: color value of the given pixel.
+Output: colour value of the given pixel.
 
 [Back Top](#table-of-content)
 
 
 # Scene Representation Networks
 
-A less direct neural 3D representation: 1) outputs a feature vector and RGB color at each continueous 3D coordinates; 2) proposes a differentiable rendering function consisting of a recurrent neural network that marches along each ray and decide where the surface is located.
+A less direct neural 3D representation: 1) outputs a feature vector and RGB colour at each continueous 3D coordinates; 2) proposes a differentiable rendering function consisting of a recurrent neural network that marches along each ray and decide where the surface is located.
 
 ![overview](./imgs/SRN.png)
 
@@ -271,7 +272,7 @@ Small set of semantically labelled data is needed for training.
 
 *SRN*: Encode a scene in the weights **w** \in R^l of a MLP. Map a 3D coordinate **x** to a scene property **v**.
 
-*RGB Renderer*: 1) use a differentiable ray marcher to find the intersections of camera rays withscene geometry; 2) query the SRN at the intersection points and map the feature vector **v** to an RGB color using another MLP.
+*RGB Renderer*: 1) use a differentiable ray marcher to find the intersections of camera rays withscene geometry; 2) query the SRN at the intersection points and map the feature vector **v** to an RGB colour using another MLP.
 
 *Hypernetwork*: maps the embedding vector **z** \in R^k to the weight **w** \in R^j, enabling representing an object class using an embedding vector **z**.
 
@@ -284,7 +285,35 @@ SEG is added to the SRN in parrallel to the RGB Renderer.
 
 SEG is parameterised as a linear classifier with input being the feature vector **v** from SRN and output being class labels.
 
+[Back Top](#table-of-content)
 
+
+# Semantic-NeRF
+### In-Place Scene Labelling and Understanding
+
+Advantages of using implicit neural reconstructions is that they do not require prior training data. But the fully self-supervised approach is not possible for semantics (labels are human-defined).
+
+*Main achievement*: **extend [NeRF](#nerf) to jointly encode semantics with appearance and geometry**.
+
+*Goal*: focused on solving semantic segmentation with sparse and very noisy labels, with applications in **Visual Semantic Mapping Systems** like scene labelling, novel semantic view synthesis, label interpolation, multi-vew semantic label fusion.
+
+Therefore, a **Scene-Specific** network is designed for <u> joint geometric and semantic prediction </u> and train it on images from a **Single Scene** with only *weak semantic supervision and no geometric supervision*. 
+
+<u> Good review on comparing code-based representations with the implicit 3D representations. </u>
+
+![architecture](./imgs/Semantic-NeRF.png)
+
+Input: a set of RGB images with associated known camera poses and some partial/noisy semantic labels.
+Output: implicit 3D representations of both geometry and semantics for the whole scene.
+
+*Semantic Segmentation Renderer*: appended to the NeRF before the injection of viewing directions. It is formalised as an inherently view-independent function that maps only a world coordinate **x** to a distribution over C semantic classes via softmax. 
+The estimated semantic label given 3D points from a ray is very similiar to the formulation of colour estimation.
+
+The training loss for the entire network is a weighted sum of photometric loss L_p and semantic loss L_s.
+
+The network is trained for **each scene individually**, i.e. train and tested on the same sequences but different frames.
+
+Training images (colour, depth, semantic) are generated using [Habitat](../Tools/README.md)
 
 
 [Back Top](#table-of-content)
