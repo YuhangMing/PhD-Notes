@@ -326,6 +326,8 @@ Goal: editable scene rendering.
 Drawback of NeRF: Encode the entire scene as a whole and is not aware of the object identity.
 Input: posed images and 2D instance masks.
 
+<u> Good review on object decomposite rendering. </u>
+
 
 ![object-nerf](./imgs/Object-NeRF.png)
 
