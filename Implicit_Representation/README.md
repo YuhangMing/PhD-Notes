@@ -343,5 +343,11 @@ Output:
 Scene branch: the opacity σ_{scn} and colour **c**_{scn} of the scene at **x**.
 Object branch: color **c**_{obj} and opacity **σ**_{obj} for the desired object while everything elseremains empty.
 
+Q: what is the activation code and how to get the voxel features.
+
+Object-composition:
+Supervision is achieved with 2D instance segmentation.
+
+
 
 [Back Top](#table-of-content)
