@@ -343,11 +343,13 @@ Output:
 Scene branch: the opacity σ_{scn} and colour **c**_{scn} of the scene at **x**.
 Object branch: color **c**_{obj} and opacity **σ**_{obj} for the desired object while everything elseremains empty.
 
-Q: what is the activation code and how to get the voxel features.
+Q: what is the activation code and how to get the voxel features. Answered below.
 
 Object-composition:
 Supervision is achieved with 2D instance segmentation.
-
-
+Assuming there are K annotated objects in the scene, create a learnable object code library L={**l**_{obj}^k}.
+For each ray **r**, select one object k as a training target and assign the object activation code **l**_{obj}^k to the object branch input.
+Colour output **c**_{obj} and opacity output **σ**_{obj} is computed in the same way as colour and opacity in NeRF.
+The loss of object supervision considers the distance between instance masks and also the distance between the rendered colour and the masked ground-truth colour.
 
 [Back Top](#table-of-content)
