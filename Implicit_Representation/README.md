@@ -336,6 +336,12 @@ Input: posed images and 2D instance masks.
 Input: 
 Hybrid space embedding: apply positional endocing γ(·) ([NeRF](#nerf)) on both of the scene voxel feature **f**_{scn} and the space coordinate **x**.
 Direction embedding: γ(**d**).
+Input only to the object brance: embedde object voxel features: γ(**f**_{obj}) and object activation code: **l**_{obj}.
+* **f**_{obj} helps to broaden the ability of learning decomposition and is shared by all the objects and **l**_{obj} identifies feature space for different objects and is possessedby each individual. *
+
+Output:
+Scene branch: the opacity σ_{scn} and colour **c**_{scn} of the scene at **x**.
+Object branch: color **c**_{obj} and opacity **σ**_{obj} for the desired object while everything elseremains empty.
 
 
 [Back Top](#table-of-content)
