@@ -7,9 +7,12 @@
 - [NeruralRecon CVPR2021](#neuralrecon)
 - [iMAP ICCV2021](#imap)
 - [* Semantic NeRF ICCV2021](#semantic-nerf)
-- [* Object-NeRF ICCV2021](#object-nerf)
+- [* Object-NeRF ICassigning a bunch of shuffled object activa-tion codes to the training raysCV2021](#object-nerf)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
 - [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
+
+# QUESTIONS
+1. What does the coordinate-based positional encoding do and how to implement that.
 
 # Trending
 *Encoding objects/scenes in the weights of an MLP that directly maps from a 3D spatial location to objects/scenes properties. This MLP serves as an implicit representation of the object/scene.*
@@ -328,8 +331,11 @@ Input: posed images and 2D instance masks.
 
 <u> Good review on object decomposite rendering. </u>
 
-
 ![object-nerf](./imgs/Object-NeRF.png)
+
+Input: 
+Hybrid space embedding: apply positional endocing γ(·) ([NeRF](#nerf)) on both of the scene voxel feature **f**_{scn} and the space coordinate **x**.
+Direction embedding: γ(**d**).
 
 
 [Back Top](#table-of-content)
