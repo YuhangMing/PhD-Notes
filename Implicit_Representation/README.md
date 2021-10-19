@@ -7,7 +7,7 @@
 - [NeruralRecon CVPR2021](#neuralrecon)
 - [iMAP ICCV2021](#imap)
 - [* Semantic NeRF ICCV2021](#semantic-nerf)
-- [* Object-NeRF ICassigning a bunch of shuffled object activa-tion codes to the training raysCV2021](#object-nerf)
+- [* Object-NeRF ICCV2021](#object-nerf)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
 - [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
 
@@ -327,7 +327,7 @@ Training images (colour, depth, semantic) are generated using [Habitat](../Tools
 
 Goal: editable scene rendering.
 Drawback of NeRF: Encode the entire scene as a whole and is not aware of the object identity.
-Input: posed images and 2D instance masks.
+Input: posed images and 2D instance masks. 
 
 <u> Good review on object decomposite rendering. </u>
 
@@ -346,7 +346,7 @@ Object branch: color **c**_{obj} and opacity **σ**_{obj} for the desired object
 Q: what is the activation code and how to get the voxel features. Answered below.
 
 Object-composition:
-Supervision is achieved with 2D instance segmentation.
+Supervision is achieved with 2D instance segmentation and assigning a bunch of shuffled object activation codes to the training rays.
 Assuming there are K annotated objects in the scene, create a learnable object code library L={**l**_{obj}^k}.
 For each ray **r**, select one object k as a training target and assign the object activation code **l**_{obj}^k to the object branch input.
 Colour output **c**_{obj} and opacity output **σ**_{obj} is computed in the same way as colour and opacity in NeRF.
