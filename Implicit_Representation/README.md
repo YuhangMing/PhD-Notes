@@ -7,6 +7,7 @@
 - [NeruralRecon CVPR2021](#neuralrecon)
 - [iMAP ICCV2021](#imap)
 - [* Semantic NeRF ICCV2021](#semantic-nerf)
+- [* Object-NeRF ICCV2021](#object-nerf)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
 - [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
 
@@ -48,7 +49,7 @@ To render the *neural radince field* (NeRF) from a particular viewpoint:
 
 By applying gradient descent on minimising error between each observed image and the corresponding rendered view across multiple views, the network is encouraged to predict a coherent model of the scene by assigning high volume densities and accurate colours to the locations that actually contain the scene content.
 
-![Pipeline](./imgs/NeRF.png)
+![nerf](./imgs/NeRF.png)
 
 #### Modeling the scene as a neural radiance field
 Network Input: 3D location **x** = (x, y, z) and 2D viewing direction (θ, φ) (expressed as 3D cartisan unit vector **d**);
@@ -77,7 +78,7 @@ Simultaneously optimize two networks: one “coarse” and one “fine.
 
 With RGB-D input, iMAP uses a MLP to represent the 3D volumetric map and casts the SLAM as a **Continual Learning** problem. The catastrophic forgetting is alleviated with replaying. Keyframes are selected to store and compress past memories. 
 
-![Pipeline](./imgs/iMAP.png)
+![imap](./imgs/iMAP.png)
 
 #### Implicit Network
 A 3D volumetric map is represented using a fully-connected neural network Fθ that maps a 3D coordinate to colour and volume density.
@@ -138,7 +139,7 @@ General Approach:
 3. use a differentiable optimizer to align the top k correspondences and estimate the 6-DOF transformation between them.
 4. render the point cloud from the two estimated viewpoints to generate an RGB image for each view; and use photometric and geometric consistency losses between the RGB-D inputs and outputs and back-propagate through our entire pipeline.
 
-![pipeline](./imgs/unsupervisedrr.png)
+![unsupervisedrr](./imgs/unsupervisedrr.png)
 
 #### Point Cloud Generation
 I \in R^{4xHxW} -> P \in R^{(6+F)xN}.
@@ -187,7 +188,7 @@ May be facilitated that distills knowlege and skills for *future exploration*.
 
 **Learning Paradigms**
 Domain-incremental continual learning: data distribution shifts and the objective remains the same.
-![learning_paradigms](./imgs/learning_paradigms.png)
+![learning-paradigms](./imgs/learning_paradigms.png)
 - Multi-task learning: splits the training process into a set of dependent tasks and optimizes all tasks jointly. The network is fixed once the model is deployed.
 - Fine-tuning: maintains a single network consecutively, where network parameters of a new task are initialized with that of the last task. The performance of early tasks will degrade on current network parameters (*Catastrophic Forgetting*).
 - Batch-retraining: preserves all previously observed data to satisfy the iid-sampled assumption. It is computationally expensive as it learns a new model at each time from scratch without exploiting past experience.
@@ -206,7 +207,7 @@ Unprojects the image features to form a 3D feature volume and then uses sparse c
 GRU makes ccurrent reconstruction conditioned on previous global volume.
 Speed: 33 keyframes per second on an NVIDIA RTX 2080Ti GPU.
 
-![neural_recon](./imgs/neuralrecon.png)
+![neural-recon](./imgs/neuralrecon.png)
 - Keyframe images passed through iamge backbone to extract multi-level features;
 - Backproject the features and aggregated them into a 3D feature volume F_t^l;
 - 3D feature volume F_t^l is passed through the GRU and MLP modules to get the predicted Sparse TSDF (Final Output).
@@ -232,7 +233,7 @@ General Steps:
 1. Optimisation: optimise a continuous volulmetric representation of the scene that stores radiance and TSDF per point.
 1. Evaluation: use Marching Cubes to extract a triangle mesh.
 
-![pipeline](./imgs/neural-surface-recon.png)
+![neural-surface-recon](./imgs/neural-surface-recon.png)
 
 MLP-1:  
 Input:  encoding (represented by γ(-)) of a queried 3D point;
@@ -249,7 +250,7 @@ Output: colour value of the given pixel.
 
 A less direct neural 3D representation: 1) outputs a feature vector and RGB colour at each continueous 3D coordinates; 2) proposes a differentiable rendering function consisting of a recurrent neural network that marches along each ray and decide where the surface is located.
 
-![overview](./imgs/SRN.png)
+![srn](./imgs/SRN.png)
 
 
 [Back Top](#table-of-content)
@@ -266,7 +267,7 @@ Small set of semantically labelled data is needed for training.
 
 ## Methodology
 
-![architecture](./imgs/Semantic_SRN.png)
+![semantic_srn](./imgs/Semantic_SRN.png)
 
 #### SRN
 
@@ -301,7 +302,7 @@ Therefore, a **Scene-Specific** network is designed for <u> joint geometric and 
 
 <u> Good review on comparing code-based representations with the implicit 3D representations. </u>
 
-![architecture](./imgs/Semantic-NeRF.png)
+![semantic-nerf](./imgs/Semantic-NeRF.png)
 
 Input: a set of RGB images with associated known camera poses and some partial/noisy semantic labels.
 Output: implicit 3D representations of both geometry and semantics for the whole scene.
@@ -314,6 +315,19 @@ The training loss for the entire network is a weighted sum of photometric loss L
 The network is trained for **each scene individually**, i.e. train and tested on the same sequences but different frames.
 
 Training images (colour, depth, semantic) are generated using [Habitat](../Tools/README.md)
+
+
+[Back Top](#table-of-content)
+
+
+# Object-NeRF
+
+Goal: editable scene rendering.
+Drawback of NeRF: Encode the entire scene as a whole and is not aware of the object identity.
+Input: posed images and 2D instance masks.
+
+
+![object-nerf](./imgs/Object-NeRF.png)
 
 
 [Back Top](#table-of-content)
