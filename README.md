@@ -14,8 +14,12 @@ Some study notes on various areas (after the object based relocalisation project
 ## Semantic for SLAM Related
 
 ## Learning Related
-* [PyTorch](./PyTorch/README.md)
+### Ref Networks
 * [KPConv](./KPConv/README.md)
+* [UnsupervisedRR](./Implicit_Representation/UnsupervisedRR.md)
+
+### Concepts
+* [PyTorch](./PyTorch/README.md)
 * [Implicit Representation](./Implicit_Representation/README.md)
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
