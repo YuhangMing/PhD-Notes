@@ -10,6 +10,7 @@
 - [* Object-NeRF ICCV2021](#object-nerf)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
 - [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
+- [NeuralBlox 3DV2021][#neuralblox]
 
 # QUESTIONS
 1. What does the coordinate-based positional encoding do and how to implement that.
@@ -17,7 +18,7 @@
 # Trending
 *Encoding objects/scenes in the weights of an MLP that directly maps from a 3D spatial location to objects/scenes properties. This MLP serves as an implicit representation of the object/scene.*
 
-Difference to the "Code" used in the CodeSLAM and its successors:
+**Difference to the "Code" used in the CodeSLAM and its successors**:
 1. CodeSLAM use the fixed-length, compact code between encoder and decoder to represent the input while Implicit Represent uses the weights in an MLP to represent the map.
 2. CodeSLAM only represent a single RGB or RGB-D frame while Implicit Representation represent the entire map.
 
@@ -124,6 +125,8 @@ Adam optimiser on the weighted sum L_geom + λ_photo L_photo.
 Jointly optimise the network and the camera poses of selected keyframes, which are incrementally chosen based on information gain.
 
 **An obivious question here is: is there any upper limits on how many keframes can be stored? i.e. can this method handle large scale scenes???**
+
+*Limitation raised by [[NeuralBlox](#neuralblox)]: iMAP has limited scalability as the entire scene is represented in one single code*
 
 [Back Top](#table-of-content)
 
@@ -255,7 +258,6 @@ A less direct neural 3D representation: 1) outputs a feature vector and RGB colo
 
 ![srn](./imgs/SRN.png)
 
-
 [Back Top](#table-of-content)
 
 
@@ -319,7 +321,6 @@ The network is trained for **each scene individually**, i.e. train and tested on
 
 Training images (colour, depth, semantic) are generated using [Habitat](../Tools/README.md)
 
-
 [Back Top](#table-of-content)
 
 
@@ -351,5 +352,16 @@ Assuming there are K annotated objects in the scene, create a learnable object c
 For each ray **r**, select one object k as a training target and assign the object activation code **l**_{obj}^k to the object branch input.
 Colour output **c**_{obj} and opacity output **σ**_{obj} is computed in the same way as colour and opacity in NeRF.
 The loss of object supervision considers the distance between instance masks and also the distance between the rendered colour and the masked ground-truth colour.
+
+[Back Top](#table-of-content)
+
+
+# NeuralBlox
+
+**This work feels like more related to CodeSLAM style rather than NeRF**
+
+Incrementally build and update the neural implicit representations.
+The scene of arbitrary size is represented as a dynamically growing grid of voxels with latent codes in them and updates are performed directly in the latent space.
+Real-time performance on CPU.
 
 [Back Top](#table-of-content)
