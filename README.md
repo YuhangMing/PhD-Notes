@@ -48,7 +48,6 @@ Some study notes on various areas (after the object based relocalisation project
 * [InteriorNet](https://interiornet.org/)
 ### RGB-D SLAM
 * [ScanNet](http://www.scan-net.org/)
-* [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset)
 * [SUN RGBD Benchmark](https://rgbd.cs.princeton.edu/)
 * [NYUv1&v2](https://cs.nyu.edu/~silberman/datasets/)
 * [Seven Scenes](https://www.microsoft.com/en-us/research/project/rgb-d-dataset-7-scenes/)
