@@ -15,3 +15,15 @@ This code creates a new tensor that shares storage with tensor that does not req
 
 #### `@torch.jit.script`
 In short, torch.jit can be used to enable 2x-3x speedups on custom module code by making the code execution happen in C++. Details see the blog [here](https://spell.ml/blog/pytorch-jit-YBmYuBEAACgAiv71).
+
+#### `tensor.contiguous()`
+It makes a copy of the tensor such that is contiguous in memory. The data stored is the same.
+Normally you don't need to worry about this. You're generally safe to assume everything will work, and wait until you get a RuntimeError: input is not contiguous where PyTorch expects a contiguous tensor to add a call to contiguous().
+
+#### `tensor.permute(*dims)`
+It rearranges the original tensor according to the desired ordering and returns a **new** multidimensional rotated tensor.
+
+#### `tensor.view(...)`
+It creates a new view of the existing tensor while avoids explicit data copy. It is a fast and memory efficient reshaping, slicing and eliment-wise operation.
+**-1**: If there is any situation that you don't know how many rows you want but are sure of the number of columns, then you can specify this with a -1. (Note that you can extend this to tensors with more dimensions. *Only one of the axis value can be -1*). This is a way of telling the library: "give me a tensor that has these many columns and you compute the appropriate number of rows that is necessary to make this happen".
+Other PyTorch operations that do not change the contents of a tensor but change the way the data is organised: `narrow()`, `expand()` and `transpose()`.
