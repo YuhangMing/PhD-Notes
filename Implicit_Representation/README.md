@@ -11,7 +11,7 @@
 - [* Object-NeRF ICCV2021](#object-nerf)
 - [Continual Neural Mapping ICCV2021](#continual-neural-mapping)
 - [* Neural RGBD Surface Reconstruction arXiv2021](#neural-rgbd-surface-reconstruction)
-- [NeuralBlox 3DV2021][#neuralblox]
+- [NeuralBlox 3DV2021](#neuralblox)
 
 # QUESTIONS
 1. What does the coordinate-based positional encoding do and how to implement that.
@@ -100,6 +100,10 @@ The entire rendering problem is decomposed into 2 components:
 
 ## Background
 ### Volume Rendering
+It's an approach for computing the radiance traveling along rays traced in a volume. **r**(t) = **x**_0 + t**ω**_**o** defines a ponit along a ray **r** with origin **x**_0. Following the Monte Carlo path tracing formulation, the radiance of the ray can be computed as:
+
+wheretnandtfare  near  and  far  integration  bounds  andσ(r(t))denotes the volume density of pointr(t). Theτ(t)is computed asexp(−∫^t_{t_n} σ(**r**(u))du), which denotes theaccumulated transmittance fromtntot.Ls(r(t),ωo)is theamount of light scattered at pointr(t)along directionωo
+
 
 ### Raytracing
 
