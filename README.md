@@ -5,6 +5,11 @@ Some study notes on various areas (after the object based relocalisation project
 * [Laptop - Asus TUF Gaming A15](./AsusTUF/README.md)
 * [Laptop - Dell XPS 15 9560](./DellXPS/README.md)
 
+## Programming
+* [PyTorch](./PyTorch/README.md)
+* [C++](./C++/README.md)
+* OpenGL: [CN](https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/), [EN](http://www.songho.ca/opengl/index.html).
+
 ## SLAM Related
 * [SDF](./SDF/README.md)
 * [Implicit Representation](./Implicit_Representation/README.md)
@@ -19,7 +24,6 @@ Some study notes on various areas (after the object based relocalisation project
 * [UnsupervisedRR](./Implicit_Representation/UnsupervisedRR.md)
 
 ### Concepts
-* [PyTorch](./PyTorch/README.md)
 * [Implicit Representation](./Implicit_Representation/README.md)
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
@@ -66,6 +70,3 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## [Tools](./Tools/README.md)
 
-## Programming
-* [C++](./C++/README.md)
-* OpenGL: [CN](https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/), [EN](http://www.songho.ca/opengl/index.html).
