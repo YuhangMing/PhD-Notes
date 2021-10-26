@@ -130,6 +130,8 @@ where **ρ**^**l**_i = f_p(**x**_i,**ω**_**l**,**ω**_**o**) ∈ [0, 1] is the 
 ##### [NeRF](#nerf)
 
 #### OSFs
+![OSFs](./imgs/OSFs.png)
+
 Learn an implicit function F_Θ: (**x**, **ω**_**l**, **ω**_**o**) → (σ, **ρ**).  
 Θ are learned weights that parameterize the neural network.
 Input: 3D point in the object coordinate frame **x** = (x,y,z), the incoming light direction **ω**_**l** = (φ_i,θ_i), and the outgoing light direction **ω**_**o** = (φ_o,θ_o);
@@ -142,7 +144,8 @@ One OSF for EACH object.
 An eight-layer MLP with 256 channels to  predict σ, and a four-layer MLP with 128 channels to predict **ρ**.
 
 #### Rendering Multiple OSFs
-Skipped for now.
+![Rendering](./imgs/Render_OSFs.png)
+Details skipped for now.
 
 
 [Back Top](#table-of-content)
