@@ -2,6 +2,7 @@
 - [Trending](#trending)
 - [Scene Representation Networks NeurIPS2019](#scene-representation-networks)
 - [NeRF ECCV2020](#nerf)
+- [Object-Centric Neural Scene Rendering arXiv2020](#object-centric-neural-scene-rendering)
 - [* Semantic Implicit 3DV2020](#semantic-implicit)
 - [* UnsupervisedR&R CVPR2021](#unsupervisedrr)
 - [NeruralRecon CVPR2021](#neuralrecon)
@@ -77,6 +78,33 @@ Mapping the inputs to a higher dimensional space using high frequency functions 
 A similar mapping is used in the popular [Transformer](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) architecture, where it is referred to as a positional encoding
 ##### Hierarchical volume sampling
 Simultaneously optimize two networks: one “coarse” and one “fine.
+
+*Limitation raised by [[Object-Centric Neural Scene Rendering](#object-centric-neural-scene-rendering)]: only model static scenes and are closely tied to specific imaging conditions, making NeRFs hard to generalise to new scenarios.*
+
+[Back Top](#table-of-content)
+
+
+
+
+# Object-Centric Neural Scene Rendering
+
+Proposed to learn object-centric neural scattering functions (OSFs) to model **per-object** light transport.
+
+OSFs:
+Input: (x,y,z,φ_i,θ_i,φ_o,θ_o) where (s,y,z) is the spatial location, (φ_i,θ_i) is the incoming light direction, and (φ_o,θ_o) is the outgoing light direction.
+Output: volumetric density and the fraction of light arriving from direction (φ_i,θ_i) that sctters in outgoing direction  (φ_o,θ_o).
+
+The entire rendering problem is decomposed into 2 components:
+1. a learned component (per-object asset creation) which models intra-object light transport.
+2. a non-learned component (per-scene path tracing) which handles inter-object light transport.
+
+## Background
+### Volume Rendering
+
+### Raytracing
+
+### NeRF (reviewed)
+
 
 [Back Top](#table-of-content)
 
@@ -378,3 +406,6 @@ The fusion network consists of 2 3D convolution layers with ReLU activations.
 The decoder predicts the occupancy probability and threshold is set to determine if a voxel is occupied or free.
 
 [Back Top](#table-of-content)
+
+
+
