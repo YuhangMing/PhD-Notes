@@ -1,6 +1,6 @@
 # Random notes in C++
 
-### std::set<> vs. std::vector<>
+### `std::set<>` vs. `std::vector<>`
 * std::set<>: elements are ordered, and unique, fast in insertion & deleting in the middle of the container;
 * std::vector<>: elementes are unordered, and can contain duplicates, fast in inserion & deleting at the end of the container.
 * [ref1-GeeksforGeeks](https://www.geeksforgeeks.org/difference-between-stdset-vs-stdvector-in-c-stl/), [ref2-StackOverflow](https://stackoverflow.com/questions/8686725/what-is-the-difference-between-stdset-and-stdvector).
@@ -8,7 +8,7 @@
 ### Smart Pointer (C++11)
 Automatically delete the allocated memory. No longer need to delete the pointer manually. [ref-GeeksforGeeks](https://www.geeksforgeeks.org/smart-pointers-cpp/)
 
-### Static keyword
+### `static` keyword
 
 详细解释见[link](https://zhuanlan.zhihu.com/p/37439983)
 
@@ -35,7 +35,7 @@ Automatically delete the allocated memory. No longer need to delete the pointer 
 
 与普通函数相比，静态成员函数属于类本身，而不作用于对象，因此它不具有this指针。正因为它没有指向某一个对象，所以它无法访问属于类对象的非静态成员变量和非静态成员函数，它只能调用其余的静态成员函数和静态成员变量。从另一个角度来看，由于静态成员函数和静态成员变量在类实例化之前就已经存在可以访问，而此时非静态成员还是不存在的，因此静态成员不能访问非静态成员。
 
-### Replacing Functions with Macros
+### Replacing Functions with Macros / `inline` keyword
 Why doing so: Because there's a (tiny) time penalty for using functions. Historically, small functions can be implemented in Macros for the time-efficiency purposes.
 
 ```c
@@ -47,3 +47,10 @@ m = i++ < j++ ? i++ : j++;
 ```
 
 Similar time-saving function can be achieved with `inline` keyword which is introduced in C99. `inline` tells compiler to substitue the body of function into the code, saving the overhead of a function call.
+
+#### `stderr`
+Why need `stderr` when you can print with `stdout`? It is quite common to redirect the output to a file when running a program. For example:
+```bash
+$ ls > myfiles.txt
+```
+If something went wrong in the code, the use will never see the error message in the terminal. Therefore, `stderr` exists to display warnings/errors to the user.
