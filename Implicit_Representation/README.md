@@ -14,7 +14,7 @@
 - [NeuralBlox 3DV2021](#neuralblox)
 
 # QUESTIONS
-1. What does the coordinate-based positional encoding do and how to implement that.
+1. What does the coordinate-based positional encoding do and how to implement that? See [here](#positional-encoding) for answer.
 
 
 # Trending
@@ -90,38 +90,59 @@ Simultaneously optimize two networks: one “coarse” and one “fine.
 
 Proposed to learn object-centric neural scattering functions (OSFs) to model **per-object** light transport.
 
-OSFs:
-Input: (x,y,z,φ_i,θ_i,φ_o,θ_o) where (s,y,z) is the spatial location, (φ_i,θ_i) is the incoming light direction, and (φ_o,θ_o) is the outgoing light direction.
-Output: volumetric density and the fraction of light arriving from direction (φ_i,θ_i) that sctters in outgoing direction  (φ_o,θ_o).
-
 The entire rendering problem is decomposed into 2 components:
 1. a learned component (per-object asset creation) which models intra-object light transport.
 2. a non-learned component (per-scene path tracing) which handles inter-object light transport.
 
-## Background
+#### Background
 !!! I can understand what these equations mean but don't really understand why these equations work !!!
 
-### Volume Rendering
+##### Volume Rendering
 It's an approach for computing the radiance traveling along rays traced in a volume. **r**(t) = **x**_0 + t**ω**_**o** defines a ponit along a ray **r** with origin **x**_0. Following the Monte Carlo path tracing formulation, the radiance of the ray can be computed as:
+
 L(**x**_0,**ω**_**o**) =∫^t_{f}_t_{n} τ(t) σ(**r**(t)) L_S(**r**(t),**ω**_**o**) dt    - (1)
+
 t_n and t_f are near and far integration bounds.
 σ(**r**(t)) denotes the volume density of point **r**(t). 
 τ(t) is computed as exp(−∫^t_{t_n} σ(**r**(u))du), which denotes the accumulated transmittance from t_n to t. 
 L_S(**r**(t),**ω**_**o**) is the amount of light scattered at point **r**(t) along direction **ω**_**o**, defined as the integral over all incoming light directions:
+
 L_S(**x**,**ω**_**o**) =∫_S L(**x**,**ω**_**l**) f_p(**x**,**ω**_**l**,**ω**_**o**) d**ω**_**l**    - (2)
+
 where S is a unit sphere and f_p is a phase function that evaluates the fraction of light incoming from direction **ω**_**l** at a point **x** that scatters out in direction **ω**_**o**. 
+
 *NeRF assumes fixed illumination and does not consider Equation (2) at all.*
 
-### Raytracing
+##### Raytracing
 According to [[Max TVCG1995](https://courses.cs.duke.edu/spring03/cps296.8/papers/max95opticalModelsForDirectVolumeRendering.pdf)] [[Kniss et al. TVCG2003](http://www.sci.utah.edu/publications/jmk03/kniss_tvcg03_volshade.pdf)], quadrature can be used to numerically estimate the integrals in Equation (1).
+
 For each ray stratified sample N samples along the ray, we have the approximation:
+
 L(**x**_0,**ω**_**o**) = ∑^N_{i=1} τ_i α_i L_S(**x**_i,**ω**_**o**)    - (3)
+
 where τ_i = ∏^{i−1}_{j=1} (1−α_j) and α_i = 1−e^{−σ_i (t_{i+1} − t_i)}.
 Similarly, the domain S in Equation (2) is also discretised by sampling a set of incoming light paths, leading to the approximation:
+
 L_S(**x**_i,**ω**_**o**) = (1/|L|) ∑_{l∈L} L(**x**_i,**ω**_**l**) **ρ**^**l**_i    - (4)
+
 where **ρ**^**l**_i = f_p(**x**_i,**ω**_**l**,**ω**_**o**) ∈ [0, 1] is the fraction of light incoming from light path **l** that is scattered in direction **ω**_**o**.
 
-### [NeRF](#nerf)
+##### [NeRF](#nerf)
+
+#### OSFs
+Learn an implicit function F_Θ: (**x**, **ω**_**l**, **ω**_**o**) → (σ, **ρ**).  
+Θ are learned weights that parameterize the neural network.
+Input: 3D point in the object coordinate frame **x** = (x,y,z), the incoming light direction **ω**_**l** = (φ_i,θ_i), and the outgoing light direction **ω**_**o** = (φ_o,θ_o);
+Output: volumetric density σ and fraction of incoming light that is scattered in the outgoing direction **ρ** = (ρ_r,ρ_g,ρ_b).
+
+Positional encoding is also applied to the inputs. And objects are transformed to their canonical coordinate frame.
+
+Question: does this per-object NeRF use a single MLP for ALL objects or use a MLP for EACH object?????
+One OSF for EACH object.
+An eight-layer MLP with 256 channels to  predict σ, and a four-layer MLP with 128 channels to predict **ρ**.
+
+#### Rendering Multiple OSFs
+Skipped for now.
 
 
 [Back Top](#table-of-content)
