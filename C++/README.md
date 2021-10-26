@@ -45,3 +45,5 @@ m = MIN(i++, j++);
 // same as below
 m = i++ < j++ ? i++ : j++;
 ```
+
+Similar time-saving function can be achieved with `inline` keyword which is introduced in C99. `inline` tells compiler to substitue the body of function into the code, saving the overhead of a function call.
