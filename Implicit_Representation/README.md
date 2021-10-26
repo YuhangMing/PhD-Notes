@@ -145,6 +145,7 @@ An eight-layer MLP with 256 channels to  predict σ, and a four-layer MLP with 1
 
 #### Rendering Multiple OSFs
 ![Rendering](./imgs/Render_OSFs.png)
+
 Details skipped for now.
 
 
