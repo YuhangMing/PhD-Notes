@@ -52,6 +52,51 @@ Work on large viewpoint changes
 
 ## Network Architecture
 The model consists of three main components: an *Encoder*, a *Decoder* and a *Renderer*.
+### 2D Encoder
+ResNetEncoder has a 4-layer architecture:
+```python
+resnet = resnet18(pretrained=pretrained)
+inconv = ConvBlock(chan_in, 64, k=3)
+layer1 = resnet.layer1
+layer2 = resnet.layer1
+outconv = ConvBlock(64, chan_out, k=1, activation=False)
+```
+
+inconv: `ConvBlock` consists of Conv -> BN -> ReLU with input being the RGB image (H, W, 3). Conv uses conv3x3 (the 3x3 convolution with padding) from `torchvision.models.resnet`, BN = nn.BatchNorm2d(), ReLU = nn.ReLU().
+Outputs a feature map of size (H, W, 64).
+
+**??? Where occurs the downsampling???**
+
+layer1: `resnet.layer1` is the second convolutional block in the ResNet18, which is made of [conv3x3 * 2] *2.
+Outputs a feature map of size (H/2, W/2, 64).
+
+layer2: exactly the same architecture as layer1.
+Outputs a feature map of size (H/2, W/2, 64).
+
+outconv: same architecutre as inconv except that the Conv uses conv1x1 rather than conv3x3.
+Outputs a feature map of size (H/4, W/4, chan_out).
+
+### 2D Decoder
+ResNetDecoder also has a 4-layer architecture
+```python
+resnet = resnet18(pretrained=pretrained)
+resnet.inplanes = chan_in
+layer1 = resnet._make_layer(BasicBlock, 64, 2)
+resnet.inplanes = 64
+layer2 = resnet._make_layer(BasicBlock, 64, 2)
+upconv1 = UpConv(64, 64, "bilinear")
+outconv = ConvBlock(64, chan_out, batchnorm=False, activation=False)
+```
+layer1: is made with `_make_layer()` function from `torchvision.models.resnet`. It consists of 2 blocks of BasicBlock from ResNet and the output feature size is 64.
+
+layer2: exactly the same as layer1.
+
+upconv1: keep feature size the same and perform upsampling with scale=2.
+
+outconv: same as layer_0 from encoder, with different input, output feature size.
+
+### Points Renerer
+
 
 ### Data flow in a forward pass
 Use the *Encoder* to get features for each input view:
