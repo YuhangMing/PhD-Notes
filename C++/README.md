@@ -1,4 +1,4 @@
-# Random notes in C++
+# Random notes in C/C++
 
 ### `std::set<>` vs. `std::vector<>`
 * std::set<>: elements are ordered, and unique, fast in insertion & deleting in the middle of the container;
@@ -54,3 +54,35 @@ Why need `stderr` when you can print with `stdout`? It is quite common to redire
 $ ls > myfiles.txt
 ```
 If something went wrong in the code, the use will never see the error message in the terminal. Therefore, `stderr` exists to display warnings/errors to the user.
+
+#### `typedef`
+By using `typedef`, you can give a type a new name, i.e. for abbreviation. For example
+```c
+typedef unsigned char BYTE;
+BYTE b1, b2;
+```
+By convention uppercase letters are used, but you can use lowercase letters as well.
+Another example of coding with and without `typedef`
+```c
+// with typedef
+typedef struct Books{
+    char title[50];
+    char author[50];
+    char subject[50];
+    int book_id
+} Book;
+Book book;
+
+// without typedef
+struct Books{
+    char title[50];
+    char author[50];
+    char subject[50];
+    int book_id
+};
+struct Books book;
+```
+
+Compared to `#define`:
+1. `typedef` is limited to giving symbolic names to types while `#define` can be used to define alias for values;
+2. `typedef` interpretation is performed by the compiler whereas `#define` statements are processed by the pre-processor.
