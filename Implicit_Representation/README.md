@@ -5,7 +5,8 @@
 - [Object-Centric Neural Scene Rendering arXiv2020](#object-centric-neural-scene-rendering)
 - [* Semantic Implicit 3DV2020](#semantic-implicit)
 - [* UnsupervisedR&R CVPR2021](#unsupervisedrr)
-- [NeruralRecon CVPR2021](#neuralrecon)
+- [NeuralRecon CVPR2021](#neuralrecon)
+- [NeuralFusion CVPR2021](#neuralfusion)
 - [iMAP ICCV2021](#imap)
 - [* Semantic NeRF ICCV2021](#semantic-nerf)
 - [* Object-NeRF ICCV2021](#object-nerf)
@@ -270,6 +271,20 @@ Speed: 33 keyframes per second on an NVIDIA RTX 2080Ti GPU.
 - Keyframe images passed through iamge backbone to extract multi-level features;
 - Backproject the features and aggregated them into a 3D feature volume F_t^l;
 - 3D feature volume F_t^l is passed through the GRU and MLP modules to get the predicted Sparse TSDF (Final Output).
+
+[Back Top](#table-of-content)
+
+
+
+
+# NeuralFusion
+
+Input: a stream of depth maps with know camera calibration.
+Output: a TSDF map that fuses all surface information while removing noise and outlier and complete potentially missing observations.
+Key Idea: decouple the scene representation fro geometry fusion from the output scene representation. This is done by perfusion fusion in the latent feature space and use a translator network to get the final scene representation given the fused global features.
+
+![neuralfusion](./imgs/NeuralFusion.png)
+![neuralfusion-arch](./imgs/neuralfusion-arch.png)
 
 [Back Top](#table-of-content)
 
