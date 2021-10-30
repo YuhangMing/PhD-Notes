@@ -11,6 +11,8 @@ machine learning comes from a statistical perspec- tive, i.e., learning from rea
 
 # Theoretical Background
 
+## Physical modelling
+
 **Light transport**: the physical process that light sources emit photons that interact with the objects in the scene, as a function of their geometry and material properties, before being recorded by a camera.
 Light transport considers all the possible paths of light from the emitting light sources, through a scene, and onto a camera.
 
@@ -52,3 +54,28 @@ The process of estimating the different model parameters (camera, geometry, mate
 **Image-based rendering**:
 image-based rendering techniques generate novel images by transforming an existing set of images, typically by warping and compositing them together.
 
+## Deeo generative model
+
+**Three commonly-used generator architectures**:
+1. *Fully Convolutional Networks (FCNs)*: takes an input image with arbitrary size and predict an output with the same size. Orignially designed for recognition tasks such as semantic segmentation and object detection.
+1. *U-Net*: an FCN-based architecture with additional "skip connections" that connect high-resolution feature maps at early layers to upsampled features in late-stage layers. Localisation ability of the network is improved as high-frequency information from the input can be directly passed to the output.
+1. *ResNet-based generators*: use residual blocks to pass the high-frequency information from input to output.
+
+**Generative Adversarial Networks (GANs)**:
+A GAN generator G : z → y learns a mapping from a low-dimensional random vector z to an output image y.
+Variants: conditional GANs (cGANs) learn a mapping G : {x, z} → y from an observed input x and a randomly sampled vector z to an output image y.
+
+
+# Neural Rendering
+General approach:
+1. takes as input images corresponding to certain scene conditions (for example, viewpoint, lighting, layout, etc.);
+1. builds a “neural” scene representation from them; 
+1. “renders” this representation under novel scene properties to synthesize novel images.
+
+## Application
+### Semantic image synthesis
+map a user-specified semantic layout to a photo-realistic image. (Required semantic and image inputs)
+
+### Novel View Synthesis 
+#### Neural Scene Representation and Rendering
+Generative Query Network (Similar to the NeuralRecon CVPR2021 paper), uses a convolutional LSTM model.
