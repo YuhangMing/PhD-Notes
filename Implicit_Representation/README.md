@@ -58,10 +58,6 @@ Details refer to the  link [here](./UnsupervisedRR.md)
 
 
 # NeRF
-General Idea and how the scene is represented understood.
-STILL FUZZY ABOUT HOW THE MATH WORKS IN RENDERING THE SCENE USING NETWORK OUTPUTS (c, σ), as well as why the special design helps.
-LOOK INTO SEMINAL RAY TRACING WORKS.
-
 GOAL: new view sythesis.
 
 Main Advantage: It overcomes the prohibitive storage costs of discretized voxel grids when modeling complex scenes at high-resolutions.
@@ -88,17 +84,86 @@ THEN, this feature vector is concatenated with the camera ray’s viewing direct
 
 #### Rendering novel views from this representation
 Colour of the scene is rendered following [classical volume rendering](https://dl.acm.org/doi/10.1145/964965.808594)
-The volume density σ(**x**) can be interpreted as the differential probability of a ray terminating at an infinitesimal particle at location x.
-The function T(t) denotes the accumulated transmittance along the ray from tn to t, i.e., the probability that the ray travels from tn to t without hitting any other particle.
+
+The expected colour is:
+
+C(**r**) = ∫^{t_f} _{t_n} T(t) σ(**r**(t)) **c**(**r**(t), **d**) dt    - (1)
+
+Explannation:
+- C(**r**) is the expected colour at a given camera ray (pixel).
+- t is the distance traveled along a camera ray with t_f being the far bound and t_n being the near bound.
+- T(t) = exp(−∫^t _{t_n} σ(**r**(s)) ds) denotes the accumulated transmittance along the ray from t_n to t, i.e., the probability that the ray travels from t_n to t without hitting any other particle.
+- **r**(t) = **o** + t**d** is the camera ray with **o** being the camera centre and **d** being the 3D direction.
+- σ(**r**(t)) is the volume density at location **r**(t) predicted by the MLP. It can be interpreted as the differential probability of a ray terminating at an infinitesimal particle at location **r**(t).
+- **c**(**r**(t), **d**) is the view-dependt colour value predicted by the MLP.
+
+Equation (1) is numerically solved using **quadrature**. To maintain the resolution of this representation, the stratified sampling approach is adopted where we partition [t_n, t_f] into N evenly-spaced bins and then draw one sample uniformly at random from within each bin.
+t_i ∼ U[ t_n + (i-1)/N (t_f − t_n), t_n + i/N (t_f − t_n) ]     - (2)
+
+Then we have the numerical estimation of C(**r**) from the set of (**c**i, σi) values (network outputs):
+
+\hat(C)(**r**) = ∑^N_{i=1} T_i (1 − exp(− σ_i δ_i)) **c**_i     - (3)
+
+where δ_i = t_{i+1} − t_i is the distance between adjacent samples and T_i = exp(- ∑^{i-1}_{j=1}) σ_j δ_j).
+
+!!!? ??? Equation (3) is trivical differentiable ??? reduces to traditional alpha compositing with alpha values αi = 1−exp(−σiδi). ???
+
 
 #### Optimisation
+The following two improvements are introduced to representing high-resolution complex scenes.
+
 ##### Positional encoding
-Mapping the inputs to a higher dimensional space using high frequency functions to enable our MLP to more easily approximate a higher frequency function.
-A similar mapping is used in the popular [Transformer](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) architecture, where it is referred to as a positional encoding
+Why doing so? The authors found that having the network FΘ directly operate on xyzθφ input coordinates results in renderings that perform poorly at representing high-frequency variation in color and geometry.
+
+Improvements: Mapping the inputs to a higher dimensional space using high frequency functions to enable our MLP to more easily approximate a higher frequency function.
+(high-frequency refer to the edges-like region in the scene)
+
+This is done by reformulating F_Θ as a composition of two functions F_Θ = F'_Θ ◦ γ. 
+
+F'_Θ is simply a regular MLP (to be learned). 
+
+γ is applied separately to each of the three coordinate values in **x** (which are normalized to lie in [−1, 1]) and to the three components of the Cartesian viewing direction unit vector **d** (which by construction lie in [−1, 1]). 
+In the experiments, the authors set L = 10 for γ(**x**) and L = 4 for γ(**d**).
+It is defined as:
+
+γ(p) = (sin(2^0 πp), cos(2^0 πp)), ..., (sin(2^{L−1} πp), cos(2^{L−1}πp))       - (4)
+
+A similar mapping is used in the popular [Transformer](https://proceedings.neurips.cc/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf) architecture, where it is referred to as a *positional encoding*.
+
+Difference: 
+
+- Transformers use it for a different goal of providing the discrete positions of tokens in a sequence as input to an architecture that does not contain any notion of order. 
+- NeRF use these functions to map continuous input coordinates into a higher dimensional space to enable our MLP to more easily approximate a higher frequency function.
+
+
 ##### Hierarchical volume sampling
-Simultaneously optimize two networks: one “coarse” and one “fine.
+Why doing so?  Current rendering strategy of densely evaluating the neural radiance field network at N query points along each camera ray is inefficient. Because free space and occluded regions that do not contribute to the rendered image are still sampled repeatedly.
+
+Improvement: increases rendering efficiency by allocating samples proportionally to their expected effect on the final rendering.
+
+Main idea: This procedure allocates more samples to regions we expect to contain visible content. i.e. **sample more points around the surface**.
+
+Simultaneously optimize two networks: one "coarse" and one "fine":
+
+The "coarse" network is evaluated at N_c *stratified sampled* locations using Equations (2) and (3).
+
+Given output from the "coarse" network, a new set of N_f locations are sample from the per-ray PDF.
+
+\hat{C}_f(**r**) = ∑^{N_c}_{i=1} \hat{w}_i c_i.
+where \hat{w}_i = w_i/∑^{N_c}_{j=1} w_j, w_i = T_i (1 − exp(− σ_i δ_i))
 
 *Limitation raised by [[Object-Centric Neural Scene Rendering](#object-centric-neural-scene-rendering)]: only model static scenes and are closely tied to specific imaging conditions, making NeRFs hard to generalise to new scenarios.*
+
+##### Implementation details
+Data: Inputs to the network are 5D vectors. These inputs are computed from SfM using a set of RGB images of the scene, corresponding camera poses, intrinsic parameters, and scene bounds (we use ground truth camera poses, intrinsics, and bounds for synthetic data, and use the COLMAP structure-from-motion package to estimate these parameters for real data).
+
+Our loss is simply the total squared error between the rendered and true pixel colors for both the coarse and fine renderings:
+
+L = ∑_{r∈R} || \hat{C}_c(**r**) − C(**r**) ||^2_2 + || \hat{C}_f(**r**) − C(**r**) ||^2_2
+
+where R is the set of rays in each batch, and C(**r**), \hat{C}_c(**r**), and \hat{C}_f(**r**) are the ground truth, coarse volume predicted, and fine volume predicted RGB colors for ray **r** respectively.
+
+In the experiments, the authors use a batch size of 4096 rays, each sampled at N_c = 64 coordinates in the coarse volume and N_f = 128 additional coordinates in the fine volume. They use the Adam optimizer with a learning rate that begins at 5 × 10^{−4} and decays exponentially to 5 × 10^{−5} over the course of optimization (other Adam hyperparameters are left at default values of β1 = 0.9, β2 = 0.999, and epsilon = 10^{−7}). The optimization for a single scene typically take around 100–300k iterations to converge on a single NVIDIA V100 GPU (about 1–2 days).
 
 [Back Top](#table-of-content)
 
@@ -335,6 +400,7 @@ The entire rendering problem is decomposed into 2 components:
 !!! I can understand what these equations mean but don't really understand why these equations work !!!
 
 ##### Volume Rendering
+(Similar definition as [NeRF](#nerf))
 It's an approach for computing the radiance traveling along rays traced in a volume. **r**(t) = **x**_0 + t**ω**_**o** defines a ponit along a ray **r** with origin **x**_0. Following the Monte Carlo path tracing formulation, the radiance of the ray can be computed as:
 
 L(**x**_0,**ω**_**o**) =∫^t_{f}_t_{n} τ(t) σ(**r**(t)) L_S(**r**(t),**ω**_**o**) dt    - (1)
