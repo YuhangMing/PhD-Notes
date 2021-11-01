@@ -75,19 +75,19 @@ layer2 = resnet.layer1
 outconv = ConvBlock(64, chan_out, k=1, activation=False)
 ```
 
-inconv: `ConvBlock` consists of Conv -> BN -> ReLU with input being the RGB image (H, W, 3). Conv uses conv3x3 (the 3x3 convolution with padding) from `torchvision.models.resnet`, BN = nn.BatchNorm2d(), ReLU = nn.ReLU().
-Outputs a feature map of size (H, W, 64).
+inconv: `ConvBlock` consists of Conv -> BN -> ReLU with input being the RGB image (3, 128, 128). Conv uses conv3x3 (the 3x3 convolution with padding) from `torchvision.models.resnet`, BN = nn.BatchNorm2d(), ReLU = nn.ReLU().
+Outputs a feature map of size (64, 128, 128).
 
-!!!??? Where occurs the downsampling???
+!!!??? NO DOWNSAMPLING
 
 layer1: `resnet.layer1` is the second convolutional block in the ResNet18, which is made of [conv3x3 * 2] *2.
-Outputs a feature map of size (H/2, W/2, 64).
+Outputs a feature map of size (64, 128, 128).
 
 layer2: exactly the same architecture as layer1.
-Outputs a feature map of size (H/2, W/2, 64).
+Outputs a feature map of size (64, 128, 128).
 
 outconv: same architecutre as inconv except that the Conv uses conv1x1 rather than conv3x3.
-Outputs a feature map of size (H/4, W/4, chan_out).
+Outputs a feature map of size (32, 128, 128).
 
 ### 2D Decoder
 ResNetDecoder also has a 4-layer architecture
