@@ -2,8 +2,14 @@
 
 ## Table of Content
 - [Overview](#conceptual-overivew)
+- [Architecture](#network-architecture)
 
 ## Conceptual Overview 
+Questions aim to be answered:
+(1) does unsupervised training provide us with useful features for alignment?; 
+(2) can RGB-D video alleviate the need for the pose supervision required by ge- ometric registration approaches?; 
+(3) how do the different components of the model contribute to its performance?
+
 An end-to-end unsupervised approach to learn point cloud registration from raw RGB-D video by leveraging differentiable alignment and rendering to enforce photometric and geometric consistency between frames.
 
 Key Idea: use the natural transformations in the data as indirect supervision provided in the RGB-D video.
@@ -44,6 +50,12 @@ A simplified version of RANSAC is also applied to mitigate the problem of outlie
 **This step provides the primary learning signals: photometric and depth consistency.**
 Render the RGB-D images from the aligned point clouds serving a verificaiton step.
 If the camera locations are estimated correctly, the point cloud renders will be consistent with the input images
+
+#### Loss design
+We use three consistency losses to train our model: photometric, depth, and correspondence. 
+The photometric and depth losses are the L1 losses applied between the rendered and input RGB-D frames. Those losses are masked to only apply to valid pixels
+Additionally, we use the correspondence error calculated in Eq. 4 (error when computing alignment) as our correspondence loss. 
+We weight the photometric and depth losses with a weighting of 1 while the correspondence loss receives a weighting of 0.1.
 
 #### Possible Improvement
 Work on large viewpoint changes
@@ -268,8 +280,8 @@ output[f"cover_{i}"] = projs[i]["mask"].unsqueeze(1)
 ```
 
 #### Loss
-*Loss = Appearance_Loss + Depth_Loss + Correspondence_Loss*
-where appearance_loss and depth_loss are calculated between the input view and the rendered view while the correspondence_loss is computed in the kNN stage.
+*Loss = Appearance_Loss + Depth_Loss + 0.1 * Correspondence_Loss*
+where appearance_loss and depth_loss are calculated between the input view and the rendered view while the correspondence_loss is computed in the kNN-alignment stage.
 
 
 
