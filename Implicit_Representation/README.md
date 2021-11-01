@@ -97,7 +97,7 @@ Explannation:
 - σ(**r**(t)) is the volume density at location **r**(t) predicted by the MLP. It can be interpreted as the differential probability of a ray terminating at an infinitesimal particle at location **r**(t).
 - **c**(**r**(t), **d**) is the view-dependt colour value predicted by the MLP.
 
-Equation (1) is numerically solved using **quadrature**. To maintain the resolution of this representation, the stratified sampling approach is adopted where we partition [t_n, t_f] into N evenly-spaced bins and then draw one sample uniformly at random from within each bin.
+Equation (1) is numerically solved using **quadrature** (Riemann Sum). To maintain the resolution of this representation, the stratified sampling approach is adopted where we partition [t_n, t_f] into N evenly-spaced bins and then draw one sample uniformly at random from within each bin.
 t_i ∼ U[ t_n + (i-1)/N (t_f − t_n), t_n + i/N (t_f − t_n) ]     - (2)
 
 Then we have the numerical estimation of C(**r**) from the set of (**c**i, σi) values (network outputs):

@@ -41,6 +41,7 @@ A simplified version of RANSAC is also applied to mitigate the problem of outlie
 
 #### Point Cloud Rendering
 [implementation](#data-flow-in-a-forward-pass)
+**This step provides the primary learning signals: photometric and depth consistency.**
 Render the RGB-D images from the aligned point clouds serving a verificaiton step.
 If the camera locations are estimated correctly, the point cloud renders will be consistent with the input images
 
@@ -65,7 +66,7 @@ outconv = ConvBlock(64, chan_out, k=1, activation=False)
 inconv: `ConvBlock` consists of Conv -> BN -> ReLU with input being the RGB image (H, W, 3). Conv uses conv3x3 (the 3x3 convolution with padding) from `torchvision.models.resnet`, BN = nn.BatchNorm2d(), ReLU = nn.ReLU().
 Outputs a feature map of size (H, W, 64).
 
-**??? Where occurs the downsampling???**
+!!!??? Where occurs the downsampling???
 
 layer1: `resnet.layer1` is the second convolutional block in the ResNet18, which is made of [conv3x3 * 2] *2.
 Outputs a feature map of size (H/2, W/2, 64).
@@ -96,7 +97,91 @@ upconv1: keep feature size the same and perform upsampling with scale=2.
 outconv: same as layer_0 from encoder, with different input, output feature size.
 
 ### Points Renerer
+``rasterize_points`` from ``pytorch3d.renderer.points`` is used to render a batch of points. The PointRenderer class combines rasterisation, weight calculation, and compisiting.
 
+Rasterizing settings:
+```python
+S = render_cfg.render_size
+K = render_cfg.points_per_pixel
+# convert radius from pixels to normalised device coordinate (NDC)
+r = 2 * render_cfg.radius / float(render_cfg.render_size)
+```
+
+Define weight computation:
+```python
+if render_cfg.weight_calculation == "linear":
+    calculate_weights = linear_alpha
+elif render_cfg.weight_calculation == "exponential":
+    calculate_weights = exponential_alpha
+else:
+    raise ValueError()
+```
+
+Define compositing:
+```python
+if render_cfg.compositor == "alpha":
+    compositor = compositing.alpha_composite
+elif render_cfg.compositor == "weighted_sum":
+    compositor = compositing.weighted_sum
+elif render_cfg.compositor == "norm_weighted_sum":
+    compositor = compositing.norm_weighted_sum
+else:
+    raise ValueError()
+```
+
+Then when doing a forward pass given input points and features (both in FloatTensor with size BxNx3 and BxNxF).
+
+Rasterise the points:
+```python
+pointcloud = pytorch3d.structures.Pointclouds(points, features=features)
+```
+([Official Docs](https://pytorch3d.readthedocs.io/en/latest/modules/structures.html) and [Source Code](https://pytorch3d.readthedocs.io/en/latest/_modules/pytorch3d/structures/pointclouds.html#Pointclouds)).
+
+```python
+idx, zbuf, dist_xy = rasterize_points(pointcloud, S, r, K)
+```
+([Source Code](https://github.com/facebookresearch/pytorch3d/blob/v0.6.0/pytorch3d/renderer/points/rasterize_points.py)). 
+
+The 4 input arguments are: 
+
+- a Pointclouds object representing a batch of point cloud to be rasterised, 
+- size of the output (square) image to be rasterised, 
+- the radius (in NDC units) of the disk to be rasterised, 
+- the number of points per pixel.
+
+The 3 outputs are:
+
+- idx: int32 Tensor of shape (N, image_size, image_size, points_per_pixel) giving the **indices of the nearest points at each pixel**, in ascending z-order. Concretely `idx[n, y, x, k] = p` means that `points[p]` is the kth closest point (along the z-direction) to pixel (y, x) - note that points represents the packed points of shape (P, 3). *Pixels that are hit by fewer than points_per_pixel are padded with -1.*
+- zbuf: Tensor of shape (N, image_size, image_size, points_per_pixel) giving the **z-coordinates of the nearest points at each pixel**, sorted in z-order. Concretely, if `idx[n, y, x, k] = p` then `zbuf[n, y, x, k] = points[n, p, 2]`. *Pixels that are hit by fewer than points_per_pixel are padded with -1.*
+- dist_xy: Tensor of shape (N, image_size, image_size, points_per_pixel) giving the **squared Euclidean distance (in NDC units) in the x/y plane** for each point closest to the pixel. Concretely if `idx[n, y, x, k] = p` then `dists[n, y, x, k]` is the squared distance between the pixel (y, x) and the point `(points[n, p, 0], points[n, p, 1])`. *Pixels that are hit by fewer than points_per_pixel are padded with -1.*
+
+Prepare for rasterising:
+```python
+# Calculate PC coverage
+valid_pts = (idx >= 0).float()      # same shape with values being 0 or 1
+valid_ray = valid_pts[:, :, :, 0]   # get the closest point (along z-axis) to pixel (x, y)
+
+# Calculate composite weights -- dist_xy is squared distance!!
+weights = calculate_weights(dist_xy, r)
+weights = weights.clamp(min=0.0, max=0.99)  # Clamp weights to avoid 0 gradients or errors
+
+# change dim order for idx
+idx = idx.long().permute(0, 3, 1, 2).contiguous()
+```
+
+Rasterising:
+```python
+# features
+feats = pointcloud.features_packed().permute(1, 0)
+feats = compositor(idx, weights, feats)
+
+# depth
+# zero out weights -- currently applies norm_weighted sum
+w_normed = weights * (idx >= 0).float()
+w_normed = w_normed / w_normed.sum(dim=1, keepdim=True).clamp(min=1e-9)
+depth = zbuf.permute(0, 3, 1, 2).contiguous() * w_normed.contiguous()
+depth = depth.sum(dim=1, keepdim=True)
+```
 
 ### Data flow in a forward pass
 Use the *Encoder* to get features for each input view:
