@@ -51,6 +51,16 @@ A simplified version of RANSAC is also applied to mitigate the problem of outlie
 Render the RGB-D images from the aligned point clouds serving a verificaiton step.
 If the camera locations are estimated correctly, the point cloud renders will be consistent with the input images
 
+##### More on differentiable rendering [[doc](https://pytorch3d.org/docs/renderer)], [[video](https://www.youtube.com/watch?v=eCDBA_SbxCE)] :
+Differentiable rendering is a relatively new and exciting research area in computer vision, bridging the gap between 2D and 3D by allowing 2D image pixels to be related back to 3D properties of a scene.
+
+For example, by rendering an image from a 3D shape predicted by a neural network, it is possible to compute a 2D loss with a reference image. Inverting the rendering step means we can relate the 2D loss from the pixels back to the 3D properties of the shape such as the positions of mesh vertices, *enabling 3D shapes to be learnt without any explicit 3D supervision*.
+
+![components](./imgs/pytorch3d-comps.png)
+![renderer](./imgs/pytorch3d-renderer.png)
+
+The loss is differentiable w.r.t. scene properties such as camera pose, lights, texture map, etc.
+
 #### Loss design
 We use three consistency losses to train our model: photometric, depth, and correspondence. 
 The photometric and depth losses are the L1 losses applied between the rendered and input RGB-D frames. Those losses are masked to only apply to valid pixels

@@ -58,6 +58,7 @@ Details refer to the  link [here](./UnsupervisedRR.md)
 
 
 # NeRF
+[[ref doc](http://www.4k8k.xyz/article/g11d111/118959540)]
 GOAL: new view sythesis.
 
 Main Advantage: It overcomes the prohibitive storage costs of discretized voxel grids when modeling complex scenes at high-resolutions.
