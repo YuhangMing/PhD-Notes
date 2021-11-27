@@ -1,5 +1,14 @@
 # PyTorch-Notes
 
+#### RuntimeError
+`RuntimeError: Trying to backward through the graph a second time, but the saved intermediate results have already been freed. Specify retain_graph=True when calling .backward() or autograd.grad() the first time.` 
+训练GAN net时经常遇到这个问题. 翻译一下就是 第二次尝试在图中向后遍历时，保存的临时变量已经被释放. 显然，
+GAN中有一个变量存在于gen和disc之间，就是fake，加上detach() 就行. 
+![example](gan_detach.png)
+Same for the Implicit-Localisation Model. 
+In the second pass, a new variable is added to the model, which is the vps[0]. Detach this vairable before backwards.
+
+
 #### `torch.no_grad()`
 The wrapper `with torch.no_grad()` sets all of tehe `requires_grad` flags to false.
 The PyTorch official document for `autograd` is [here](https://pytorch.org/tutorials/beginner/blitz/autograd_tutorial.html). 
