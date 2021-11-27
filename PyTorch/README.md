@@ -1,5 +1,8 @@
 # PyTorch-Notes
 
+#### Posts
+[Link](https://zhuanlan.zhihu.com/p/47749934)
+
 #### RuntimeError
 `RuntimeError: Trying to backward through the graph a second time, but the saved intermediate results have already been freed. Specify retain_graph=True when calling .backward() or autograd.grad() the first time.` 
 训练GAN net时经常遇到这个问题. 翻译一下就是 第二次尝试在图中向后遍历时，保存的临时变量已经被释放. 显然，
