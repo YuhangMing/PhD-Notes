@@ -26,11 +26,12 @@ Some study notes on various areas (after the object based relocalisation project
 * [UnsupervisedRR](./Implicit_Representation/UnsupervisedRR.md)
 
 ### Concepts
+* [Learning rate vs Batch Size](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/): In general, larger batch size means more confidence in the current training direction, means larger learning rate can be used. 
+* [L1Norm vs. L2Norm](./L1-L2/README.md)
+* [Optimiser in Deep Learning](./Optimiser/README.md)
 * [Implicit Representation](./Implicit_Representation/README.md)
 * [Graph and GCN](./GCN/README.md)
 * [Bayesian Filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation): a general probabilistic approach for estimating an unknown probability density function (PDF) recursively over time using incoming measurements and a mathematical process model.
-* [L1Norm vs. L2Norm](./L1-L2/README.md)
-* [Optimiser in Deep Learning](./Optimiser/README.md)
 * Traditional ML Algorithms
   * Random Forest
   * AdaBoost
