@@ -64,6 +64,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [TUM RGBD Benchmark](https://vision.in.tum.de/data/datasets/rgbd-dataset)
 * [DIML/CVL RGBD Datasest](https://dimlrgbd.github.io/) (both indoors and outdoors)
 * [InteriorNet](https://interiornet.org/)
+* [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset) + [Habitat-Sim](https://github.com/facebookresearch/habitat-sim)
 ### Point Clouds
 * [3DMatch](https://3dmatch.cs.princeton.edu/)
 ### More
