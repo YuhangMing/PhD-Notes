@@ -26,7 +26,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [UnsupervisedRR](./Implicit_Representation/UnsupervisedRR.md)
 
 ### Concepts
-* [Learning rate vs Batch Size](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/): In general, larger batch size means more confidence in the current training direction, means larger learning rate can be used. 
+* [Learning rate vs Batch Size](https://machinelearningmastery.com/how-to-control-the-speed-and-stability-of-training-neural-networks-with-gradient-descent-batch-size/): In general, larger batch size means more confidence in the current training direction, means larger learning rate can be used. ([another reference](https://miguel-data-sc.github.io/2017-11-05-first/))
 * [L1Norm vs. L2Norm](./L1-L2/README.md)
 * [Optimiser in Deep Learning](./Optimiser/README.md)
 * [Implicit Representation](./Implicit_Representation/README.md)
