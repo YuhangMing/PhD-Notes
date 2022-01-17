@@ -3,6 +3,18 @@
 #### Posts
 [Link](https://zhuanlan.zhihu.com/p/47749934)
 
+
+#### HTTPError
+`urllib.error.HTTPError: HTTP Error 403: rate limit exceeded` when using `resnet = torch.hub.load("facebookresearch/WSL-Images", "resnext101_32x8d_wsl")`
+[ref](https://stackoverflow.com/questions/68901236/urllib-error-httperror-http-error-403-rate-limit-exceeded-when-loading-resnet1)
+This is a bug in Pytorch 1.9. As a workaround, try adding:
+`torch.hub._validate_not_a_forked_repo=lambda a,b,c: True`
+to your script before any torch.hub call. i.e.:
+```python
+torch.hub._validate_not_a_forked_repo=lambda a,b,c: True
+model = torch.hub.load('pytorch/vision:v0.9.0', 'resnet18', pretrained=True)
+```
+
 #### RuntimeError
 `RuntimeError: Trying to backward through the graph a second time, but the saved intermediate results have already been freed. Specify retain_graph=True when calling .backward() or autograd.grad() the first time.` 
 训练GAN net时经常遇到这个问题. 翻译一下就是 第二次尝试在图中向后遍历时，保存的临时变量已经被释放. 显然，
@@ -10,6 +22,7 @@ GAN中有一个变量存在于gen和disc之间，就是fake，加上detach() 就
 ![example](gan_detach.png)
 Same for the Implicit-Localisation Model. 
 In the second pass, a new variable is added to the model, which is the vps[0]. Detach this vairable before backwards.
+
 
 
 #### `torch.no_grad()`
