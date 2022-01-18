@@ -12,6 +12,7 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## SLAM Related
 * [Everything about Coordinate Systems and Transformations](https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points)
+* [OpenGL & OpenCV Pose Conventions](https://github.com/nex-mpi/nex-code/wiki/Pose-convention)
 * [SDF](./SDF/README.md)
 * [Render](./Render/README.md)
 * [Implicit Representation](./Implicit_Representation/README.md)
