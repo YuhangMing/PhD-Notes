@@ -1,7 +1,17 @@
 # PyTorch-Notes
 
 #### Posts
+##### Some errors
+concatenate variable; 
+tensors are on different GPUs; 
+argument 0 is not a Variable; 
+backward through the graph a second time; 
+multi-target not supported at.
 [Link](https://zhuanlan.zhihu.com/p/47749934)
+
+##### Running Out Of Memory Error
+Reasons could be batch size too big.
+[Link](https://discuss.pytorch.org/t/backward-to-compute-partial-derivatives-without-retain-graph-true/74364/6)
 
 
 #### HTTPError
