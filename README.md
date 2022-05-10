@@ -9,6 +9,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [PyTorch](./PyTorch/README.md)
 * [C++](./C++/README.md)
 * OpenGL: [CN](https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/), [EN](http://www.songho.ca/opengl/index.html).
+* [g2o installation error](https://github.com/uoip/g2opy/issues/35)
 
 ## SLAM Related
 * [Everything about Coordinate Systems and Transformations](https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points)
