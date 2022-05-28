@@ -1,5 +1,28 @@
 # Random notes in CUDA
 
+
+### 按以下顺序清除现存cuda环境
+1. 使用以下命令删除现存cuda
+sudo apt-get remove --purge '^nvidia-.*'
+查漏
+locate cuda-11
+移动到指定文件夹删除漏的文件
+2. 防止桌面GUI被删除
+sudo apt-get install ubuntu-desktop
+3. 移除xorg.conf if there is any
+sudo rm /etc/X11/xorg.conf
+4. 防止nouveau被nvidia blacklisted
+echo 'nouveau' | sudo tee -a /etc/modules
+5. 去cuda toolkit官网搜索需要的cuda版本，按教程安装
+
+
+### nvcc --version显示信息与安装的CUDA版本不⼀致
+![solution](nvcc-version.PNG)
+
+编辑 /.bashrc可以⽤ `sudo gedit ~/.bashrc`, 保存后跑 source ~/.bashrc 重新加载。
+
+
+
 ### Illegal memory access
 ```shell
 an illegal memory access was encountered-3

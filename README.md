@@ -7,6 +7,7 @@ Some study notes on various areas (after the object based relocalisation project
 
 ## Programming
 * [C++](./Programming/C++/README.md)
+* [CMake](./Programming/CMake/README.md)
 * [python](./Programming/python/README.md)
 * [PyTorch](./Programming/PyTorch/README.md)
 * [CUDA](./Programming/CUDA/README.md)
