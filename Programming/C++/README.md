@@ -86,3 +86,7 @@ struct Books book;
 Compared to `#define`:
 1. `typedef` is limited to giving symbolic names to types while `#define` can be used to define alias for values;
 2. `typedef` interpretation is performed by the compiler whereas `#define` statements are processed by the pre-processor.
+
+### Atomic operations
+[C++11 原子操作与无锁编程](https://zhuanlan.zhihu.com/p/24983412)
+[C++11中的原子操作](https://www.pudn.com/news/628f8298bf399b7f351e349c.html)

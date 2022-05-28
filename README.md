@@ -2,14 +2,16 @@
 Some study notes on various areas (after the object based relocalisation project).
 
 ## Environment Setup
-* [Laptop - Asus TUF Gaming A15](./AsusTUF/README.md)
-* [Laptop - Dell XPS 15 9560](./DellXPS/README.md)
+* [Laptop - Asus TUF Gaming A15](./Laptops/AsusTUF/README.md)
+* [Laptop - Dell XPS 15 9560](./Laptops/DellXPS/README.md)
 
 ## Programming
-* [PyTorch](./PyTorch/README.md)
-* [C++](./C++/README.md)
+* [C++](./Programming/C++/README.md)
+* [python](./Programming/python/README.md)
+* [PyTorch](./Programming/PyTorch/README.md)
+* [CUDA](./Programming/CUDA/README.md)
+* [g2o](./Programming/g2o/README.md)
 * OpenGL: [CN](https://learnopengl-cn.github.io/01%20Getting%20started/04%20Hello%20Triangle/), [EN](http://www.songho.ca/opengl/index.html).
-* [g2o installation error](https://github.com/uoip/g2opy/issues/35)
 
 ## SLAM Related
 * [Everything about Coordinate Systems and Transformations](https://www.scratchapixel.com/lessons/3d-basic-rendering/computing-pixel-coordinates-of-3d-point/mathematics-computing-2d-coordinates-of-3d-points)
