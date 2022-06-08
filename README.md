@@ -6,6 +6,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [Laptop - Dell XPS 15 9560](./Laptops/DellXPS/README.md)
 
 ## Programming
+* [Git](./Programming/Git/README.md)
 * [C++](./Programming/C++/README.md)
 * [CMake](./Programming/CMake/README.md)
 * [python](./Programming/python/README.md)
