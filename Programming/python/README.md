@@ -4,6 +4,9 @@
 [official docs](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/)
 [guide](https://docs.python-guide.org/writing/structure/)
 
+### print with `sep`, `end` and `flush`
+[link]https://realpython.com/lessons/sep-end-and-flush/
+
 ### PIL vs. OpenCV
 
 PIL: Python Image Library Pillow, its for loading/processing/creating images
