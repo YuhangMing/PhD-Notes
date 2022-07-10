@@ -1,5 +1,10 @@
 # Random notes in python
 
+### Setting up on Windows and trouble-shooting
+[Instruction](https://www.neonscience.org/resources/learning-hub/tutorials/setup-git-bash-python)
+
+[Conda not found on Git Bash](https://stackoverflow.com/questions/54501167/anaconda-and-git-bash-in-windows-conda-command-not-found)
+
 ### Package system
 [official docs](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/)
 [guide](https://docs.python-guide.org/writing/structure/)
