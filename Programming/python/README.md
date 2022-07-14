@@ -44,3 +44,15 @@ cv2.imwrite("save.png", img)
 
 NOTE, with the same image operations, OpenCV implementations are about **5x faster** than PIL implementations. see [link](https://www.kaggle.com/code/vfdev5/pil-vs-opencv/notebook) for detailed comparisons.
 
+### OpenCV Draw Funcions
+```
+cv2.error: OpenCV(4.5.3) :-1: error: (-5:Bad argument) in function 'circle'
+> Overload resolution failed:
+>  - Layout of the output array img is incompatible with cv::Mat (step[ndims-1] != elemsize or step[1] != elemsize*nchannels)
+>  - Expected Ptr<cv::UMat> for argument 'img'
+```
+- Error encountered when calling `cv2.circle`, same error happened with `rectangle`, etc.
+- The reason: The img array is not stored continuously in memory
+- The solution: `img = np.ascontiguousarray(img, dtype=np.uint8)`
+
+[source](https://blog.actorsfit.com/a?ID=01250-431ce4e1-5ba4-43e8-b41c-45a150d71223)
