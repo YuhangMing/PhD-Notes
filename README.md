@@ -51,6 +51,7 @@ Some study notes on various areas (after the object based relocalisation project
 * [Stanford-2D-3D-S](http://buildingparser.stanford.edu/dataset.html)
 * [Structure3D](https://structured3d-dataset.org/)
 ### 3D Segmentation
+* [To-Scene](https://github.com/GAP-LAB-CUHK-SZ/TO-Scene)
 * [ScanNet](http://www.scan-net.org/)
 * [Replica Dataset](https://github.com/facebookresearch/Replica-Dataset)
 * [S3DIS](http://buildingparser.stanford.edu/dataset.html)
