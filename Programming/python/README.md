@@ -9,6 +9,10 @@
 [official docs](https://packaging.python.org/en/latest/guides/distributing-packages-using-setuptools/)
 [guide](https://docs.python-guide.org/writing/structure/)
 
+### `__getattr__` vs `__getattribute__`
+[link](https://stackoverflow.com/questions/3278077/difference-between-getattr-and-getattribute)
+`__getattr__` is only invoked if the attribute wasn't found the usual ways. It's good for implementing a fallback for missing attributes. `__getattribute__` is invoked before looking at the actual attributes on the object, and so can be tricky to implement correctly. You can end up in infinite recursions very easily. Though one good reason to use `__getattribute__` is that you can prevent access to attributes and make them more secure as shown in the following example.
+
 ### print with `sep`, `end` and `flush`
 [link]https://realpython.com/lessons/sep-end-and-flush/
 
